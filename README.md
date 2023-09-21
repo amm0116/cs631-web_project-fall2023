@@ -8,9 +8,9 @@ Below is a guide on how to navigate this repository. I'm sure we will add more c
 	
  * **TASKLIST:** A place for us to track immediate and upcoming to-do's, as well as important dates and deadlines (including any periods of time where we may have reduced availability). For any assignments to be submitted, we'll track both hard deadlines (due dates for the class) and target delivery dates (self-imposed internal due dates to ensure anxiety-free assignment submission). 
 	
-* **REFERENCES:** Collection of useful articles, links, tutorials, etc. for various tools and methodologies we'll be using. Any useful learning resource or reference guide should go here.
+* **References** Collection of useful articles, links, tutorials, etc. for various tools and methodologies we'll be using. Any useful learning resource or reference guide should go here.
 	
-* **Specifications:** Stores any written specifications for our DB or apps. Includes material from the professor (Canvas pages, app requirements, DB design specifications) and any development and/or testing specifications we create for ourselves.
+* **Specifications:** Stores any written specifications for our DB or apps. Includes material from the professor (info from Canvas, app requirements, DB design specifications) and any development and/or testing specifications we create for ourselves.
 	
 * **Diagrams:** Stores any diagrams or flow charts used to describe our DB or apps.
 	
