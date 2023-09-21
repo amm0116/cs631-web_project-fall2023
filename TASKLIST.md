@@ -5,12 +5,12 @@ N = Not Started / I = In Progress / C = Complete
 | Date | Type | Description | Responsible | Status? |
 | -------- | ------- | ------- | ------- | ------- |
 | THU, 09/21/23 | Target Completion | Initial Wiki setup | Amira | C |
-| SUN, 10/01/23 (?) | Reminder | Assignment 1 (Relational Algebra) due | Amira, Aspen | N |
-| SUN, 10/08/23 | Reminder | Assignment 2 (SQL) due | Amira, Aspen | N |
+| SUN, 10/01/23 (?) | Reminder | Assignment 1 (Relational Algebra) due | - | N |
+| SUN, 10/08/23 | Reminder | Assignment 2 (SQL) due | - | N |
 | WED, 10/18/23 | Reminder | Amira unavailable | - | N |
-| TBD | Reminder | Midterms | Amira, Aspen | N |
-| SUN, 10/23/23 | Reminder | Assignment 3 (Relational Calculus) due | Amira, Aspen | N |
-| SUN, 10/30/23 | Reminder | Assignment 4 (Database Design) due | Amira, Aspen | N |
+| TBD | Reminder | Midterms | -| N |
+| SUN, 10/23/23 | Reminder | Assignment 3 (Relational Calculus) due | - | N |
+| SUN, 10/30/23 | Reminder | Assignment 4 (Database Design) due | - | N |
 | TBD | Target Completion | Finish basic education on Python, Flask, SQLite | Amira, Aspen | I |
 | TBD | Target Completion | Finish setting up Python, Flask, SQLite | TBD | N |
 | TBD | Target Completion | Find collaborative tool for schema diagramming | TBD | N |
