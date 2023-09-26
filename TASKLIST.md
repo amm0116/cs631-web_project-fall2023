@@ -1,36 +1,43 @@
 # Task List
 
-N = Not Started / I = In Progress / C = Complete
+**Project Status Meetings:** Every Monday @ 5pm
 
-| Date | Type | Description | Responsible | Status? |
-| -------- | ------- | ------- | ------- | ------- |
-| THU, 09/21/23 | Target Completion | Initial Wiki setup | Amira | C |
-| SUN, 10/01/23 (?) | Reminder | Assignment 1 (Relational Algebra) due | - | N |
-| SUN, 10/08/23 | Reminder | Assignment 2 (SQL) due | - | N |
-| WED, 10/18/23 | Reminder | Amira unavailable | - | N |
-| TBD | Reminder | Midterms | -| N |
-| SUN, 10/23/23 | Reminder | Assignment 3 (Relational Calculus) due | - | N |
-| SUN, 10/30/23 | Reminder | Assignment 4 (Database Design) due | - | N |
-| TBD | Target Completion | Finish basic education on Python, Flask, SQLite | Amira, Aspen | I |
-| TBD | Target Completion | Finish setting up Python, Flask, SQLite | TBD | N |
-| TBD | Target Completion | Find collaborative tool for schema diagramming | TBD | N |
-| TBD | Target Completion | Finalize high-level DB schema design | TBD | N |
-| TBD | Target Completion | Finalize high-level app design & specs | TBD | N |
-| TBD | Target Completion | Patient Mgmt App/Schema: First pass build | TBD | N |
-| TBD | Target Completion | Patient Mgmt App/Schema: First pass testing | TBD | N |
-| TBD | Target Completion | Patient Mgmt App/Schema: Finalize | TBD | N |
-| TBD | Target Completion | In-patient Mgmt App/Schema: First pass build | TBD | N |
-| TBD | Target Completion | In-patient Mgmt App/Schema: First pass testing | TBD | N |
-| TBD | Target Completion | In-patient Mgmt App/Schema: Finalize | TBD | N |
-| TBD | Target Completion | Medical Staff Mgmt App/Schema: First pass build | TBD | N |
-| TBD | Target Completion | Medical Staff Mgmt App/Schema: First pass testing | TBD | N |
-| TBD | Target Completion | Medical Staff Mgmt App/Schema: Finalize | TBD | N |
-| TBD | Target Completion | Term Project Report: First Draft | TBD | N |
-| TBD | Target Completion | Term Project Report: Final Draft | TBD | N |
-| TBD | Target Completion | Term Project Report: Submission | TBD | N |
-| TBD | Target Completion | Term Project Presentation: Script | TBD | N |
-| TBD | Target Completion | Term Project Presentation: Record | TBD | N |
-| TBD | Target Completion | Term Project Presentation: Upload & Submission | TBD | N |
+**Technical Workshop Meetings:** See table below
+
+*N = Not Started / I = In Progress / C = Complete*
+
+| Start Week | Due Date | Type | Description | Responsible | Status? |
+| -------- | -------- | ------- | ------- | ------- | ------- |
+| 09/18/23 | THU, 09/21/23 | Target Completion | Initial Wiki setup | Amira | C |
+| 09/18/23 | MON, 09/25/23 | Target Completion | Finish basic education on Python, Flask, SQLite | Amira, Aspen | C |
+| 09/18/23 | MON, 09/25/23 | Target Completion | Find collaborative tool for schema diagramming | Amira | C |
+| 09/25/23 | SUN, 10/01/23 | Target Completion | First-pass schema design | Amira, Aspen | I |
+| 09/25/23 | MON, 10/02/23 | Target Completion | Build a test run app | Aspen | I |
+| 09/25/23 | MON, 10/02/23 | Target Completion | Similar app market research | Amira | I |
+| TBD | SUN, 10/01/23 (?) | Reminder | Assignment 1 (Relational Algebra) due | - | N |
+| TBD | SUN, 10/08/23 (?) | Reminder | Assignment 2 (SQL) due | - | N |
+| 10/16/23 | N/A | Reminder | BREAK WEEK (no project work) | - | N |
+| 10/23/23 | N/A | Reminder | LITE WEEK (limited project work) | - | N |
+| TBD | TBD | Reminder | Midterms | -| N |
+| TBD | SUN, 10/23/23 (?) | Reminder | Assignment 3 (Relational Calculus) due | - | N |
+| TBD | SUN, 10/30/23 (?) | Reminder | Assignment 4 (Database Design) due | - | N |
+| TBD | TBD | Target Completion | Finalize schema design | TBD | N |
+| TBD | TBD | Target Completion | Finalize app design & specs | TBD | N |
+| TBD | TBD | Target Completion | Patient Mgmt App/Schema: First pass build | TBD | N |
+| TBD | TBD | Target Completion | Patient Mgmt App/Schema: First pass testing | TBD | N |
+| TBD | TBD | Target Completion | Patient Mgmt App/Schema: Finalize | TBD | N |
+| TBD | TBD | Target Completion | In-patient Mgmt App/Schema: First pass build | TBD | N |
+| TBD | TBD | Target Completion | In-patient Mgmt App/Schema: First pass testing | TBD | N |
+| TBD | TBD | Target Completion | In-patient Mgmt App/Schema: Finalize | TBD | N |
+| TBD | TBD | Target Completion | Medical Staff Mgmt App/Schema: First pass build | TBD | N |
+| TBD | TBD | Target Completion | Medical Staff Mgmt App/Schema: First pass testing | TBD | N |
+| TBD | TBD | Target Completion | Medical Staff Mgmt App/Schema: Finalize | TBD | N |
+| TBD | TBD | Target Completion | Term Project Report: First Draft | TBD | N |
+| TBD | TBD | Target Completion | Term Project Report: Final Draft | TBD | N |
+| TBD | TBD | Target Completion | Term Project Report: Submission | TBD | N |
+| TBD | TBD | Target Completion | Term Project Presentation: Script | TBD | N |
+| TBD | TBD | Target Completion | Term Project Presentation: Record | TBD | N |
+| TBD | TBD | Target Completion | Term Project Presentation: Upload & Submission | TBD | N |
 
 # Hard Deadlines
 
