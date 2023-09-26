@@ -36,7 +36,7 @@
 
 # Bulma
 
-[Bulma](https://bulma.io/) is an open-source CSS framework that can be used to easily build responsive aesthetically pleasing web interfaces.
+[Bulma](https://bulma.io/) is an open-source CSS framework that can be used to build responsive and aesthetically pleasing web interfaces.
 
 * [Help Documentation](https://bulma.io/documentation/)
 * [Video Tutorials](https://bulma.io/videos/)
