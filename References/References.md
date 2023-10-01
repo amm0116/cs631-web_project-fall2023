@@ -47,6 +47,7 @@
 ### Written References
 
 * [Brief Description of What's Being Linked](http://www.website.com)
+* https://allergenuityhealth.com/common-allergy-medical-codes/
 
 ### Video Tutorials
 
