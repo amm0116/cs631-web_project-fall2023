@@ -42,11 +42,11 @@
 * [Video Tutorials](https://bulma.io/videos/)
 * [Visual Cheatsheet](https://codepen.io/thanh01_pmt/pen/XLoXKe)
 
-# Other Tools
+# Miscellaneous
 
 ### Written References
 
-* [Brief Description of What's Being Linked](http://www.website.com)
+* [Common Medical and Allergy Codes](http://www.website.com)
 * https://allergenuityhealth.com/common-allergy-medical-codes/
 
 ### Video Tutorials

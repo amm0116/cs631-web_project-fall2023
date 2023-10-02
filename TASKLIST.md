@@ -11,11 +11,11 @@
 | 09/18/23 | THU, 09/21/23 | Target Completion | Initial Wiki setup | Amira | C |
 | 09/18/23 | MON, 09/25/23 | Target Completion | Finish basic education on Python, Flask, SQLite | Amira, Aspen | C |
 | 09/18/23 | MON, 09/25/23 | Target Completion | Find collaborative tool for schema diagramming | Amira | C |
-| 09/25/23 | SUN, 10/01/23 | Target Completion | First-pass schema design | Amira, Aspen | I |
+| 09/25/23 | SUN, 10/01/23 | Target Completion | First-pass schema design | Amira, Aspen | C |
 | 09/25/23 | MON, 10/02/23 | Target Completion | Build a test run app | Aspen | I |
 | 09/25/23 | MON, 10/02/23 | Target Completion | Similar app market research | Amira | I |
-| TBD | SUN, 10/01/23 (?) | Reminder | Assignment 1 (Relational Algebra) due | - | N |
-| TBD | SUN, 10/08/23 (?) | Reminder | Assignment 2 (SQL) due | - | N |
+| 10/02/23 | SUN, 10/15/23 | Reminder | Assignment 1 (Relational Algebra) due | - | N |
+| 10/02/23 | SUN, 10/15/23 | Reminder | Assignment 2 (SQL) due | - | N |
 | 10/16/23 | N/A | Reminder | BREAK WEEK (no project work) | - | N |
 | 10/23/23 | N/A | Reminder | LITE WEEK (limited project work) | - | N |
 | TBD | TBD | Reminder | Midterms | -| N |
