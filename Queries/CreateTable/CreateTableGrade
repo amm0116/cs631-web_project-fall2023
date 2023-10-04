@@ -1,0 +1,16 @@
+/* Nurse Grade */
+    DROP TABLE GRADE;
+    CREATE TABLE GRADE (
+        Grade INT AUTO_INCREMENT,
+        Description VARCHAR(50),
+        PRIMARY KEY (Grade)
+    );
+    INSERT INTO GRADE (Description) VALUES
+        ('Student Nurse'),
+        ('Staff Nurse'),
+        ('Senior Staff Nurse'),
+        ('Charge Nurse'),
+        ('Clinical Nurse Specialist'),
+        ('Advance Practice Nurse'),
+        ('Nurse Manager'),
+        ('Clinical Nurse Leader');

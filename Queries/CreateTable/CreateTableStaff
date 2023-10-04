@@ -1,0 +1,44 @@
+/* Staff */
+    DROP TABLE STAFF;
+    CREATE TABLE STAFF (
+        EmpNo INT AUTO_INCREMENT,
+        Fname VARCHAR(50) NOT NULL,
+        Minit CHAR(1),
+        Lname VARCHAR(50) NOT NULL,
+        Ssn CHAR(9) UNIQUE,
+        Gender CHAR(1) NOT NULL CHECK (Gender = 'M' OR Gender = 'F'),
+        EmpType CHAR(4) NOT NULL CHECK (EmpType = 'PHYS' OR EmpType = 'NURS' OR EmpType = 'SURG' OR EmpType = 'SUPP'),
+        Title VARCHAR(50),
+        EmpStatus CHAR(1) NOT NULL CHECK (EmpStatus = 'A' OR EmpStatus = 'I'),
+        Addr VARCHAR(100),
+        City VARCHAR(20),
+        StateProv CHAR(2),
+        ZIP VARCHAR(10),
+        Country CHAR(2),
+        Phone VARCHAR(10),
+        PRIMARY KEY (EmpNo)
+    );
+    INSERT INTO STAFF (Fname, Minit, Lname, Ssn, Gender, EmpType, Title, EmpStatus, Addr, City, StateProv, ZIP, Country, Phone)
+    VALUES
+    ('Matthew', 'R', 'Wilson', '111111111', 'M', 'PHYS', 'Doctor', 'A', '123 Elm St', 'Newark', 'NJ', '07101', 'US', '555-7890'),
+    ('Amanda', 'J', 'Thomas', '222222222', 'F', 'NURS', 'Nurse', 'I', '456 Oak St', 'Jersey City', 'NJ', '07301', 'US', '555-8901'),
+    ('Joseph', 'T', 'Hall', '333333333', 'M', 'SURG', 'Surgeon', 'A', '789 Maple St', 'Hoboken', 'NJ', '07030', 'US', '555-1234'),
+    ('Laura', 'E', 'Garcia', '444444444', 'F', 'SURG', 'Surgeon', 'I', '101 Pine St', 'Elizabeth', 'NJ', '07201', 'US', '555-5678'),
+    ('Daniel', 'M', 'Brown', '555555555', 'M', 'SUPP', 'Admin Assistant', 'I', '202 Cedar St', 'Newark', 'NJ', '07102', 'US', '555-9012'),
+    ('Sarah', 'L', 'Lopez', '666666666', 'F', 'SUPP', 'Payroll Accountant', 'A', '303 Birch St', 'Jersey City', 'NJ', '07302', 'US', '555-2345'),
+    ('Jason', 'P', 'Adams', '777777777', 'M', 'SURG', 'Surgeon', 'A', '404 Redwood St', 'Hoboken', 'NJ', '07031', 'US', '555-3456'),
+    ('Michelle', 'R', 'Rodriguez', '888888888', 'F', 'PHYS', 'Doctor', 'A', '505 Willow St', 'Elizabeth', 'NJ', '07202', 'US', '555-4567'),
+    ('Andrew', 'D', 'Harris', '999999999', 'M', 'NURS', 'Nurse', 'A', '606 Birchwood St', 'Newark', 'NJ', '07103', 'US', '555-5678'),
+    ('Stephanie', 'J', 'Gonzalez', '123456789', 'F', 'NURS', 'Nurse', 'A', '707 Oakwood St', 'Jersey City', 'NJ', '07303', 'US', '555-6789'),
+    ('Ryan', 'S', 'Perez', '234567890', 'M', 'SURG', 'Surgeon', 'A', '808 Pineview St', 'Hoboken', 'NJ', '07032', 'US', '555-7890'),
+    ('Melissa', 'A', 'King', '345678901', 'F', 'SUPP', 'Receptionist', 'A', '909 Elmwood St', 'Elizabeth', 'NJ', '07203', 'US', '555-8901'),
+    ('David', 'L', 'Scott', '456789012', 'M', 'PHYS', 'Doctor', 'A', '1010 Maple St', 'Newark', 'NJ', '07104', 'US', '555-1234'),
+    ('Emily', 'M', 'Lewis', '567890123', 'F', 'SURG', 'Surgeon', 'A', '1111 Willow St', 'Jersey City', 'NJ', '07304', 'US', '555-5678'),
+    ('Michael', 'D', 'Turner', '678901234', 'M', 'NURS', 'Nurse', 'A', '1212 Oak St', 'Hoboken', 'NJ', '07033', 'US', '555-9012'),
+    ('Jessica', 'R', 'Martinez', '789012345', 'F', 'PHYS', 'Doctor', 'I', '1313 Cedar St', 'Elizabeth', 'NJ', '07204', 'US', '555-2345'),
+    ('William', 'M', 'Hill', '890123456', 'M', 'SUPP', 'Office Manager', 'A', '1414 Elm St', 'Newark', 'NJ', '07105', 'US', '555-3456'),
+    ('Linda', 'J', 'Wright', '987654321', 'F', 'SUPP', 'Chief of Staff', 'A', '1515 Pine St', 'Elizabeth', 'NJ', '07205', 'US', '555-4567'),
+    ('Thomas', 'E', 'Young', '876543210', 'M', 'NURS', 'Nurse', 'A', '1616 Maple St', 'Jersey City', 'NJ', '07305', 'US', '555-5678'),
+    ('Karen', 'A', 'Walker', '765432109', 'F', 'NURS', 'Nurse', 'A', '1717 Birch St', 'Hoboken', 'NJ', '07034', 'US', '555-6789');
+
+
