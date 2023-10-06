@@ -1,0 +1,13 @@
+/* Patient Cholesterol Reading */
+    DROP TABLE PATIENT_CHOLESTEROL;
+    CREATE TABLE PATIENT_CHOLESTEROL (
+        PatientNo INT,
+        ReadTime DATETIME,
+        SampledBy INT,
+        Hdl INT,
+        Ldl INT,
+        Triglycerides INT,
+        PRIMARY KEY (PatientNo, ReadTime),
+        FOREIGN KEY (PatientNo) REFERENCES PATIENT(PatientNo),
+        FOREIGN KEY (SampledBy) REFERENCES STAFF(EmpNo)
+    );
