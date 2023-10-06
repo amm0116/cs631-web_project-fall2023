@@ -7,5 +7,5 @@
         mgdL INT,
         PRIMARY KEY (PatientNo, ReadTime),
         FOREIGN KEY (PatientNo) REFERENCES PATIENT(PatientNo),
-        FOREIGN KEY (ReadBy) REFERENCES STAFF(EmpNo)
+        FOREIGN KEY (SampledBy) REFERENCES STAFF(EmpNo)
     );
