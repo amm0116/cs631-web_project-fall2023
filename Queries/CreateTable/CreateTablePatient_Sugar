@@ -1,0 +1,11 @@
+/* Patient Blood Sugar Reading */
+    DROP TABLE PATIENT_SUGAR;
+    CREATE TABLE PATIENT_SUGAR (
+        PatientNo INT,
+        ReadTime DATETIME,
+        ReadBy INT,
+        mgdL INT,
+        PRIMARY KEY (PatientNo, ReadTime),
+        FOREIGN KEY (PatientNo) REFERENCES PATIENT(PatientNo),
+        FOREIGN KEY (ReadBy) REFERENCES STAFF(EmpNo)
+    );
