@@ -6,10 +6,10 @@
         Minit CHAR(1),
         Lname VARCHAR(50) NOT NULL,
         Ssn CHAR(9) UNIQUE,
-        Gender CHAR(1) NOT NULL CHECK (Gender = 'M' OR Gender = 'F'),
+        Gender CHAR(1) NOT NULL CHECK (Gender IN ('M', 'F')),
         Dob DATE NOT NULL, /* TRIGGER?? */
-        BloodType VARCHAR(2) CHECK (BloodType = 'A' OR BloodType = 'B' OR BloodType = 'AB' OR BloodType = 'O'),
-        RhFactor CHAR(1) CHECK (RhFactor = '+' OR RhFactor = '-'),
+        BloodType VARCHAR(2) CHECK (BloodType IN ('A', 'B', 'AB', 'O')),
+        RhFactor CHAR(1) CHECK (RhFactor IN ('+', '-')),
         InsProvider VARCHAR(50),
         InsMemberId VARCHAR(20),
         Pcp INT NOT NULL, /* FOREIGN KEY FROM TWO SOURCES, MUST HAVE DEFAULT (CHIEF OF STAFF) */
@@ -18,9 +18,15 @@
         StateProv CHAR(2),
         ZIP VARCHAR(10),
         Country CHAR(2),
-        Phone VARCHAR(10),
-        PRIMARY KEY (PatientNo)
+        Phone VARCHAR(15),
+        EmergContName VARCHAR(100),
+        EmergContPhone VARCHAR(15),
+        PRIMARY KEY (PatientNo),
+        /*FOREIGN KEY (InsProvider) REFERENCES INS_PROVIDER (Code),*/
+        FOREIGN KEY (StateProv) REFERENCES STATEPROV(Code),
+        FOREIGN KEY (Country) REFERENCES COUNTRY(Code)
     );
+
     INSERT INTO PATIENT (Fname, Minit, Lname, Ssn, Gender, Dob, BloodType, RhFactor, InsProvider, InsMemberId, Pcp, Addr, City, StateProv, ZIP, Country, Phone) VALUES
         ('Mary', 'M', 'Cleason', '292620457', 'F', '1995-10-12', 'A', '-', 'Horizon BCBS', 'ABC123XYZ', 1,  '52008 Bartell Heights Apt. 679', 'North Gaston', 'AL', '34800', 'US', '6585551539'),
         ('Sabina', 'A', 'Kerluke', '457385601', 'F', '1982-01-16', 'O', '+', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, '2415553413'),
