@@ -1,7 +1,7 @@
 /* Medical Specialty Type */
     DROP TABLE SPECIALTY_TYPE;
     CREATE TABLE SPECIALTY_TYPE (
-        Code VARCHAR(50),
+        Code VARCHAR(10),
         Description VARCHAR(50),
         PRIMARY KEY (Code)
     );
