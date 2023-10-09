@@ -1,0 +1,9 @@
+/* Nurse Experience (Years, Grade, Surgery Type) */
+    DROP TABLE NURSE_EXP;
+    CREATE TABLE NURSE_EXP (
+        EmpNum INT,
+        YrsExp INT CHECK (YrsExp > 0),
+        Grade INT, /* FOREIGN KEY */
+        SurgeryType INT, /* FOREIGN KEY */
+        PRIMARY KEY (EmpNum)
+    );

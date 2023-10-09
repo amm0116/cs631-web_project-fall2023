@@ -1,0 +1,22 @@
+/* Surgeon Specialty */
+    DROP TABLE SPECIALTY;
+    CREATE TABLE SPECIALTY (
+        Code INT AUTO_INCREMENT,
+        Description VARCHAR(50),
+        PRIMARY KEY (Code)
+    );
+    INSERT INTO SPECIALTY (Description) VALUES
+        ('Orthopedics'),
+        ('Cardiothoracic'),
+        ('Neurosurgery'),
+        ('General'),
+        ('Vascular'),
+        ('Urology'),
+        ('Gastrointestinal'),
+        ('Colorectal'),
+        ('Ophthalmology'),
+        ('Otolaryngology'),
+        ('Pediatric'),
+        ('Transplant'),
+        ('Bariatric'),
+        ('Hand');

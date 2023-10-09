@@ -1,0 +1,7 @@
+/* Surgeon Specialty */
+    DROP TABLE SURGEON_SPECIALTY;
+    CREATE TABLE SURGEON_SPECIALTY (
+        EmpNum INT,
+        SpecialtyCode INT,
+        PRIMARY KEY (EmpNum, SpecialtyCode)
+    );
