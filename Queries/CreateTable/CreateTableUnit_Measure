@@ -1,0 +1,22 @@
+/* Units of Measure */
+    DROP TABLE UNIT_MEASURE;
+    CREATE TABLE UNIT_MEASURE (
+        Code CHAR(4),
+        Description VARCHAR(50),
+        PRIMARY KEY (Code)
+    );
+
+    INSERT INTO UNIT_MEASURE (Code, Description) VALUES
+        ('MG', 'Milligram'),
+        ('MCG', 'Microgram'),
+        ('ML', 'Milliliter'),
+        ('U', 'Unit'),
+        ('G', 'Gram'),
+        ('TAB', 'Tablet'),
+        ('CAP', 'Capsule'),
+        ('DOSE', 'Dose'),
+        ('GTTS', 'Drops'),
+        ('PTCH', 'Patch'),
+        ('AMP', 'Ampule'),
+        ('VIAL', 'Vial'),
+        ('SPRAY', 'Spray');

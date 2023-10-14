@@ -1,0 +1,14 @@
+/* National Drug Codes (Medication Types) */
+
+    DROP TABLE NDC;
+    CREATE TABLE NDC (
+        Code VARCHAR(15),
+        Description VARCHAR(50),
+        DispensingUnit VARCHAR(4),
+        CostPerUnit DECIMAL(6,2),
+        QtyOnHand DECIMAL(6,2), /* Possibly move into its own view or table */
+        QtyOnOrder DECIMAL(6,2), /* Possibly move into its own view or table */
+        YTDUsage DECIMAL(6,2), /* Possibly move into its own view or table */
+        PRIMARY KEY (Code),
+        FOREIGN KEY (DispensingUnit) REFERENCES UNIT_MEASURE(Code)
+    );
