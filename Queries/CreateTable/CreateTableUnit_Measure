@@ -2,7 +2,7 @@
     DROP TABLE UNIT_MEASURE;
     CREATE TABLE UNIT_MEASURE (
         Code CHAR(4),
-        Description VARCHAR(50),
+        Description VARCHAR(50) NOT NULL,
         PRIMARY KEY (Code)
     );
 
