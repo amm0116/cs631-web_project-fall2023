@@ -1,0 +1,8 @@
+/* Skills for Nursing Staff */
+    DROP TABLE NURSE_SKILL;
+    CREATE TABLE NURSE_SKILL (
+        EmpNo INT NOT NULL, 
+        SurgSkill INT NOT NULL,
+        PRIMARY KEY (EmpNo, SurgSkill),
+        FOREIGN KEY (EmpNo) REFERENCES STAFF(EmpNo) /* Any way to limit this to just certain types of staff? */
+    );
