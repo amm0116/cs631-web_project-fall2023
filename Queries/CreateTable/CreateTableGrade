@@ -5,6 +5,7 @@
         Description VARCHAR(50),
         PRIMARY KEY (Grade)
     );
+    
     INSERT INTO GRADE (Description) VALUES
         ('Student Nurse'),
         ('Staff Nurse'),

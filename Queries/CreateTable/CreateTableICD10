@@ -6,6 +6,7 @@
         Type VARCHAR(10) CHECK (Type IN ('Allergy', 'Illness')),
         PRIMARY KEY (Code)
     );
+    
     INSERT INTO ICD10 (Code, Description, Type) VALUES
         ('T78.1XXA', 'Adverse Food Reactions', 'Allergy'),
         ('T78.07XA', 'Anaphylaxis to dairy, initial encounter', 'Allergy'),

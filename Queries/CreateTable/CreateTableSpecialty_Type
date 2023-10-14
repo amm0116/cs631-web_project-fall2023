@@ -5,6 +5,7 @@
         Description VARCHAR(50),
         PRIMARY KEY (Code)
     );
+    
     INSERT INTO SPECIALTY_TYPE (Code, Description) VALUES
         ('CARD', 'Cardiology'),
         ('DERM', 'Dermatology'),

@@ -5,6 +5,7 @@
         Description VARCHAR(50),
         PRIMARY KEY (Code)
     );
+    
     INSERT INTO CONTRACT_TYPE (Description) VALUES
         ('Employment'),
         ('Independent'),

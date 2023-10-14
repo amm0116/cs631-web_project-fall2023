@@ -18,6 +18,7 @@
         Phone VARCHAR(10),
         PRIMARY KEY (EmpNo)
     );
+    
     INSERT INTO STAFF (Fname, Minit, Lname, Ssn, Gender, EmpType, Title, EmpStatus, Addr, City, StateProv, ZIP, Country, Phone)
     VALUES
     ('Matthew', 'R', 'Wilson', '111111111', 'M', 'PHYS', 'Doctor', 'A', '123 Elm St', 'Newark', 'NJ', '07101', 'US', '555-7890'),

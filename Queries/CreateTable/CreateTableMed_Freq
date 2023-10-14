@@ -5,6 +5,7 @@
         Description VARCHAR(50),
         PRIMARY KEY (Code)
     );
+    
     INSERT INTO MED_FREQ (Code, Description) VALUES
         ('STAT', 'Immediately'),
         ('q15', 'Every 15 minutes'),

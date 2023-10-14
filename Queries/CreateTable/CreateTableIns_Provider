@@ -5,6 +5,7 @@
         Description VARCHAR(255),
         PRIMARY KEY (Code)
     );
+    
     INSERT INTO INS_PROVIDER (Description) VALUES
         ('BlueCross BlueShield'),
         ('Aetna Health Insurance'),
