@@ -5,10 +5,10 @@
         Code VARCHAR(15),
         Description VARCHAR(50) NOT NULL,
         DispensingUnit VARCHAR(4) NOT NULL,
-        CostPerUnit DECIMAL(6,2) NOT NULL DEFAULT 0,
-        QtyOnHand DECIMAL(6,2) NOT NULL DEFAULT 0, /* Possibly move into its own view or table */
-        QtyOnOrder DECIMAL(6,2) NOT NULL DEFAULT 0, /* Possibly move into its own view or table */
-        YTDUsage DECIMAL(6,2) NOT NULL DEFAULT 0, /* Possibly move into its own view or table */
+        CostPerUnit DECIMAL(8,2) NOT NULL DEFAULT 0,
+        QtyOnHand DECIMAL(8,2) NOT NULL DEFAULT 0, /* Possibly move into its own view or table */
+        QtyOnOrder DECIMAL(8,2) NOT NULL DEFAULT 0, /* Possibly move into its own view or table */
+        YTDUsage DECIMAL(8,2) NOT NULL DEFAULT 0, /* Possibly move into its own view or table */
         PRIMARY KEY (Code),
         FOREIGN KEY (DispensingUnit) REFERENCES UNIT_MEASURE(Code)
     );
