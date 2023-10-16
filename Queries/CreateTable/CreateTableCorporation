@@ -2,11 +2,11 @@
     DROP TABLE CORPORATION;
     CREATE TABLE CORPORATION (
         CorpNo INT AUTO_INCREMENT,
-        Description VARCHAR(50),
+        CorpName VARCHAR(50) UNIQUE,
         PRIMARY KEY (CorpNo)
     );
     
-    INSERT INTO CORPORATION (Description) VALUES
+    INSERT INTO CORPORATION (CorpName) VALUES
         ('MediLife Healthcare Corporation'),
         ('HealthLink Medical Group'),
         ('MediCore Hospitals, Inc.'),
