@@ -1,0 +1,14 @@
+/* Corporations */
+    DROP TABLE CORPORATION;
+    CREATE TABLE CORPORATION (
+        Code INT AUTO_INCREMENT,
+        Description VARCHAR(50),
+        PRIMARY KEY (Code)
+    );
+    
+    INSERT INTO CORPORATION (Description) VALUES
+        ('MediLife Healthcare Corporation'),
+        ('HealthLink Medical Group'),
+        ('MediCore Hospitals, Inc.'),
+        ('MediServe Health Systems'),
+        ('WellnessCare Clinics, LLC');
