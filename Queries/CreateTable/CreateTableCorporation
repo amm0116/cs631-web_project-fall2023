@@ -1,9 +1,9 @@
 /* Corporations */
     DROP TABLE CORPORATION;
     CREATE TABLE CORPORATION (
-        Code INT AUTO_INCREMENT,
+        CorpNo INT AUTO_INCREMENT,
         Description VARCHAR(50),
-        PRIMARY KEY (Code)
+        PRIMARY KEY (CorpNo)
     );
     
     INSERT INTO CORPORATION (Description) VALUES

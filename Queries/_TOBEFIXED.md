@@ -7,6 +7,7 @@ Foreign key(s) on the following tables don't have on update/on delete actions sp
 * NURSE_SKILL
 * SURGEON_CONTRACT
 * NURSE_EXP
+* OWNER
 
 Foreign key constraints need to be set up for the following tables/columns:
 * PATIENT (Pcp, InsProvider)
