@@ -13,8 +13,8 @@
     );
     
     INSERT INTO CLINIC (Description, Addr, City, StateProv, ZIP, Country, Phone) VALUES
-        ('Newark Medical Clinic', 'Commerce Avenue', 'Newark', 'NJ', '07101', 'US', '555-123-4567'),
-        ('Jersey City Health', 'Market Street', 'Jersey City', 'NJ', '07302', 'US', '555-234-5678'),
-        ('Elizabeth Healthcare Center', 'Business Road', 'Elizabeth', 'NJ', '07201', 'US', '555-345-6789'),
-        ('High Point Clinic', 'Trade Boulevard', 'Harrison', 'NJ', '07029', 'US', '555-456-7890'),
-        ('Mountain View Healthcare', 'Commerce Parkway', 'Kearny', 'NJ', '07032', 'US', '555-567-8901');
+        ('Newark Medical Clinic', '1500 Commerce Avenue', 'Newark', 'NJ', '07101', 'US', '555-123-4567'),
+        ('Jersey City Health', '12-04 Market Street', 'Jersey City', 'NJ', '07302', 'US', '555-234-5678'),
+        ('Elizabeth Healthcare Center', '1251 Business Road', 'Elizabeth', 'NJ', '07201', 'US', '555-345-6789'),
+        ('High Point Clinic', '86 Trade Boulevard', 'Harrison', 'NJ', '07029', 'US', '555-456-7890'),
+        ('Mountain View Healthcare', '20A Commerce Parkway', 'Kearny', 'NJ', '07032', 'US', '555-567-8901');
