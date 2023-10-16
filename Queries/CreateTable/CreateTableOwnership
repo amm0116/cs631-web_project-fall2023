@@ -1,0 +1,17 @@
+/* Ownership */
+    DROP TABLE OWNERSHIP;
+    CREATE TABLE OWNERSHIP (
+        OwnerID INT AUTO_INCREMENT,
+        OwnPct DECIMAL(5,2) NOT NULL CHECK (OwnPct >= 0), /* MAKE SURE ALL OWNERSHIP PERCENTAGES TOTAL TO 100% */
+        PRIMARY KEY (OwnerID),
+        FOREIGN KEY (OwnerID) REFERENCES OWNER(OwnerID)
+    );
+
+    INSERT INTO OWNERSHIP (OwnerID, OwnPct) VALUES
+        (1, 58.00),
+        (2, 12.50),
+        (3, 25.00),
+        (4, 0.00),
+        (5, 0.00),
+        (6, 2.25),
+        (7, 2.25);
