@@ -1,0 +1,11 @@
+/* NDC (Medication) Interactions */
+
+    DROP TABLE MED_INTERACT;
+    CREATE TABLE MED_INTERACT (
+        NdcA VARCHAR(15),
+        NdcB VARCHAR(15), /* Not equal to NdcA */
+        Severity CHAR NOT NULL CHECK (Severity IN ('N', 'L', 'M', 'S')),
+        PRIMARY KEY (NdcA, NdcB),
+        FOREIGN KEY (NdcA) REFERENCES NDC(Code),
+        FOREIGN KEY (NdcB) REFERENCES NDC(Code)
+);
