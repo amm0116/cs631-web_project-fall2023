@@ -1,0 +1,12 @@
+/* Patient Allergies */
+    DROP TABLE PATIENT_ALLERGY;
+    CREATE TABLE PATIENT_ALLERGY (
+        PatientNo INT,
+        Allergy VARCHAR(10), /* Any way to limit this to just certain types of ICD10? */
+        DiagnosisDate DATE,
+        DiagnosedBy INT NOT NULL, /* Any way to limit this to just certain types of staff? */
+        PRIMARY KEY (PatientNo, Allergy, DiagnosisDate),
+        FOREIGN KEY (PatientNo) REFERENCES Patient(PatientNo),
+        FOREIGN KEY (Allergy) REFERENCES ICD10(Code),
+        FOREIGN KEY(DiagnosedBy) REFERENCES Staff(EmpNo)
+    );
