@@ -44,8 +44,8 @@
 | 11/25/23 | 12/03/23 | Target Completion | Term Project Report: Final Draft | Amira | N |
 | 11/25/23 | 12/07/23 | Target Completion | Term Project Presentation: Script | Amira | N |
 | 12/04/23 | 12/08/23 | Target Completion | Term Project Presentation: Record | Amira, Aspen | N |
-| 12/04/23 | 12/08/23| Target Completion | Term Project Report: Submission | Amira, Aspen | N |
-| 12/04/23 | 12/08/23 | Target Completion | Term Project Presentation: Upload & Submission | Amira, Aspen | N |
+| 12/04/23 | 12/09/23| Target Completion | Term Project Report: Submission | Amira, Aspen | N |
+| 12/04/23 | 12/09/23 | Target Completion | Term Project Presentation: Upload & Submission | Amira, Aspen | N |
 
 # Hard Deadlines
 
