@@ -1,0 +1,10 @@
+/* Surgery Types */
+    DROP TABLE SURG_TYPE;
+    CREATE TABLE SURG_TYPE (
+        Code INT AUTO_INCREMENT,
+        Description VARCHAR(50),
+        AnatomicalLoc INT NOT NULL,
+        Category CHAR(1) NOT NULL CHECK (Category IN ('O', 'H')),
+        PRIMARY KEY (Code),
+        FOREIGN KEY (AnatomicalLoc) REFERENCES Anatomical_Loc(Code)
+    );

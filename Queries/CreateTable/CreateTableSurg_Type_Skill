@@ -1,0 +1,9 @@
+/* Surgery Type-Skill Mappings */
+    DROP TABLE SURG_TYPE_SKILL;
+    CREATE TABLE SURG_TYPE_SKILL (
+        Type INT,
+        Skill INT,
+        PRIMARY KEY (Type, Skill),
+        FOREIGN KEY (Type) REFERENCES SURG_TYPE(Code),
+        FOREIGN KEY (Skill) REFERENCES SURG_SKILL(Code)
+    );
