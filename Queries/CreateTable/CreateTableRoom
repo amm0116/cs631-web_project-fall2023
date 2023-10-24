@@ -1,10 +1,9 @@
 /* Rooms */
     DROP TABLE ROOM;
     CREATE TABLE ROOM (
-        
         RoomBed VARCHAR(10),
         Facility INT,
-        NurseUnit INT CHECK (NurseUnit IN (1, 2, 3, 4, 5, 6, 7)),
+        NurseUnit INT, /* Must be between 1 - 7 */
         Wing VARCHAR(5) CHECK (Wing IN ('Blue', 'Green')),
         PRIMARY KEY (RoomBed),
         FOREIGN KEY (Facility) REFERENCES FACILITY(Code)

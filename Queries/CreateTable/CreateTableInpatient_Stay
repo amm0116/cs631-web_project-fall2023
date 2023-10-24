@@ -1,0 +1,13 @@
+/* In-Patient Stays */
+    DROP TABLE INPATIENT_STAY;
+    CREATE TABLE INPATIENT_STAY (
+        PatientNo INT,
+        RoomBed VARCHAR(10) NOT NULL,
+        CheckInDate DATE,
+        CheckOutDate DATE,
+        Nurse INT,
+        PRIMARY KEY (PatientNo, CheckInDate),
+        FOREIGN KEY (PatientNo) REFERENCES PATIENT(PatientNo),
+        FOREIGN KEY (RoomBed) REFERENCES ROOM(RoomBed),
+        FOREIGN KEY (Nurse) REFERENCES STAFF(EmpNo) /* Any way to limit this to just certain types of staff? */
+    );
