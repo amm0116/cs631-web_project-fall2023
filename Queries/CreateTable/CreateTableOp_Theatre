@@ -1,9 +1,10 @@
 /* Operation Theatres */
     DROP TABLE OP_THEATRE;
     CREATE TABLE OP_THEATRE (
-        Facility INT,
-        Theatre CHAR,
-        PRIMARY KEY (Facility, Theatre),
+        Code INT AUTO_INCREMENT,
+        Facility INT NOT NULL,
+        Theatre CHAR NOT NULL,
+        PRIMARY KEY (Code),
         FOREIGN KEY (Facility) REFERENCES FACILITY(Code)
     );
     
