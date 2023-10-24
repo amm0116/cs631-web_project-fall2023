@@ -1,0 +1,11 @@
+/* Surgery Staff Assignments */
+    DROP TABLE SURGERY_STAFF;
+    CREATE TABLE SURGERY_STAFF (
+        SurgeryNo INT,
+        EmpNo INT,
+        /* Any way to make sure there is at least one surgeon and two nurses per surgery? */
+        /* Any way to make sure that assigned nurses have the proper skills? */
+        PRIMARY KEY (SurgeryNo, EmpNo),
+        FOREIGN KEY (SurgeryNo) REFERENCES SURGERY(SurgeryNo),
+        FOREIGN KEY (EmpNo) REFERENCES STAFF(EmpNo)
+    );

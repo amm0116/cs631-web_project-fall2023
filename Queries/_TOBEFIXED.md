@@ -19,6 +19,7 @@ Foreign key(s) on the following tables don't have on update/on delete actions sp
 * SURG_TYPE_SKILL
 * INPATIENT_STAY
 * SURGERY
+* SURGERY_STAFF
 
 Foreign key constraints need to be set up for the following tables/columns:
 * PATIENT (Pcp, InsProvider)
@@ -39,6 +40,7 @@ The following tables have no sample data inserted yet:
 * SURG_TYPE_SKILL
 * INPATIENT_STAY
 * SURGERY
+* SURGERY_STAFF
 
 The following tables may need to be split up into multiple:
 * NDC
