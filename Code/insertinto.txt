@@ -1,0 +1,68 @@
+INSERT INTO GRADE (Description) VALUES
+        ('Student Nurse'),
+        ('Staff Nurse'),
+        ('Senior Staff Nurse'),
+        ('Charge Nurse'),
+        ('Clinical Nurse Specialist'),
+        ('Advance Practice Nurse'),
+        ('Nurse Manager'),
+        ('Clinical Nurse Leader');
+
+
+    INSERT INTO PATIENT (Fname, Minit, Lname, Ssn, Gender, Dob, BloodType, RhFactor, InsProvider, InsMemberId, Pcp, Addr, City, StateProv, ZIP, Country, Phone) VALUES
+        ('Mary', 'M', 'Cleason', '292620457', 'F', '1995-10-12', 'A', '-', 'Horizon BCBS', 'ABC123XYZ', 1,  '52008 Bartell Heights Apt. 679', 'North Gaston', 'AL', '34800', 'US', '6585551539'),
+        ('Sabina', 'A', 'Kerluke', '457385601', 'F', '1982-01-16', 'O', '+', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, '2415553413'),
+        ('Mike', 'E', 'Douglas', '148412801', 'M', '1971-06-05', 'B', '+', 'Anthem', '45695844', 1,  '2 Linda Place', 'Fanwood', 'NJ', '07023', 'US', '7325554580'),
+        ('Sal', NULL, 'Levine', '157350082', 'M', '2003-02-24', 'B', '-', 'Cigna', '43DA20', 1,  '591 Valley Road', 'West Orange', 'NJ', '07052', 'US', '7325558999'),
+        ('John', 'A', 'Howell', NULL, 'M', '2001-05-24', 'B', '-', NULL, NULL, 1,  '4784 Robson St', 'Vancouver', 'BC', 'V6B3K9', 'CA', '6045550246'),
+        ('Britney', 'L', 'King', '149124409', 'F', '1983-12-30', NULL, NULL, 'Horizon BCBS', '59865FG1', 1,  '1111 Washington Street', 'Hoboken', 'NJ', '07030', 'US', '6045558871'),
+        ('John', 'D', 'Smith', '123456789', 'M', '1990-05-15', 'A', '+', 'HealthCare Inc.', 'HC123456', 101, '123 Elm St', 'Anytown', 'CA', '98765', 'US', '5551234567'),
+        ('Alice', 'M', 'Smith', '987654321', 'F', '1985-08-20', 'B', '-', 'MediCare Corp', 'MC987654', 102, '456 Oak Ave', 'Smallville', 'NY', '54321', 'US', '5559876543'),
+        ('David', 'P', 'Brown', '567890123', 'M', '1992-03-10', 'AB', '+', 'InsureCo', 'IC567890', 103, '789 Maple St', 'Metropolis', 'TX', '67890', 'US', '5552345678'),
+        ('Sarah', 'S', 'Lee', '345678901', 'F', '1987-11-25', 'O', '-', 'CoverAll Insurance', 'CA345678', 104, '234 Pine Rd', 'Villageville', 'FL', '76543', 'US', '5558765432'),
+        ('Michael', 'J', 'Wang', '210987654', 'M', '1995-02-01', 'A', '+', 'HealthFirst', 'HF210987', 105, '567 Cedar Ln', 'Townsville', 'CA', '54321', 'US', '5553456789'),
+        ('Emily', 'R', 'Garcia', '654321098', 'F', '1984-07-10', 'A', '-', 'InsuranceHub', 'IH654321', 101, '456 Birch Dr', 'Countryside', 'NY', '45678', 'US', '5556543210'),
+        ('Daniel', 'L', 'Martinez', '789012345', 'M', '1989-10-05', 'B', '+', 'GuardianCare', 'GC789012', 102, '789 Willow Rd', 'Metroville', 'TX', '98765', 'US', '5557890123'),
+        ('Olivia', 'K', 'Lopez', '432109876', 'F', '1993-12-15', 'O', '-', 'InsureWell', 'IW432109', 103, '123 Spruce Ave', 'Cityville', 'FL', '12345', 'US', '5558765432'),
+        ('Matthew', 'A', 'Chen', '876543210', 'M', '1988-04-30', 'AB', '+', 'HealthPlus', 'HP876543', 104, '890 Oak St', 'Hometown', 'CA', '23456', 'US', '5559876543'),
+        ('Emma', 'B', 'Nguyen', '543210987', 'F', '1982-09-18', 'A', '-', 'MediShield', 'MS543210', 105, '567 Pine Ln', 'Villagetown', 'NY', '56789', 'US', '5553210987')
+        ;
+
+            INSERT INTO SPECIALTY (Description) VALUES
+        ('Orthopedics'),
+        ('Cardiothoracic'),
+        ('Neurosurgery'),
+        ('General'),
+        ('Vascular'),
+        ('Urology'),
+        ('Gastrointestinal'),
+        ('Colorectal'),
+        ('Ophthalmology'),
+        ('Otolaryngology'),
+        ('Pediatric'),
+        ('Transplant'),
+        ('Bariatric'),
+        ('Hand');
+
+    INSERT INTO STAFF (Fname, Minit, Lname, Ssn, Gender, EmpType, Title, EmpStatus, Addr, City, StateProv, ZIP, Country, Phone)
+    VALUES
+    ('Matthew', 'R', 'Wilson', '111111111', 'M', 'PHYS', 'Doctor', 'A', '123 Elm St', 'Newark', 'NJ', '07101', 'US', '555-7890'),
+    ('Amanda', 'J', 'Thomas', '222222222', 'F', 'NURS', 'Nurse', 'I', '456 Oak St', 'Jersey City', 'NJ', '07301', 'US', '555-8901'),
+    ('Joseph', 'T', 'Hall', '333333333', 'M', 'SURG', 'Surgeon', 'A', '789 Maple St', 'Hoboken', 'NJ', '07030', 'US', '555-1234'),
+    ('Laura', 'E', 'Garcia', '444444444', 'F', 'SURG', 'Surgeon', 'I', '101 Pine St', 'Elizabeth', 'NJ', '07201', 'US', '555-5678'),
+    ('Daniel', 'M', 'Brown', '555555555', 'M', 'SUPP', 'Admin Assistant', 'I', '202 Cedar St', 'Newark', 'NJ', '07102', 'US', '555-9012'),
+    ('Sarah', 'L', 'Lopez', '666666666', 'F', 'SUPP', 'Payroll Accountant', 'A', '303 Birch St', 'Jersey City', 'NJ', '07302', 'US', '555-2345'),
+    ('Jason', 'P', 'Adams', '777777777', 'M', 'SURG', 'Surgeon', 'A', '404 Redwood St', 'Hoboken', 'NJ', '07031', 'US', '555-3456'),
+    ('Michelle', 'R', 'Rodriguez', '888888888', 'F', 'PHYS', 'Doctor', 'A', '505 Willow St', 'Elizabeth', 'NJ', '07202', 'US', '555-4567'),
+    ('Andrew', 'D', 'Harris', '999999999', 'M', 'NURS', 'Nurse', 'A', '606 Birchwood St', 'Newark', 'NJ', '07103', 'US', '555-5678'),
+    ('Stephanie', 'J', 'Gonzalez', '123456789', 'F', 'NURS', 'Nurse', 'A', '707 Oakwood St', 'Jersey City', 'NJ', '07303', 'US', '555-6789'),
+    ('Ryan', 'S', 'Perez', '234567890', 'M', 'SURG', 'Surgeon', 'A', '808 Pineview St', 'Hoboken', 'NJ', '07032', 'US', '555-7890'),
+    ('Melissa', 'A', 'King', '345678901', 'F', 'SUPP', 'Receptionist', 'A', '909 Elmwood St', 'Elizabeth', 'NJ', '07203', 'US', '555-8901'),
+    ('David', 'L', 'Scott', '456789012', 'M', 'PHYS', 'Doctor', 'A', '1010 Maple St', 'Newark', 'NJ', '07104', 'US', '555-1234'),
+    ('Emily', 'M', 'Lewis', '567890123', 'F', 'SURG', 'Surgeon', 'A', '1111 Willow St', 'Jersey City', 'NJ', '07304', 'US', '555-5678'),
+    ('Michael', 'D', 'Turner', '678901234', 'M', 'NURS', 'Nurse', 'A', '1212 Oak St', 'Hoboken', 'NJ', '07033', 'US', '555-9012'),
+    ('Jessica', 'R', 'Martinez', '789012345', 'F', 'PHYS', 'Doctor', 'I', '1313 Cedar St', 'Elizabeth', 'NJ', '07204', 'US', '555-2345'),
+    ('William', 'M', 'Hill', '890123456', 'M', 'SUPP', 'Office Manager', 'A', '1414 Elm St', 'Newark', 'NJ', '07105', 'US', '555-3456'),
+    ('Linda', 'J', 'Wright', '987654321', 'F', 'SUPP', 'Chief of Staff', 'A', '1515 Pine St', 'Elizabeth', 'NJ', '07205', 'US', '555-4567'),
+    ('Thomas', 'E', 'Young', '876543210', 'M', 'NURS', 'Nurse', 'A', '1616 Maple St', 'Jersey City', 'NJ', '07305', 'US', '555-5678'),
+    ('Karen', 'A', 'Walker', '765432109', 'F', 'NURS', 'Nurse', 'A', '1717 Birch St', 'Hoboken', 'NJ', '07034', 'US', '555-6789');

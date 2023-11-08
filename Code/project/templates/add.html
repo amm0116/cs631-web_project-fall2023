@@ -1,0 +1,35 @@
+{% block header %}
+  <h1>{% block title %}New Staff Member{% endblock %}</h1>
+  <a href="{{ url_for('people.seeAll') }}"><button>Return to Staff Page</button></a>
+{% endblock %}
+
+{% block content %}
+   <form method="post">
+    <label for="name">FIRST NAME</label>
+    <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
+    <label for="name">LAST NAME</label>
+    <input name="Lname" id="lname" value="{{ request.form['Lname'] }}" required>
+
+    <label for="Gender">Gender</label>
+    <select name="Gender" id="gender">
+    <option value="M">M</option>
+    <option value="F">F</option>
+    </select>
+
+    <label for="EmpStatus">EMPLOYEE STATUS</label>
+    <select name="EmpStatus" id="status">
+    <option value="A">A</option>
+    <option value="I">I</option>
+    </select>
+
+    <label for="EmpStatus">EMPLOYEE Type</label>
+    <select name="EmpType" id="empType">
+    <option value="PHYS">PHYS</option>
+    <option value="NURS">NURS</option>
+    <option value="SURG">SURG</option>
+    <option value="SUPP">SUPP</option>
+    </select>
+
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

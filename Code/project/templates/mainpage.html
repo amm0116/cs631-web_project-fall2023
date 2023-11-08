@@ -1,0 +1,59 @@
+<!-- BASE HTML FILE, ALL OTHER HTMLS WILL REFER TO THIS -->
+<!doctype html>
+<title>{% block title %}{% endblock %} - Staffing Program</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+
+<style>
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+</style>
+
+</nav>
+<section class="content">
+ <section class="hero is-primary is-medium">
+  <div class="hero-head">
+    <nav class="navbar">
+    </nav>
+  </div>
+  {% block content %}
+  <div class="center">
+<section class="section">
+      <button class="button is-large">Patient Management</button>
+      <button class="button is-large">Surgeries</button>
+    </section>
+ <section class="section ">
+    <button class="button is-large">Appointments</button>
+    <button class="button is-large">Inpatient Stays</button>
+</section>
+<section class="section">
+    <a href="{{ url_for('people.seeAll') }}"><button class="button is-large">Staff Management </button></a>
+    <button class="button is-large">Shift Scheduling</button>
+</section>
+</div>
+  {% endblock %}
+</section>
