@@ -305,9 +305,9 @@
             * Nurse
 
 * **stay-add (Inpatient Stays / Add)**
-* Possible to receive in patient no. as POST parameter (and immediately initialize patient no. field as appropriate).
-    * 'Back' button (go to surgery)
-    * 'Add' button (perform SQL insert query and go to surgery)
+    * Possible to receive in patient no. as POST parameter (and immediately initialize patient no. field as appropriate).
+    * 'Back' button (go to stay)
+    * 'Add' button (perform SQL insert query and go to stay)
         * *INSERT INTO INPATIENT_STAY (PatientNo, RoomBed, CheckInDate) VALUES (?, ?, ?)*
     * Display the following fields...
         * Patient No. (dropdown: *SELECT PatientNo FROM PATIENT*, required)
@@ -322,7 +322,13 @@
             * Wing
             * Room/Bed
 
-* stay-checkout (Inpatient Stays / CheckOut)
+* **stay-checkout (Inpatient Stays / CheckOut)**
+    * Receive stay no. as POST parameter
+    * 'Back' button (go to stay)
+    * 'CheckOut' button (perform SQL update query and go to stay)
+        * *UPDATE INPATIENT_STAY SET CheckOutDate = ? WHERE StayNo = ?*
+    * Display the following field...
+        * CheckOut (date/time)
 
 * stay-edit-staff (Inspatient Stays / View Staff)
 
