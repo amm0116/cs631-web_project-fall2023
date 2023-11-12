@@ -330,7 +330,18 @@
     * Display the following field...
         * CheckOut (date/time)
 
-* stay-edit-staff (Inspatient Stays / View Staff)
+* **stay-view-staff (Inspatient Stays / View Staff)**
+    * Receive stay no. as POST parameter
+    * 'Back' button (go to stay)
+    * 'Assign' button (go to stay-assign-staff)
+    * 'Remove' links (go to stay-remove-staff)
+    * Display the following table...
+        * Information comes from ROOM table
+            * *SELECT * FROM INPATIENT_STAFF WHERE StayNo = ?*
+        * Each stay staff member displays this data...
+            * Stay No.
+            * Type
+            * Employee
 
 * stay-assign-staff (Inpatient Stays / Assign Staff)
 
