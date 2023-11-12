@@ -353,4 +353,10 @@
         * Type (dropdown: PHYS, NURS)
         * Employee (any way to constrain this by type selection?)
 
-* stay-remove-staff (Inpatient Stays / Remove Staff)
+* **stay-remove-staff (Inpatient Stays / Remove Staff)**
+    * Receive in stay no. and employee no. as POST parameters
+    * 'Back' button (go to stay-view-staff)
+    * 'Delete' button (perform SQL delete query and go to staff)
+        * *DELETE FROM INPATIENT_STAFF WHERE StayNo = [StayNo] EmpNo = [EmployeeNo]*
+            * The StayNo value comes from the POST parameter 
+    * Display warning message
