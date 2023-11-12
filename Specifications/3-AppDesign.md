@@ -235,7 +235,7 @@
         * Shift Start Time (date/time)
         * Shift End Time (date/time)
     
-* surgery (Surgeries)
+* **surgery (Surgeries)**
     * Filter fields (can fill in as many of as few as desired)
         * Surgeon
         * Facility
@@ -258,7 +258,27 @@
             * Time
             * Special Needs
 
-* surgery-add (Surgeries / Add)
+* **surgery-add (Surgeries / Add)**
+    * Possible to receive in patient no. as POST parameter (and immediately initialize patient no. field as appropriate).
+    * 'Back' button (go to surgery)
+    * 'Add' button (perform SQL insert query and go to surgery)
+        * *INSERT INTO SURGERY (PatientNo, OpTheatre, SurgeryTime, SurgeryType, SpecialNeeds) VALUES (?, ?, ?, ?, ?)*
+        * *INSERT INTO SURGERY_STAFF (SurgeryNo, EmpBo) VALUES (?, ?)*
+            * Surgery No. must be obtained after the first insert statement
+    * Display the following fields...
+        * Patient No. (dropdown: *SELECT PatientNo FROM PATIENT*, required)
+        * Surgeon (dropdown: *SELECT EmpNo FROM STAFF WHERE EmpType = 'SURG' AND EmpStatus = 'A'*, required)
+        * Room (dropdown: *SELECT * FROM OP_THEATRE*)
+        * Time (date/time)
+        * Type (dropdown: *SELECT Code FROM SURG_TYPE*)
+        * SpecialNeeds (text)
+    * Display the following table...
+        * Information comes from OP_THEATRE table
+            * *SELECT * FROM OP_THEATRE*
+        * Each operating theatre displays this data...
+            * Room
+            * Facility
+            * Theatre
 
 * stay (Inpatient Stays)
 
