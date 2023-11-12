@@ -298,13 +298,29 @@
             * Facility
             * Unit
             * Wing
-            * Room
+            * Room/Bed
             * CheckIn
             * CheckOut
             * Physician
             * Nurse
 
-* stay-add (Inpatient Stays / Add)
+* **stay-add (Inpatient Stays / Add)**
+* Possible to receive in patient no. as POST parameter (and immediately initialize patient no. field as appropriate).
+    * 'Back' button (go to surgery)
+    * 'Add' button (perform SQL insert query and go to surgery)
+        * *INSERT INTO INPATIENT_STAY (PatientNo, RoomBed, CheckInDate) VALUES (?, ?, ?)*
+    * Display the following fields...
+        * Patient No. (dropdown: *SELECT PatientNo FROM PATIENT*, required)
+        * CheckIn (date/time)
+        * Room/Bed (dropdown: *SELECT RoomBed FROM ROOM*)
+    * Display the following table...
+        * Information comes from ROOM table
+            * *SELECT * FROM ROOM WHERE RoomBed NOT IN (SELECT RoomBed FROM INPATIENT_STAY WHERE CheckOutDate > DATE('now'))*
+        * Each room/bed displays this data...
+            * Facility
+            * Unit
+            * Wing
+            * Room/Bed
 
 * stay-checkout (Inpatient Stays / CheckOut)
 
