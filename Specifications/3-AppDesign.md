@@ -343,6 +343,14 @@
             * Type
             * Employee
 
-* stay-assign-staff (Inpatient Stays / Assign Staff)
+* **stay-assign-staff (Inpatient Stays / Assign Staff)**
+    * Receive stay no. and employee no. as POST parameters
+    * 'Back' button (go to stay-view-staff)
+    * 'Assign' button (perform SQL insert query and go to stay-view-staff)
+        * *INSERT INPATIENT_STAFF (StayNo, EmpNo) Values (?, ?)*
+            * The StayNo value comes from the POST parameter
+    * Display the following fields...
+        * Type (dropdown: PHYS, NURS)
+        * Employee (any way to constrain this by type selection?)
 
 * stay-remove-staff (Inpatient Stays / Remove Staff)
