@@ -280,7 +280,29 @@
             * Facility
             * Theatre
 
-* stay (Inpatient Stays)
+* **stay (Inpatient Stays)**
+    * Filter fields (can fill in as many of as few as desired)
+        * Facility
+        * Room (any way to constrain this by facility selection?)
+        * Date
+    * 'Filter' button (reload table)
+        * *SELECT * FROM INPATIENT_STAY A, ROOM B WHERE A.CheckInDate <= [DATE] AND (A.CheckOutDate >= [DATE] OR A.CheckOutDate IS NULL) AND A.RoomBed = B.RoomBed AND B.Facility = [FACILITY] AND B.RoomBed = [ROOM]*
+    * 'Back' button (go to index)
+    * 'Add Stay' button (go to stay-add)
+    * Table
+        * Information comes from INPATIENT_STAY table
+            * *SELECT A.PatientNo, A.RoomBed, A.CheckInDate, A.CheckOutDate, A.Physician, A.Nurse, B.Facility, B.Wing, B.NurseUnit FROM INPATIENT_STAY A, ROOM B WHERE A.RoomBed = B.RoomBed*
+        * Each stay row displays this data...
+            * Stay No.
+            * Patient No.
+            * Facility
+            * Unit
+            * Wing
+            * Room
+            * CheckIn
+            * CheckOut
+            * Physician
+            * Nurse
 
 * stay-add (Inpatient Stays / Add)
 
