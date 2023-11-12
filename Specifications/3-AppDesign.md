@@ -235,19 +235,39 @@
         * Shift Start Time (date/time)
         * Shift End Time (date/time)
     
+* surgery (Surgeries)
+    * Filter fields (can fill in as many of as few as desired)
+        * Surgeon
+        * Facility
+        * Room (any way to constrain this by facility selection?)
+        * Date
+    * 'Filter' button (reload table)
+        * *SELECT * FROM SURGERY A, SURGERY_STAFF B, STAFF C, OP_THEATRE D WHERE B.EmpNo = [Surgeon] AND A.SurgeryTime >= [Date12:00:00AM] AND A.SurgeryTime <= [Date11:59:59PM] AND A.SurgeryNo = B.SurgeryNo AND B.EmpNo = C.EmpNo AND C.EmpType = 'SURG' AND A.OpTheatre = D.Code AND D.Facility = [Facility] AND D.Room = [Room]*
+    * 'Back' button (go to index)
+    * 'Add Surgery' button (go to surgery-add)
+    * Table
+        * Information comes from SURGERY table
+            * *SELECT A.SurgeryNo, A.PatientNo, A.SurgeryType, A.SpecialNeeds, B.EmpNo, D.Facility, D.Theatre FROM SURGERY A, SURGERY_STAFF B, STAFF C, OP_THEATRE D WHERE A.SurgeryNo = B.SurgeryNo AND B.EmpNo = C.EmpNo AND C.EmpType = 'SURG' AND A.OpTheatre = D.Code*
+        * Each surgery row displays this data...
+            * Surgery No.
+            * Patient No.
+            * Surgeon
+            * Facility
+            * Room
+            * Type
+            * Time
+            * Special Needs
+
+* surgery-add (Surgeries / Add)
+
 * stay (Inpatient Stays)
 
 * stay-add (Inpatient Stays / Add)
 
-* stay-add-doctor (Inpatient Stays / Add Doctor)
+* stay-checkout (Inpatient Stays / CheckOut)
 
-* stay-remove-doctor (Inpatient Stays / Remove Doctor)
+* stay-edit-staff (Inspatient Stays / View Staff)
 
-* stay-add-nurse (Inpatient Stays / Add Nurse)
+* stay-assign-staff (Inpatient Stays / Assign Staff)
 
-* stay-remove-nurse (Inpatient Stays / Remove Nurse)
-
-* surgery (Surgeries)
-
-* surgery-add (Surgeries / Add)
-
+* stay-remove-staff (Inpatient Stays / Remove Staff)
