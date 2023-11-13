@@ -1,0 +1,36 @@
+/* Out-of-Network Physicians */
+    DROP TABLE OON_PHYSICIAN;
+    CREATE TABLE OON_PHYSICIAN (
+        Code INT AUTO_INCREMENT,
+        Name VARCHAR(50) NOT NULL,
+        OfficeName VARCHAR(50),
+        Addr VARCHAR(100),
+        City VARCHAR(20),
+        StateProv CHAR(2),
+        ZIP VARCHAR(10),
+        Country CHAR(2),
+        Phone VARCHAR(15),
+        PRIMARY KEY (Code)
+    );
+    
+    INSERT INTO OON_PHYSICIAN (Name, OfficeName, Addr, City, StateProv, ZIP, Country, Phone) VALUES
+        ('Dr. Xenophilius Quixote', 'Mystic Medical Center', '123 Enigma Lane', 'Puzzleville', 'CA', '98765', 'US', '1234567890'),
+        ('Dr. Octavia Nebula', 'Cosmic Health Clinic', '456 Galaxy Street', 'Astronomy City', 'NY', '54321', 'US', '9876543210'),
+        ('Dr. Zephyr Vortex', 'Windborne Wellness', '789 Breeze Avenue', 'Gustville', 'TX', '12345', 'US', '3456789012'),
+        ('Dr. Ignatius Thunderfoot', 'Solstice Medical', '101 Sunshine Boulevard', 'Radiantville', 'FL', '67890', 'US', '2345678901'),
+        ('Dr. Seraphina Moonshadow', 'Lunar Healing Center', '222 Moonbeam Road', 'Stardust City', 'CA', '45678', 'US', '5678901234'),
+        ('Dr. Mortimer Peculiar', 'Eccentric Health Hub', '333 Oddity Avenue', 'Bizarreville', 'TX', '34567', 'US', '7890123456'),
+        ('Dr. Nebuchadnezzar Riddle', 'Enigma Wellness Clinic', '444 Mystery Lane', 'Puzzleville', 'NY', '23456', 'US', '8901234567'),
+        ('Dr. Persephone Hootenanny', 'Sorcery Medical Group', '555 Magic Street', 'Enchanting City', 'CA', '89012', 'US', '3456789012'),
+        ('Dr. Ambrosia Twinkletoes', 'Whimsy Health Haven', '666 Fantasy Avenue', 'Fairytown', 'TX', '45678', 'US', '4567890123'),
+        ('Dr. Horatio Wobblebottom', 'Curiosity Care Center', '777 Quirk Lane', 'Oddityville', 'NY', '67890', 'US', '9876543210'),
+        ('Dr. Pandora Snickerdoodle', 'Whimsical Wellness Clinic', '888 Whimsy Street', 'Whimsytown', 'FL', '54321', 'US', '1234567890'),
+        ('Dr. Quasar Flapdoodle', 'Astral Health Oasis', '999 Starry Road', 'Cosmic City', 'CA', '43210', 'US', '3456789012'),
+        ('Dr. Cornelius Fiddlesticks', 'Eccentric Healing Center', '111 Quirky Avenue', 'Oddsville', 'TX', '76543', 'US', '2345678901'),
+        ('Dr. Serendipity Wobblewrench', 'Serendipity Medical Group', '222 Happenstance Lane', 'Luckyville', 'NY', '78901', 'US', '5678901234'),
+        ('Dr. Bartholomew Sprocket', 'Sprocket Wellness Clinic', '333 Gadget Street', 'Invention City', 'CA', '23456', 'US', '8901234567'),
+        ('Dr. Hermione Ziggurat', 'Mystic Health Institute', '444 Enchantment Road', 'Witchville', 'FL', '43210', 'US', '4567890123'),
+        ('Dr. Archimedes Crumplehorn', 'Astrological Medical Center', '555 Starlight Avenue', 'Astrotown', 'TX', '67890', 'US', '9876543210'),
+        ('Dr. Andromeda Snickerfritz', 'Enigma Health Haven', '666 Conundrum Lane', 'Riddleville', 'NY', '54321', 'US', '1234567890'),
+        ('Dr. Ignatius Doodlebug', 'Whimsical Wellness Institute', '777 Whimsy Street', 'Whimsyville', 'CA', '34567', 'US', '2345678901'),
+        ('Dr. Melisandre Wobblegobble', 'Curious Medical Group', '888 Oddity Road', 'Odditytown', 'TX', '98765', 'US', '5678901234');

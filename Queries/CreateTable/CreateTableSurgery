@@ -1,0 +1,14 @@
+/* Surgeries */
+    DROP TABLE SURGERY;
+    CREATE TABLE SURGERY (
+        SurgeryNo INT AUTO_INCREMENT,
+        PatientNo INT NOT NULL, /* Any way to make sure one patient isn't scheduled for the same time? */
+        SurgeryTime DATETIME NOT NULL,
+        OpTheatre INT NOT NULL, /* Any way to make sure one theatre isn't scheduled for the same time? */
+        SurgeryType INT NOT NULL,
+        SpecialNeeds VARCHAR(1000),
+        PRIMARY KEY (SurgeryNo),
+        FOREIGN KEY (PatientNo) REFERENCES PATIENT(PatientNo),
+        FOREIGN KEY (OpTheatre) REFERENCES OP_THEATRE(Code),
+        FOREIGN KEY (SurgeryType) REFERENCES SURG_TYPE(Code)
+    );

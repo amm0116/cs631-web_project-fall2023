@@ -1,0 +1,21 @@
+/* Owners */
+    DROP TABLE OWNER;
+    CREATE TABLE OWNER (
+        OwnerID INT AUTO_INCREMENT,
+        OwnerType VARCHAR(20) NOT NULL CHECK (OwnerType IN ('Corporation', 'Physician')),
+        EmpNo INT UNIQUE,
+        CorpNo INT UNIQUE,
+        /* Either EmpNo or CorpNo must exist */
+        PRIMARY KEY (OwnerID),
+        FOREIGN KEY (EmpNo) REFERENCES STAFF(EmpNo), /* Physicians only? */
+        FOREIGN KEY (CorpNo) REFERENCES CORPORATION(CorpNo)
+    );
+
+    INSERT INTO OWNER (OwnerType, EmpNo, CorpNo) VALUES
+        ('Corporation', NULL, 1),
+        ('Corporation', NULL, 2),
+        ('Corporation', NULL, 3),
+        ('Corporation', NULL, 4),
+        ('Corporation', NULL, 5),
+        ('Physician', 1, NULL),
+        ('Physician', 13, NULL);

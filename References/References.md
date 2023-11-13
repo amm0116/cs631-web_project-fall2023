@@ -46,8 +46,8 @@
 
 ### Written References
 
-* [Common Medical and Allergy Codes](http://www.website.com)
-* https://allergenuityhealth.com/common-allergy-medical-codes/
+* [Common Medical and Allergy Codes](https://allergenuityhealth.com/common-allergy-medical-codes/)
+* [List of Medical Abbreviations (Source of Med_Freq)](https://en.wikipedia.org/wiki/List_of_medical_abbreviations)
 
 ### Video Tutorials
 

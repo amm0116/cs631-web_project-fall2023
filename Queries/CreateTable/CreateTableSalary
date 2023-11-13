@@ -1,0 +1,9 @@
+/* Salaries for Non-Surgeon Staff */
+    DROP TABLE SALARY;
+    CREATE TABLE SALARY (
+        EmpNo INT NOT NULL, 
+        Salary DECIMAL(9,2) NOT NULL DEFAULT 0,
+        EffectiveDate DATE NOT NULL,
+        PRIMARY KEY (EmpNo, EffectiveDate),
+        FOREIGN KEY (EmpNo) REFERENCES STAFF(EmpNo) /* Any way to limit this to just certain types of staff? */
+    );

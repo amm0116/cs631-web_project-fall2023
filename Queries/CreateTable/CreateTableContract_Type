@@ -1,0 +1,15 @@
+/* Surgeon Contract Type */
+    DROP TABLE CONTRACT_TYPE;
+    CREATE TABLE CONTRACT_TYPE (
+        Code INT AUTO_INCREMENT,
+        Description VARCHAR(50),
+        PRIMARY KEY (Code)
+    );
+    
+    INSERT INTO CONTRACT_TYPE (Description) VALUES
+        ('Employment'),
+        ('Independent'),
+        ('Partnership'),
+        ('Call Coverage'),
+        ('Research'),
+        ('Consulting');

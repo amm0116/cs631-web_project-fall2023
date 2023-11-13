@@ -1,0 +1,23 @@
+/* Facilities (Clinics & Hospitals) */
+    DROP TABLE FACILITY;
+    CREATE TABLE FACILITY (
+        Code INT AUTO_INCREMENT,
+        Description VARCHAR(50),
+        FacilityType VARCHAR (10) CHECK (FacilityType IN ('Hospital', 'Clinic')),
+        Addr VARCHAR(100),
+        City VARCHAR(20),
+        StateProv CHAR(2),
+        ZIP VARCHAR(10),
+        Country CHAR(2),
+        Phone VARCHAR(15),
+        PRIMARY KEY (Code)
+    );
+    
+    INSERT INTO FACILITY (Description, FacilityType, Addr, City, StateProv, ZIP, Country, Phone) VALUES
+        ('Newark Medical Clinic', 'Clinic', '1500 Commerce Avenue', 'Newark', 'NJ', '07101', 'US', '555-123-4567'),
+        ('Jersey City Health', 'Clinic', '12-04 Market Street', 'Jersey City', 'NJ', '07302', 'US', '555-234-5678'),
+        ('Elizabeth Healthcare Center', 'Clinic', '1251 Business Road', 'Elizabeth', 'NJ', '07201', 'US', '555-345-6789'),
+        ('High Point Hospital', 'Hospital', '86 Trade Boulevard', 'Harrison', 'NJ', '07029', 'US', '555-456-7890'),
+        ('Mountain View Healthcare', 'Clinic', '20A Commerce Parkway', 'Kearny', 'NJ', '07032', 'US', '555-567-8901'),
+        ('Newark Hospital', 'Hospital', '200 Main Street', 'Newark', 'NJ', '07101', 'US', '555-345-5555'),
+        ('Century Hospital', 'Hospital', '1034 Railroad Ave', 'Elizabeth', 'NJ', '07201', 'US', '555-345-6666');

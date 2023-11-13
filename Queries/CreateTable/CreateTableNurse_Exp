@@ -1,9 +1,17 @@
 /* Nurse Experience (Years, Grade, Surgery Type) */
-    DROP TABLE NURSE_EXP;
+	DROP TABLE NURSE_EXP;
     CREATE TABLE NURSE_EXP (
-        EmpNum INT,
-        YrsExp INT CHECK (YrsExp > 0),
-        Grade INT, /* FOREIGN KEY */
-        SurgeryType INT, /* FOREIGN KEY */
-        PRIMARY KEY (EmpNum)
+        EmpNo INT NOT NULL,
+        YrsExp INT NOT NULL DEFAULT 0 CHECK (YrsExp >= 0),
+        Grade INT NOT NULL DEFAULT 1,
+        SurgeryType VARCHAR(10),
+        PRIMARY KEY (EmpNo),
+        FOREIGN KEY (EmpNo) REFERENCES STAFF(EmpNo), /* Any way to limit this to just certain types of staff? */
+        FOREIGN KEY (Grade) REFERENCES GRADE(Grade),
+        FOREIGN KEY (SurgeryType) REFERENCES SPECIALTY_TYPE(Code)
     );
+
+
+
+
+

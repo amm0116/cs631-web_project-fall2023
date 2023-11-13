@@ -1,0 +1,9 @@
+/* Surgeon and Physicial Specialties */
+    DROP TABLE SURG_PHYS_SPECIALTY;
+    CREATE TABLE SURG_PHYS_SPECIALTY (
+        EmpNo INT,
+        Specialty VARCHAR(10) NOT NULL,
+        PRIMARY KEY (EmpNo, Specialty),
+        FOREIGN KEY (EmpNo) REFERENCES STAFF(EmpNo), /* Any way to limit this to just certain types of staff? */
+        FOREIGN KEY (Specialty) REFERENCES SPECIALTY_TYPE(Code)
+    );

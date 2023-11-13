@@ -1,0 +1,15 @@
+/* Prescriptions */
+
+    DROP TABLE PRESCRIPTION;
+    CREATE TABLE PRESCRIPTION (
+        PatientNo INT,
+        Ndc VARCHAR(15),
+        MedFreq VARCHAR(10) NOT NULL,
+        Prescriber INT NOT NULL,
+        StartDate DATE,
+        EndDate DATE,
+        PRIMARY KEY (PatientNo, Ndc, StartDate),
+        FOREIGN KEY (PatientNo) REFERENCES PATIENT(PatientNo),
+        FOREIGN KEY (Ndc) REFERENCES NDC(Code),
+        FOREIGN KEY (Prescriber) REFERENCES STAFF(EmpNo) /* Limit to physicians only */
+    );

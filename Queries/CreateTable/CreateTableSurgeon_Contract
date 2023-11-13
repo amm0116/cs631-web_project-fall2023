@@ -1,0 +1,11 @@
+/* Contracts for Surgeon Staff */
+    DROP TABLE SURGEON_CONTRACT;
+    CREATE TABLE SURGEON_CONTRACT (
+        EmpNo INT NOT NULL, 
+        ContractType INT NOT NULL,
+        ContractAmt DECIMAL(9,2) NOT NULL DEFAULT 0,
+        EffectiveDate DATE NOT NULL,
+        ExpirationDate DATE NOT NULL, /* Any way to check if Expiration Date is after Effective Date? Any way to default to one year out? */
+        PRIMARY KEY (EmpNo, EffectiveDate),
+        FOREIGN KEY (EmpNo) REFERENCES STAFF(EmpNo) /* Any way to limit this to just certain types of staff? */
+    );

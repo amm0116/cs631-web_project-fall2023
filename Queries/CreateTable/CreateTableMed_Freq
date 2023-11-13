@@ -1,0 +1,27 @@
+/* Medicine Frequency */
+    DROP TABLE MED_FREQ;
+    CREATE TABLE MED_FREQ (
+        Code VARCHAR(10),
+        Description VARCHAR(50),
+        PRIMARY KEY (Code)
+    );
+    
+    INSERT INTO MED_FREQ (Code, Description) VALUES
+        ('STAT', 'Immediately'),
+        ('q15', 'Every 15 minutes'),
+        ('q.h.', 'Every hour'),
+        ('q.o.h.', 'Every other hour'),
+        ('q6h', 'Every 6 hours'),
+        ('q.d.s.', 'Four times each day'),
+        ('qAc', 'Before every meal'),
+        ('BID', 'Twice a day'),
+        ('TID', 'Three times a day'),
+        ('q.d.', 'Every day'),
+        ('q.AM', 'Every day before noon'),
+        ('q.h.s.', 'Every day before bedtime'),
+        ('q.A.D.', 'Every other day'),
+        ('qw', 'Weekly'),
+        ('q2wk', 'Every 2 weeks'),
+        ('qm', 'Every month'),
+        ('q.s.', 'As needed'),
+        ('ad lib', 'As much as the patient desires');

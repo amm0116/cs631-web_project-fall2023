@@ -1,0 +1,29 @@
+/* Medical Specialty Type */
+    DROP TABLE SPECIALTY_TYPE;
+    CREATE TABLE SPECIALTY_TYPE (
+        Code VARCHAR(10),
+        Description VARCHAR(50),
+        PRIMARY KEY (Code)
+    );
+    
+    INSERT INTO SPECIALTY_TYPE (Code, Description) VALUES
+        ('CARD', 'Cardiology'),
+        ('DERM', 'Dermatology'),
+        ('GASTRO', 'Gastroenterology'),
+        ('ORTH', 'Orthopedics'),
+        ('NEURO', 'Neurology'),
+        ('OPHTH', 'Ophthalmology'),
+        ('ENT', 'Otolaryngology'),
+        ('PEDIAT', 'Pediatrics'),
+        ('OBGYN', 'Obstetrics and Gynecology'),
+        ('URO', 'Urology'),
+        ('ENDO', 'Endocrinology'),
+        ('RHEUM', 'Rheumatology'),
+        ('PULM', 'Pulmonology'),
+        ('HEMAT', 'Hematology'),
+        ('ID', 'Infectious Disease'),
+        ('EM', 'Emergency Medicine'),
+        ('PLAST', 'Plastic Surgery'),
+        ('RADIO', 'Radiology'),
+        ('ANESTH', 'Anesthesiology'),
+        ('PATH', 'Pathology');

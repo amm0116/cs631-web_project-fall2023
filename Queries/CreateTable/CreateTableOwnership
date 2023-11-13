@@ -1,0 +1,36 @@
+/* Ownership */
+    DROP TABLE OWNERSHIP;
+    CREATE TABLE OWNERSHIP (
+        OwnerID INT,
+        Facility INT, 
+        OwnPct DECIMAL(5,2) NOT NULL CHECK (OwnPct >= 0), /* MAKE SURE OWNERSHIP PERCENTAGES TOTAL TO 100% FOR EACH FACILITY */
+        PRIMARY KEY (OwnerID, Facility),
+        FOREIGN KEY (OwnerID) REFERENCES OWNER(OwnerID),
+        FOREIGN KEY (Facility) REFERENCES FACILITY(Code)
+    );
+
+INSERT INTO OWNERSHIP (OwnerID, Facility, OwnPct) VALUES
+    (1, 1, 20.00),
+    (2, 1, 30.00),
+    (3, 1, 50.00),
+    (5, 1, 0.00),
+    
+    (2, 2, 100.00),
+    
+    (4, 3, 40.00),
+    (5, 3, 60.00),
+    
+    (6, 4, 10.00),
+    (7, 4, 15.00),
+    (5, 4, 0.00),
+    (4, 4, 0.00),
+    
+    (3, 5, 100.00),
+    
+    (4, 6, 25.00),
+    (5, 6, 50.00),
+    (6, 6, 25.00),
+    
+    (7, 7, 100.00),
+    (3, 7, 0.00),
+    (5, 7, 0.00);

@@ -1,0 +1,12 @@
+/* Patient Illnesses */
+    DROP TABLE PATIENT_ILLNESS;
+    CREATE TABLE PATIENT_ILLNESS (
+        PatientNo INT,
+        Illness VARCHAR(10), /* Any way to limit this to just certain types of ICD10? */
+        DiagnosisDate DATE,
+        DiagnosedBy INT NOT NULL, /* Any way to limit this to just certain types of staff? */
+        PRIMARY KEY (PatientNo, Illness, DiagnosisDate),
+        FOREIGN KEY (PatientNo) REFERENCES Patient(PatientNo),
+        FOREIGN KEY (Illness) REFERENCES ICD10(Code),
+        FOREIGN KEY(DiagnosedBy) REFERENCES Staff(EmpNo)
+    );

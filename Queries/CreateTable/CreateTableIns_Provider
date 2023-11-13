@@ -1,0 +1,29 @@
+/* Insurance Provider */
+    DROP TABLE INS_PROVIDER;
+    CREATE TABLE INS_PROVIDER (
+        Code INT AUTO_INCREMENT,
+        Description VARCHAR(255),
+        PRIMARY KEY (Code)
+    );
+    
+    INSERT INTO INS_PROVIDER (Description) VALUES
+        ('BlueCross BlueShield'),
+        ('Aetna Health Insurance'),
+        ('UnitedHealthcare'),
+        ('Cigna Health Insurance'),
+        ('Humana Health Insurance'),
+        ('Anthem Health Insurance'),
+        ('Kaiser Permanente'),
+        ('Molina Healthcare'),
+        ('Centene Corporation'),
+        ('WellCare Health Plans'),
+        ('MVP Health Care'),
+        ('Oscar Health'),
+        ('Ambetter Health'),
+        ('HealthPartners'),
+        ('Regence BlueCross BlueShield'),
+        ('Highmark Health'),
+        ('Tufts Health Plan'),
+        ('SCAN Health Plan'),
+        ('Medica'),
+        ('CareSource');

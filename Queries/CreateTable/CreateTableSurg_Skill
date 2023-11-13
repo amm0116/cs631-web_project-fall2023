@@ -1,0 +1,25 @@
+/* Surgery Skills */
+    DROP TABLE SURG_SKILL;
+    CREATE TABLE SURG_SKILL (
+        Code INT AUTO_INCREMENT,
+        Description VARCHAR(50),
+        PRIMARY KEY (Code)
+    );
+
+    INSERT INTO SURG_SKILL (Description) VALUES
+        ('Anatomy Knowledge'),
+        ('Manual Dexterity'),
+        ('Surgical Instrument Proficiency'),
+        ('Suture Techniques'),
+        ('Tissue Handling'),
+        ('Hemostasis'),
+        ('Tissue Dissection'),
+        ('Minimally Invasive Surgery (MIS) Skills'),
+        ('Patient Positioning and Access'),
+        ('Infection Control'),
+        ('Decision-Making'),
+        ('Communication'),
+        ('Teamwork'),
+        ('Patient Assessment'),
+        ('Ethical and Legal Understanding'),
+        ('Postoperative Care');
