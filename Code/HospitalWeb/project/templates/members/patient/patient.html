@@ -1,0 +1,37 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+  <h1>Patient Management</h1>
+  <h2><a href="/"><button>Back</button></a>
+<a href="{{ url_for('people.addPatient') }}"><button>Add More</button></a></h2>
+  <ul>
+ 
+      <!--patient -->
+  </ul>
+</nav>
+
+{% block header %}
+<h1>{% block title %} Patients {% endblock %}</h1>
+{% endblock %}
+
+
+
+{% block content %}
+
+{% for item in patient%}
+<table class="table">
+<tr>
+	<td class="rowid">{{item['P.rowid']}}</td>
+	<td class="name"><a href="{{ url_for('people.seePatient',id=item['rowid'])}}">{{item['P.Fname']}} {{item['P.Minit']}} {{item['P.Lname']}}</a></td>
+	<td class="gender">{{item['P.Gender']}}</td>
+	<td class="dob">{{item['P.Dob']}}</td>
+
+	<td class="test">{{item['S.rowid']}}</td>
+
+	<td><a href="{{ url_for('people.delete',id=item['rowid'])}}"><button class="button is-large">Delete</button></a></td>
+	
+</tr>
+{% endfor %}
+
+</table>
+{% endblock %}

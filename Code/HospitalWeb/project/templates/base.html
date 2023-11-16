@@ -1,0 +1,23 @@
+<!-- BASE HTML FILE, ALL OTHER HTMLS WILL REFER TO THIS -->
+<!doctype html>
+<title>{% block title %}{% endblock %} - Staffing Program</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>This is the Staffing System</h1>
+  <h2><a href="/"><button>Home</button></a>
+<a href="{{ url_for('people.addOne') }}"><button>Add More</button></a></h2>
+  <ul>
+ 
+      <!--staff -->
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}
+  {% endblock %}
+</section>
