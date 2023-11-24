@@ -20,12 +20,6 @@ def seeAllStaff():
 
     return render_template('members/staff/staff.html',staff=staff)
 
-   #get_db().execute(
-        # 'SELECT rowid,*'
-        # ' FROM PATIENT P,STAFF E'
-        # ' WHERE P.pcp=E.rowid'
-        # ,(id,)).fetchall()
-
 
 @bp.route('/patient')
 def seeAllPatients():
@@ -188,4 +182,27 @@ def delete(id):
     db.commit()
     return redirect(url_for('people.seeAllStaff'))
 
+# DUMMY DATA DO NOT NAVIAGTE TO UNLESS ADDING DUMMY DATA
+@bp.route('/dummy')
+def createDummy():
+    db=get_db()
+    list=['VALUES (4,"Tony","D","Scarlet","987654321","M","NURS","Head Nurse",100000,NULL,5,10,"345 Willow Ave","Newark","NJ","07123","United States","555-4444")',
+       ' VALUES (2,"Jane","B","Doe","111222333","F","PHYS","Generalist",125000,"Pathology",NULL,NULL,"100 Oak St","Jersey City","NJ","07321","United States","555-2222")',
+       ' VALUES (5,"Michael","E","Baker","354364136","M","SURG","Surgeon",NULL,"Cardiology",NULL,NULL,"45 Circle Ct","Newark","NJ","07123","United States","555-5555")',
+       ' VALUES (6,"Angelina","F","Hernandez","115879266","F","SURG","Surgeon",NULL,"Cardiology",NULL,NULL,"56 45th St","Philadelphia","PA","09654","United States","555-6666")',
+       ' VALUES(7,"Peter","M","Parker","559311458","M","PHYS","Specialist",275000,"Gastroenterology",NULL,NULL,"587 Ocean Ln","Hoboken","NJ","07852","United States","555-7777")',
+       ' VALUES (8,"David","L","Baldwin","000111222","M","PHYS","Specialist",225000,"Orthopedics",NULL,NULL,"87 Beach St","Red Bank","NJ","07999","United States","555-8888")',
+       ' VALUES (9,"Noor","H","Ahmad","222333444","F","PHYS","Generalist",215000,"Pathology",NULL,NULL,"89 Silver Mine Rd","Suffern","NY","08563","United States","555-9999")',
+       ' VALUES (10,"Ernest",NULL,"Li","333444555","M","NURS","Nurse",65000,NULL,1,2,"5890 Main St","Newark","NJ","07123","United States","555-0000")',
+       ' VALUES (11,"Tracy","O","Allison","555666777","F","NURS","Nurse",65000,NULL,1,2,"54 Eureka Ave","Edison","NJ","07456","United States","555-1000")',
+       ' VALUES  (12,"John","P","Smith","666777888","M","SUPP","Shift Manager",90000,NULL,NULL,NULL,"43 Church Rd","Jersey City","NJ","07321","United States","555-2000")',
+       ' VALUES (13,"Taylor",NULL,"White","777888999","F","SUPP","Jr. Payroll Accountant",45000,NULL,NULL,NULL,"6547 City St","Newark","NJ","07123","United States","555-3000")',
+       ' VALUES (14,"Stanley","P","Arabel","111111111","M","SUPP","IT Director",170000,NULL,NULL,NULL,"22 W 2nd Ave","Jersey City","NJ","07321","United States","555-4000")',
+       ' VALUES (15,"Lana","R","Skye","999666333","F","SUPP","Receptionist",40000,NULL,NULL,NULL,"4545 Distant Ln","Yonkers","NY","08521","United States","555-5000")']
 
+    
+    for i in range(len(list)):
+        staff=db.execute( 'INSERT INTO "STAFF" ("EmpNo","Fname","Minit","Lname","Ssn","Gender","EmpType","Title","Salary","Specialty","NurseGrade","YrsNursingExp","Addr","City","StateProv","ZIP","Country","Phone")'
+                f'{list[i]}')
+        db.commit()
+    return render_template('members/staff/staff.html',staff=staff)
