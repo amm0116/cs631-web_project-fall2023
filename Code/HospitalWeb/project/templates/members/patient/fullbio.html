@@ -19,11 +19,36 @@
 
 <table class="table">
 <tr>
-	<td class="rowid">{{item['rowid']}}</td>
-	<td class="name">{{item['Fname']}}{{item['Minit']}}{{item['Lname']}}</td>
-	<td class="dob">{{item['Dob']}}</td>
+	<td class="empno">{{item['EmpNo']}}</td>
+
+	<td class="firstname">First Name: {{item['Fname']}}</td>
+	<td class="midname">Middle Initial: {{item['Minit']}}</td>
+	<td class="lastname">Last Name: {{item['Lname']}}</td>
+
+
+	<td class="ssn">SSN: {{item['Ssn']}}</td>
+	<td class="dob">DOB: {{item['Dob']}}</td>
+	<td class="gender">Gender: {{item['Gender']}}</td>
+
+		
+	<td class="physician">Primary Physician: {{item['Pcp']}}</td>
+	<td class="blood">Blood Type: {{item['BloodType']}}</td>
+
+	<td class="rh">Rh Factor: {{item['RhFactor']}}</td>
+
 	<td class="gender">{{item['Gender']}}</td>
 
+
+
+
+	<td class="addr">Address: {{item['Addr']}}</td>
+	<td class="city">City: {{item['City']}}</td>
+	<td class="stateprov">State/Prov: {{item['StateProv']}}</td>
+
+		
+	<td class="zip">ZIPCODE: {{item['ZIP']}}</td>
+	<td class="country">Country: {{item['Country']}}</td>
+	<td class="phone">Phone: {{item['Phone']}}</td>
 
 	<td><a href="{{ url_for('people.delete',id=item['rowid'])}}"><button class="button is-large">Delete</button></a></td>
 	
