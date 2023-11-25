@@ -12,6 +12,7 @@
 
 {% block header %}
 <h1>{% block title %} Patients {% endblock %}</h1>
+
 {% endblock %}
 
 
@@ -19,17 +20,33 @@
 {% block content %}
 
 {% for item in patient%}
-<table class="table">
+<table class="table is-bordered is-narrow">
+
+ <tbody>
+
+ 	<tr>
+<th >Patient Number</th>
+	<th >First Name</th>	
+	<th>Middle Name</th>
+	<th >Last Name</th>
+	<th >Gender</th>
+	<th >DOB</th>
+	<th >SSN</th>
+	<th >Action</th>
+ 	</tr>
 <tr>
 	<td class="patientno">{{item['PatientNo']}}</td>
-	<td class="name"><a href="{{ url_for('people.seePatient',id=item['PatientNo'])}}">{{item['Fname']}} {{item['Minit']}} {{item['Lname']}}</a></td>
+	<td class="name">{{item['Fname']}} </td>
+	<td class="name">{{item['Minit']}} </td>
+	<td class="name">{{item['Lname']}} </td>
 	<td class="gender">{{item['Gender']}}</td>
 	<td class="dob">{{item['Dob']}}</td>
-
-
-	<td><a href="{{ url_for('people.delete',id=item['PatientNo'])}}"><button class="button is-large">Delete</button></a></td>
+  <td class="ssn">{{item['Ssn']}}</td>
+  <td class="view"><a href="{{ url_for('people.seePatient',id=item['PatientNo'])}}">View</a></td>
 	
+	<td><a href="{{ url_for('people.delete',id=item['PatientNo'])}}"><button class="button is-large">Delete</button></a></td>
 </tr>
+</tbody>
 {% endfor %}
 
 </table>

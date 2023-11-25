@@ -53,6 +53,7 @@ def addPatient():
         
         mName = request.form['Minit']
         birthdate=request.form['Dob']
+        ssn=request.form['Ssn']
         caregiver=0
 
         item = get_db().execute('SELECT Fname FROM STAFF').fetchall()
@@ -75,9 +76,9 @@ def addPatient():
         else:  
              db=get_db()
              db.execute(
-                'INSERT INTO PATIENT (Fname,Minit,Lname,Gender,Dob,Pcp)'
-                ' VALUES (?,?,?,?,?,?)',
-                (Fname,mName,Lname,gender,birthdate,caregiver)
+                'INSERT INTO PATIENT (Fname,Minit,Lname,Gender,Dob,Ssn,Pcp)'
+                ' VALUES (?,?,?,?,?,?,?)',
+                (Fname,mName,Lname,gender,birthdate,ssn,caregiver)
             )
              post_id = db.cursor().fetchone()
              print(post_id)
