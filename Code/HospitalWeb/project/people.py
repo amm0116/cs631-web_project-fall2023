@@ -21,6 +21,17 @@ def seeAllStaff():
     return render_template('members/staff/staff.html',staff=staff)
 
 
+@bp.route('/viewstaff/<int:id>')
+def seeStaff(id):
+    item = get_db().execute(
+        'SELECT rowid,*'
+        ' FROM STAFF'
+        ' WHERE rowid = ?'
+        ,(id,)).fetchone()
+
+
+    return render_template('members/staff/fullbio.html',item=item) 
+
 @bp.route('/patient')
 def seeAllPatients():
     db=get_db()

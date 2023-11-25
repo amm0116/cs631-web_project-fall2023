@@ -44,4 +44,6 @@ def create_app(test_config=None):
     from . import people
     app.register_blueprint(people.bp)
 
+    from . import schedule
+    app.register_blueprint(schedule.bp)
     return app

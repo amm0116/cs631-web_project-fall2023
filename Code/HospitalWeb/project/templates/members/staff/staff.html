@@ -39,6 +39,7 @@
 	<td class="gender">{{item['Gender']}}</td>
 	<td class="empstatus">{{item['EmpStatus']}}</td>
 	<td class="emptype">{{item['EmpType']}}</td>
+	<td class="view"><a href="{{ url_for('people.seeStaff',id=item['EmpNo'])}}">View</a></td>
 	<td><a href="{{ url_for('people.delete',id=item['EmpNo'])}}"><button class="button is-large">Delete</button></a></td>
 	
 </tr>
