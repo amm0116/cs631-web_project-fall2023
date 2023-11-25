@@ -1,25 +1,38 @@
 <!doctype html>
 <link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
 <nav>
-  <h1>Patient Management/Full!</h1>
-  <h2><a href="/"><button>Back</button></a>
-  <ul>
+
+	<section class="hero is-small is-primary">
+  <div class="hero-body" >
+    <p class="title has-text-black">
+      Newark Medical </p>  
+      Patient Management > View
+
+  </div>
+</section> 
+    <ul>
  
       <!--patient -->
   </ul>
 </nav>
 
 {% block header %}
-<h1>{% block title %} Patients {% endblock %}</h1>
+<h1>{% block title %} Patient No.{{item['PatientNo']}} ({{item['Fname']}} {{item['Minit']}} {{item['Lname']}})  {% endblock %}</h1>
+
+<h2><a href="{{ url_for('people.seeAllPatients')}}"><button class="button is-large">Back</button></a></h2>
+
 {% endblock %}
 
 
 
 {% block content %}
 
+<div class="box">
+  I'm in a box.
+
 <table class="table">
 <tr>
-	<td class="empno">{{item['EmpNo']}}</td>
+	<td class="patientno">{{item['PatientNo']}}</td>
 
 	<td class="firstname">First Name: {{item['Fname']}}</td>
 	<td class="midname">Middle Initial: {{item['Minit']}}</td>
@@ -31,15 +44,18 @@
 	<td class="gender">Gender: {{item['Gender']}}</td>
 
 		
-	<td class="physician">Primary Physician: {{item['Pcp']}}</td>
-	<td class="blood">Blood Type: {{item['BloodType']}}</td>
-
-	<td class="rh">Rh Factor: {{item['RhFactor']}}</td>
+	<td class="physician">Primary Physician: {{item['Pcp']}}</td>	
 
 	<td class="gender">{{item['Gender']}}</td>
 
+	<td class="blood">Blood Type: {{item['BloodType']}}</td>
 
+	<td class="rh">Rh Factor: {{item['RhFactor']}}</td>
+</table>
+</div>
 
+<table class="table">
+<tr>
 
 	<td class="addr">Address: {{item['Addr']}}</td>
 	<td class="city">City: {{item['City']}}</td>
@@ -50,7 +66,7 @@
 	<td class="country">Country: {{item['Country']}}</td>
 	<td class="phone">Phone: {{item['Phone']}}</td>
 
-	<td><a href="{{ url_for('people.delete',id=item['rowid'])}}"><button class="button is-large">Delete</button></a></td>
+
 	
 </tr>
 

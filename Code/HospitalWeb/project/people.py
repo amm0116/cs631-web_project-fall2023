@@ -24,7 +24,7 @@ def seeAllStaff():
 @bp.route('/patient')
 def seeAllPatients():
     db=get_db()
-    patient=db.execute('SELECT P.rowid, S.rowid, *' ' FROM PATIENT P, STAFF S' 'WHERE P.rowid=S.rowid').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
+    patient=db.execute('SELECT PatientNo, * FROM PATIENT ').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
 
     return render_template('members/patient/patient.html',patient=patient) #TODO: Generic person html, changes from DB name
 
@@ -206,3 +206,23 @@ def createDummy():
                 f'{list[i]}')
         db.commit()
     return render_template('members/staff/staff.html',staff=staff)
+
+# DUMMY DATA DO NOT NAVIAGTE TO UNLESS ADDING DUMMY DATA
+@bp.route('/dummyPatient')
+def createPatientDummy():
+    db=get_db()
+    list=['VALUES (1,"Mohammad","M","Abdullah","986486000","M","1974/01/16","A","-",2,"789 Cooper St","Newark","New Jersey","07111","United States","555-2536")']#'VALUES (1,"Mohammad","M","Abdullah","986486000","M","1974/1/16","A","-",2,"789 Cooper St","Newark","New Jersey","07111","United States","555-2536")',
+# 'VALUES (2,"Bob","A","Smith","455523369","M","1/1/1990","AB","+",2,"87 Maple St","Toronto","Ontario","A1A 2B2","Canada","555-6589")',
+# 'VALUES (3,"Grace",NULL,"Nguyen",NULL,"F","1/1/2001","O","-",2,"345 Washington Ave","Newark","New Jersey","07111","United States","555-4455")',
+# 'VALUES (5,"Jon","L","Polowski","566999555","M","2/18/1974",NULL,NULL,2,"1111 Main St","Newark","New Jersey","07111","United States","555-8523")',
+# 'VALUES (7,"Zack","W","Steiner","752263354","M","9/14/1965","A","+",7,"4 Brookside Dr","Dublin",NULL,"D22","Ireland",NULL)',
+# 'VALUES (8,"Gary","M","Jackson","445522779","M","8/30/1954","B","+",2,NULL,NULL,NULL,NULL,NULL,NULL)',
+# 'VALUES(9,"Jessica","J","Quincy","556894331","F","8/1/1984","O","+",2,"65 Hickory St","Morristown","New Jersey","07554","United States","555-8897")',
+# 'VALUES (10,"Ivan","R","Vitaly","555888666","M","4/5/1967","B","-",1,"1 Eagle St","Atlanta","Georgia","56211","United States","555-9876")']
+
+    
+    for i in range(len(list)):
+        patient=db.execute( 'INSERT INTO "PATIENT" ("PatientNo","Fname","Minit","Lname","Ssn","Gender","Dob","BloodType","RhFactor","Pcp","Addr","City","StateProv","ZIP","Country","Phone")'
+                f'{list[i]}')
+        db.commit()
+    return render_template('members/patient/patient.html',patient=patient)

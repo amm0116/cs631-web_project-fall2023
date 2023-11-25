@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS PATIENT (
     Lname   VARCHAR(50) NOT NULL,
     Ssn CHAR(9) UNIQUE,
     Gender  CHAR(1) NOT NULL CHECK(Gender IN ('M', 'F')),
-    Dob DATE NOT NULL,
+    Dob DATETIME NOT NULL,
     BloodType   VARCHAR(2) CHECK(BloodType IN ('A', 'B', 'AB', 'O')),
     RhFactor    CHAR(1) CHECK(RhFactor IN ('+', '-')),
     Pcp INTEGER NOT NULL DEFAULT 1,
