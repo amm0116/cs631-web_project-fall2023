@@ -39,8 +39,7 @@
 <p>DOB: {{item['Dob']}}</p>
 <p>Gender: {{item['Gender']}}</p>
 
-		
-<p>Primary Physician: {{item['Pcp']}}</p>
+<p>Primary Physician: {{item['Pcp']}}(<a href="{{ url_for('people.seeStaff',id=item['empNo'])}}">{{item['docLast']}},{{item['docFirst']}}</a>)</p>
 
 <p>Gender: {{item['Gender']}}</p>
 
