@@ -16,7 +16,6 @@
 {% endblock %}
 
 
-
 {% block content %}
 
 <table class="table is-bordered is-fullwidth">
@@ -25,18 +24,30 @@
  <tbody>
 
  	<tr>
-<th >Employee Number</th>
-	<th >Shift Start</th>	
-	<th>Shift End</th>
-
+<th >Surgery Number</th>
+<th >Patient</th>
+<th >Surgeon</th>
+<th>Facility</th>
+<th>Type</th>
+<th >Time</th>	
 
  	</tr>
+ {% for item in surgery%}
 <tr>
-	<td> Employee Number First Name Last Name</td>
-	<td>Shift Start</td>
-	<td>Shift End</td>
+	
+	<td class="surgeryno">{{item['SurgeryNo']}}</td>
+	<td class="patientno">{{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})</td>
+	<td class="physician">{{item['Surgeon']}}({{item['docLast']}},{{item['docFirst']}})</td>
+	<td class="facility">{{item['clinic']}} </td>
+	<td class="type">{{item['surgName']}}</td>
+	<td class="time">{{item['SurgeryTime']}} </td>
 </tr>
+
+{% endfor %}
+
 </tbody>
 
+
 </table>
+
 {% endblock %}

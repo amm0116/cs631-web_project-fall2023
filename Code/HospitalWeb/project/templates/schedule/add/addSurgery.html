@@ -1,0 +1,44 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+  <h1>Add Surgery</h1>
+  <h2><a href="/"><button>Back</button></a>
+<a href="{{ url_for('people.addPatient') }}"><button>Add More</button></a></h2>
+  <ul>
+ 
+      <!--Surgery -->
+  </ul>
+</nav>
+
+{% block content %}
+   <form method="post">
+    <label for="name">FIRST NAME</label>
+    <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
+    <label for="name">MIDDLE Initial(optional)</label>
+    <input name="Minit" id="minit" value="{{ request.form['Minit'] }}">
+    <label for="name">LAST NAME</label>
+    <input name="Lname" id="lname" value="{{ request.form['Lname'] }}" required>
+
+    <label for="Gender">Gender</label>
+    <select name="Gender" id="gender">
+    <option value="M">M</option>
+    <option value="F">F</option>
+    </select>
+
+    <label for="EmpStatus">EMPLOYEE STATUS</label>
+    <select name="EmpStatus" id="status">
+    <option value="A">A</option>
+    <option value="I">I</option>
+    </select>
+
+    <label for="EmpStatus">EMPLOYEE Type</label>
+    <select name="EmpType" id="empType">
+    <option value="PHYS">PHYS</option>
+    <option value="NURS">NURS</option>
+    <option value="SURG">SURG</option>
+    <option value="SUPP">SUPP</option>
+    </select>
+
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

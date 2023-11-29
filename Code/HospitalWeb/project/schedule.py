@@ -61,10 +61,12 @@ def doctorInfo(appointment):
 
 @bp.route('/surgery')
 def surgeryPage():
-    # db=get_db()
-    # staff=db.execute('SELECT empNo , * FROM STAFF').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
-
-    return render_template('schedule/surgeries.html')
+    db=get_db()
+    surgery=db.execute('SELECT SURGERY.*,SURGERY_STAFF.*,SURG_TYPE.Name AS surgName,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast, OP_THEATRE.Clinic AS clinic'
+                           ' FROM SURGERY,SURGERY_STAFF,SURG_TYPE,STAFF,PATIENT,OP_THEATRE'
+                           ' WHERE STAFF.EmpNo=SURGERY_STAFF.EmpNo AND PATIENT.PatientNo=SURGERY.PatientNo AND SURG_TYPE.Code=SURGERY.SurgeryType AND SURGERY_STAFF.SurgeryNo=SURGERY.SurgeryNo AND OP_THEATRE.Code=SURGERY.OpTheatre').fetchall()
+    print(db)
+    return render_template('schedule/surgeries.html',surgery=surgery)
 
 # @bp.route('/addSurgery',methods=('GET','POST')) #'GET','POST')
 # def addSurgery():
