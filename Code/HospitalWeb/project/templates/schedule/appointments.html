@@ -2,16 +2,22 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
 <nav>
   <h1>Shifts</h1>
-  <h2><a href="/"><button>Back</button></a>
-<h2><button>Add More</button></h2>
+  <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
+<h2><button>Add Appointment</button></h2>
   <ul>
  
       <!--appointments! -->
   </ul>
 </nav>
 
+<script>
+   function changeValue(o){
+     document.getElementById('name').value=o.innerHTML;
+    }
+</script>
+
 {% block header %}
-<h1>{% block title %} Appointments? {% endblock %}</h1>
+<h1>{% block title %} Appointments {% endblock %}</h1>
 
 {% endblock %}
 
@@ -33,14 +39,39 @@
 
 
  	</tr>
+ {% for item in appointment%}
 <tr>
-	<td> Patient Number(with name)</td>
-	<td>Physician Name(with name)</td>
-	<td>Facility</td>
-	<td>Time</td>
-	<td>Type</td>
+	<td class="patientno">{{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})</td>
+	<td class="physician">{{item['Physician']}}({{item['docLast']}},{{item['docFirst']}})</td>
+	<td class="clinic">{{item['Clinic']}} </td>
+	<td class="time">{{item['Time']}} </td>
+	<td class="type">{{item['Type']}}</td>
+
 </tr>
+
+
+
+{% endfor %}
 </tbody>
 
 </table>
+
+{{doctors}}
+
+ <label for="filtering">Appointment Filter</label>
+<form onsubmit="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=item) }}">
+<select>
+  <optgroup label="Physician Name">
+    {% for item in doctors%}
+   <option id="name" onclick="changeValue(item)">{{doctors[item]}}</option></a>
+    {% endfor %}
+  </optgroup>
+  <optgroup label="Appointment Date">
+    <option>Option 2.1</option>
+  </optgroup>
+</select>
+
+<input type="submit" value="Submit">
+</form>
+  <h2><a href="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=2)}}"><button>Filter by Physician</button></a>
 {% endblock %}

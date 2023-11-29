@@ -15,21 +15,46 @@ bp = Blueprint('schedule', __name__, url_prefix='/schedule')
 
 @bp.route('/')
 def schedulePage():
-    # db=get_db()
-    # staff=db.execute('SELECT empNo , * FROM STAFF').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
+    db=get_db()
+    shift=db.execute('SELECT PatientNo, * FROM PATIENT ').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
 
-    return render_template('schedule/shifts.html')
+   
+    return render_template('schedule/shifts.html',shift=shift)
 
 @bp.route('/appointments')
 def appointmentPage():
-    # db=get_db()
-    # staff=db.execute('SELECT empNo , * FROM STAFF').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
+    db=get_db()
+    appointment=db.execute('SELECT APPOINTMENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
+                           ' FROM APPOINTMENT,PATIENT,STAFF'
+                           ' WHERE STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo').fetchall()#'SELECT AppointmentNo , * FROM APPOINTMENT').fetchall()
+    return render_template('schedule/appointments.html',appointment=appointment,doctors=doctorInfo(appointment))
 
-    return render_template('schedule/appointments.html')
+@bp.route('/<string:filter>/<int:id>/')
+def appointmentFiltering(filter,id):
+    db=get_db()
+    result=db.execute('  SELECT APPOINTMENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
+                           ' FROM APPOINTMENT,PATIENT,STAFF'
+                           ' WHERE APPOINTMENT.Physician=? AND STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo',(id,) ).fetchall()
+    db.commit()
+    return render_template('schedule/appointments.html',appointment=result)
+
+
+def doctorInfo(appointment):
+    list=[]
+    physician={}
+    for item in appointment:
+        id= item['Physician']
+        name=item['docLast']+","+item['docFirst']
+        list.append((id,name))
+
+    for a,b in list:
+        physician[a]=b
+
+    return physician
 
     # @bp.route('/addAppointment',methods=('GET','POST')) #'GET','POST')
 # def addAppointment():
-#     pass
+#      # "APPOINTMENT" ("AppointmentNo","PatientNo","Physician","Clinic","Time","Type")
 
 #     return render_template('members/patient/addPatient.html')
 
