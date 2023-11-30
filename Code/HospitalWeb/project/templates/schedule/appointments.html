@@ -3,10 +3,17 @@
 <nav>
   <h1>Shifts</h1>
   <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
-<h2><button>Add Appointment</button></h2>
+<h2><a href="{{ url_for('schedule.addAppointment') }}"><button>Add Appointment</button></h2></a>
   <ul>
  
       <!--appointments! -->
+
+
+      
+ 
+
+<input type="submit" value="Submit">
+</form>
   </ul>
 </nav>
 
@@ -58,20 +65,5 @@
 
 {{doctors}}
 
- <label for="filtering">Appointment Filter</label>
-<form onsubmit="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=item) }}">
-<select>
-  <optgroup label="Physician Name">
-    {% for item in doctors%}
-   <option id="name" onclick="changeValue(item)">{{doctors[item]}}</option></a>
-    {% endfor %}
-  </optgroup>
-  <optgroup label="Appointment Date">
-    <option>Option 2.1</option>
-  </optgroup>
-</select>
-
-<input type="submit" value="Submit">
-</form>
   <h2><a href="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=2)}}"><button>Filter by Physician</button></a>
 {% endblock %}

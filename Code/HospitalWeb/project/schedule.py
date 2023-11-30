@@ -52,12 +52,41 @@ def doctorInfo(appointment):
 
     return physician
 
-    # @bp.route('/addAppointment',methods=('GET','POST')) #'GET','POST')
-# def addAppointment():
-#      # "APPOINTMENT" ("AppointmentNo","PatientNo","Physician","Clinic","Time","Type")
+@bp.route('/addAppointment',methods=('GET','POST')) #'GET','POST')
+def addAppointment():
+ 
+    db=get_db()
+    appointment=db.execute('SELECT APPOINTMENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
+                           ' FROM APPOINTMENT,PATIENT,STAFF'
+                           ' WHERE STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo').fetchall()
 
-#     return render_template('members/patient/addPatient.html')
+    if request.method == 'POST':
+        patientnum= request.form['PatientNo']
+        physician=request.form['Physician']
+        clinic=request.form['Clinic']
+        apptime=request.form['Time']
+        apptype=request.form['Type']
 
+        error = None
+
+        if error is not None:
+            flash(error)
+
+        else:  
+             db=get_db()
+
+             db.execute(
+                'INSERT INTO APPOINTMENT(PatientNo,Physician,Clinic,Time,Type)'
+                ' VALUES (?,?,?,?,?)',
+                (patientnum,physician,clinic,apptime,apptype)
+                
+            )
+       
+             db.commit()
+
+             return redirect(url_for('schedule.appointmentPage'))
+
+    return render_template('schedule/add/addAppointment.html',appointment=appointment)
 
 @bp.route('/surgery')
 def surgeryPage():
@@ -68,12 +97,40 @@ def surgeryPage():
     print(db)
     return render_template('schedule/surgeries.html',surgery=surgery)
 
-# @bp.route('/addSurgery',methods=('GET','POST')) #'GET','POST')
-# def addSurgery():
-#     pass
+@bp.route('/addSurgery',methods=('GET','POST')) 
+def addSurgery():
+    db=get_db()
+    surgery=db.execute('SELECT APPOINTMENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
+                           ' FROM APPOINTMENT,PATIENT,STAFF'
+                           ' WHERE STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo').fetchall()
 
-#     return render_template('members/patient/addPatient.html')
+    if request.method == 'POST':
+        patientnum= request.form['PatientNo']
+        physician=request.form['Physician']
+        clinic=request.form['Clinic']
+        apptime=request.form['Time']
+        apptype=request.form['Type']
 
+        error = None
+
+        if error is not None:
+            flash(error)
+
+        else:  
+             db=get_db()
+
+             db.execute(
+                'INSERT INTO APPOINTMENT(PatientNo,Physician,Clinic,Time,Type)'
+                ' VALUES (?,?,?,?,?)',
+                (patientnum,physician,clinic,apptime,apptype)
+                
+            )
+       
+             db.commit()
+
+             return redirect(url_for('schedule.surgeryPage'))
+
+    return render_template('schedule/add/addSurgery.html',surgery=surgery)
 
 @bp.route('/incoming')
 def inpatientPage():

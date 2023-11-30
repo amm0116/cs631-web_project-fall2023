@@ -69,17 +69,7 @@ def addPatient():
         caregiver=0
 
         item = get_db().execute('SELECT Fname FROM STAFF').fetchall()
-
-        #get_db().execute(
-        # 'SELECT rowid,*'
-        # ' FROM PATIENT P,STAFF E'
-        # ' WHERE P.pcp=E.rowid'
-        # ,(id,)).fetchall()
-
-
-        #UUID>regular unique number up to 5 digits, no one has the same! COS has unique number(if multiple has the same)
-        #descriptive info for name, etc
-        # Hopkins,Jenna (#5550) general page after the fact
+        
         error = None
 
         if error is not None:

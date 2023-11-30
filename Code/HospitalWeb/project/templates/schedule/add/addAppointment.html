@@ -12,33 +12,35 @@
 
 {% block content %}
    <form method="post">
-    <label for="name">FIRST NAME</label>
-    <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
-    <label for="name">MIDDLE Initial(optional)</label>
-    <input name="Minit" id="minit" value="{{ request.form['Minit'] }}">
-    <label for="name">LAST NAME</label>
-    <input name="Lname" id="lname" value="{{ request.form['Lname'] }}" required>
 
-    <label for="Gender">Gender</label>
-    <select name="Gender" id="gender">
-    <option value="M">M</option>
-    <option value="F">F</option>
-    </select>
+    <select name="PatientNo">
+    {% for item in appointment%}
+     <option value="{{request.form['PatientNo']}}" label="{{item['patientLast']}},{{item['patientFirst']}}">{{item['PatientNo']}}</option>
+    
+    {% endfor %}
+    </option>
+    </select> 
 
-    <label for="EmpStatus">EMPLOYEE STATUS</label>
-    <select name="EmpStatus" id="status">
-    <option value="A">A</option>
-    <option value="I">I</option>
-    </select>
+    <select name="Physician">
+    {% for item in appointment%}
+     <option value="name" label="{{item['docLast']}},{{item['docFirst']}}">{{item['Physician']}}</option>
+    {% endfor %}
+    </option>
+    </select> 
 
-    <label for="EmpStatus">EMPLOYEE Type</label>
-    <select name="EmpType" id="empType">
-    <option value="PHYS">PHYS</option>
-    <option value="NURS">NURS</option>
-    <option value="SURG">SURG</option>
-    <option value="SUPP">SUPP</option>
-    </select>
+     <select name="Clinic">
+    {% for item in appointment%}
+     <option value="name">{{item['Clinic']}}</option>
+    {% endfor %}
+    </option>
+    </select> 
 
-    <input type="submit" value="Save">
+    <label for="Time">Time</label>
+    <input type="date" name="Time">
+
+    <label for="type">Type</label>
+    <input name="Type" value="{{ request.form['Type'] }}" required>
+
+<input type="submit" value="Save">
   </form>
 {% endblock %}
