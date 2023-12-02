@@ -1,0 +1,32 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+  <h1>Add Stay</h1>
+  <h2><a href="/"><button>Back</button></a>
+<a href="{{ url_for('people.addPatient') }}"><button>Add More</button></a></h2>
+  <ul>
+ 
+      <!--Stay -->
+  </ul>
+</nav>
+
+{% block content %}
+   <form method="post">
+       <label for="Patient">Patient</label>
+    <select name="Patient" id="PatientNo">
+    <option value="PHYS">PHYS</option>
+    </select>
+
+     <label for="Check-In">Check-In</label>
+    <input type="date" name="Check-In">
+
+    <label for="room">Room/Bed</label>
+    <select name="bed" id="Bed">
+    <option value="bed">item{'Bed'}</option>
+    </select>
+
+
+
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
