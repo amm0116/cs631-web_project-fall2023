@@ -51,9 +51,19 @@
 
 	<td class="admission">{{item['AdmissionDate']}}</td>
 	<td class="checkout">?????</td>
-	<td class="physician">{{item['Surgeon']}}({{item['docLast']}},{{item['docFirst']}})</td>
+
+	<td class="physician">{{item['Physician']}}</td>
+
 	<td class="nurse">{{item['Nurse']}} </td>
-	<td class="action">????</td>
+
+	{% if item['Physician'] != None %}
+   	<td><a href="{{ url_for('people.seeStaff',id=item['Physician'])}}">{{item['Physician']}}</a></td>
+    {% else %}
+    	<td><a href="{{ url_for('people.seeStaff',id=item['Nurse'])}}">{{item['Nurse']}}</a></td>
+{% endif %}
+
+
+
 
 
 </tr>

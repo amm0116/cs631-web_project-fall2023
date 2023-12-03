@@ -140,7 +140,7 @@ def stayPage():
                            ' WHERE PATIENT.PatientNo=STAY.PatientNo').fetchall()
     print(db)
 
-    return render_template('schedule/inpatient.html')
+    return render_template('schedule/inpatient.html',stay=stay)
 
 @bp.route('/addStay',methods=('GET','POST')) #'GET','POST')
 def addStay():
