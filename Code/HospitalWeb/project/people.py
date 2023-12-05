@@ -51,7 +51,7 @@ def seePatient(id):
 
     return render_template('members/patient/fullbio.html',item=item) 
 
-# SELECT * FROM PATIENT P, EMPLOYEE E WHERE P.Pcp = E.EmpNo
+
 
 @bp.route('/addPatient',methods=('GET','POST')) #'GET','POST')
 def addPatient():
@@ -62,14 +62,23 @@ def addPatient():
         gender=request.form['Gender']
         Fname = request.form['Fname']
         Lname = request.form['Lname']
-        
         mName = request.form['Minit']
         birthdate=request.form['Dob']
         ssn=request.form['Ssn']
-        caregiver=0
+        caregiver=request.form['Pcp']
+        zipCode= request.form['ZIP']
+        blood= request.form['BloodType']
+        rh= request.form['RhFactor']
+        address= request.form['Addr']
+        city= request.form['City']
+        state= request.form['StateProv']
+        country= request.form['Country']
+        phone= request.form['Phone']
 
-        item = get_db().execute('SELECT Fname FROM STAFF').fetchall()
-        
+        item = get_db().execute('SELECT STAFF.* FROM STAFF'
+            ' FROM STAFF'
+        ' WHERE STAFF.EmpType=PHYS').fetchall()
+        #only of type physician
         error = None
 
         if error is not None:
@@ -78,9 +87,9 @@ def addPatient():
         else:  
              db=get_db()
              db.execute(
-                'INSERT INTO PATIENT (Fname,Minit,Lname,Gender,Dob,Ssn,Pcp)'
-                ' VALUES (?,?,?,?,?,?,?)',
-                (Fname,mName,Lname,gender,birthdate,ssn,caregiver)
+                'INSERT INTO PATIENT (Fname,Minit,Lname,Gender,Dob,Ssn,Pcp,ZIP,BloodType,RhFactor,Addr,City,StateProv,Country,Phone)'
+                ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                (Fname,mName,Lname,gender,birthdate,ssn,caregiver,zipCode,blood,rh,address,city,state,country,phone)
             )
              post_id = db.cursor().fetchone()
              print(post_id)
@@ -96,16 +105,15 @@ def addStaff():
     # error=None
 
     if request.method == 'POST':
-        status= request.form['EmpStatus']
         gender=request.form['Gender']
         empType=request.form['EmpType']
         Fname = request.form['Fname']
         Lname = request.form['Lname']
 
         mName = request.form['Minit']
-        # ssn = request.form['Ssn']
-        # title = request.form['Title']
-        
+        ssn = request.form['Ssn']
+        title = request.form['Title']
+        salary=request.form['Salary']
         # empStatus = request.form['EmpStatus']
         # addr = request.form['Addr']
         # city = request.form['City'] 
@@ -123,9 +131,9 @@ def addStaff():
         else:  
              db=get_db()
              db.execute(
-                'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,EmpStatus)'
-                ' VALUES (?,?,?,?,?,?)',
-                (Fname,mName,Lname,gender,empType,status)
+                'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary)'
+                ' VALUES (?,?,?,?,?,?,?,?)',
+                (Fname,mName,Lname,gender,empType,ssn,title,salary)
             )
              post_id = db.cursor().fetchone()
              print(post_id)

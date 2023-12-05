@@ -3,7 +3,7 @@
 <nav>
   <h1>In-Patient</h1>
   <h2><a href="/"><button>Back</button></a>
-<h2><button>Add More</button></h2>
+<a href="{{ url_for('schedule.addStay') }}"><button>Add More</button></a></h2>
   <ul>
  
       <!--In Patient! -->
@@ -26,7 +26,7 @@
 
  	<tr>
 <th >Stay No.</th>
-	<th >Patient/th>	
+	<th >Patient</th>	
 	<th>Facility</th>
 	<th >Unit</th>
 	<th >Wing</th>	
@@ -44,7 +44,7 @@
 	
 	<td class="stayno">{{item['StayNo']}}</td>
 	<td class="patient">{{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})</td>
-	<td class="facility">{{item['clinic']}} </td>
+	<td class="facility">{{item['Clinic']}} </td>
 	<td class="unit">{{item['Unit']}}</td>
 	<td class="wing">{{item['Wing']}}</td>
 	<td class="room">{{item['Bed']}} </td>
@@ -52,7 +52,7 @@
 	<td class="admission">{{item['AdmissionDate']}}</td>
 	<td class="checkout">?????</td>
 
-	<td class="physician">{{item['Physician']}}</td>
+	<td class="physician">{{item['Physician']}}({{item['staffLast']}},{{item['staffFirst']}})</td>
 
 	<td class="nurse">{{item['Nurse']}} </td>
 

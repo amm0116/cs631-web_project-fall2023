@@ -3,7 +3,7 @@
 <nav>
   <h1>Add Stay</h1>
   <h2><a href="/"><button>Back</button></a>
-<a href="{{ url_for('people.addPatient') }}"><button>Add More</button></a></h2>
+
   <ul>
  
       <!--Stay -->
@@ -14,15 +14,19 @@
    <form method="post">
        <label for="Patient">Patient</label>
     <select name="Patient" id="PatientNo">
-    <option value="PHYS">PHYS</option>
+    {% for item in stay%}  
+    <option value="{{request.form['PatientNo']}}">{{item['patientLast']}},{{item['patientFirst']}}</option>
+    {% endfor %}
     </select>
-
-     <label for="Check-In">Check-In</label>
-    <input type="date" name="Check-In">
+    
+     <label for="Date">Start Date:</label>
+    <input type="date" name="StartDate">
 
     <label for="room">Room/Bed</label>
     <select name="bed" id="Bed">
-    <option value="bed">item{'Bed'}</option>
+   {% for item in stay%}  
+    <option value="item.Code">{{item.Clinic}} Wing:{{item.Wing}} Room: {{item.RoomNo}} Room/Bed: {{item.NurseUnit}}-{{item.RoomNo}}-{{item.Bed}}</option>
+    {% endfor %}
     </select>
 
 

@@ -135,8 +135,8 @@ def addSurgery():
 @bp.route('/stays')
 def stayPage():
     db=get_db()
-    stay=db.execute('SELECT STAY.*,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
-                           ' FROM STAY,PATIENT'
+    stay=db.execute('SELECT STAY.*,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast'
+                           ' FROM STAY,PATIENT,STAFF'
                            ' WHERE PATIENT.PatientNo=STAY.PatientNo').fetchall()
     print(db)
 
@@ -145,16 +145,19 @@ def stayPage():
 @bp.route('/addStay',methods=('GET','POST')) #'GET','POST')
 def addStay():
     db=get_db()
-    stay=db.execute('SELECT STAY.*,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
-                           ' FROM STAY,PATIENT'
-                           ' WHERE PATIENT.PatientNo=STAY.PatientNo').fetchall()
+    stay=db.execute('SELECT STAY.*,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast,BED.*'
+                           ' FROM STAY,PATIENT,BED'
+                           ' WHERE PATIENT.PatientNo=STAY.PatientNo AND STAY.Bed=BED.Code').fetchall()
 
     if request.method == 'POST':
         patientnum= request.form['PatientNo']
         physician=request.form['Physician']
-        clinic=request.form['Clinic']
-        apptime=request.form['Time']
-        apptype=request.form['Type']
+        nurse=request.form['Nurse']
+        bed=request.form['Bed']
+        admission=request.form['AdmissionDate']
+        diagnosis=request.form['DiagnosisNo']
+
+
 
         error = None
 
@@ -165,14 +168,57 @@ def addStay():
              db=get_db()
 
              db.execute(
-                'INSERT INTO APPOINTMENT(PatientNo,Physician,Clinic,Time,Type)'
-                ' VALUES (?,?,?,?,?)',
-                (patientnum,physician,clinic,apptime,apptype)
+                'INSERT INTO STAY(PatientNo,Bed,AdmissionDate,DiagnosisNo,Physician,Nurse)'
+                ' VALUES (?,?,?,?,?,?)',
+                (patientnum,bed,admission,diagnosis,physician,nurse)
                 
             )
        
              db.commit()
 
-             return redirect(url_for('schedule.surgeryPage'))
+             return redirect(url_for('schedule/inpatient.html'))
 
-    return render_template('members/patient/addStay.html')
+    return render_template('schedule/add/addStay.html',stay=stay)
+
+@bp.route('/shift')
+def shiftPage():
+    db=get_db()
+    shift=db.execute('SELECT SHIFT.*,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast'
+                           ' FROM SHIFT,STAFF'
+                           ' WHERE STAFF.EmpNo=SHIFT.EmpNo').fetchall()
+    print(db)
+
+    return render_template('schedule/shifts.html',shift=shift)
+
+@bp.route('/addShift',methods=('GET','POST')) #'GET','POST')
+def addShift():
+    db=get_db()
+    shift=db.execute('SELECT SHIFT.*,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast'
+                           ' FROM SHIFT,STAFF'
+                           ).fetchall()
+
+    if request.method == 'POST':
+        empnum= request.form['EmpNo']
+        start=request.form['StartDate']
+        shift=request.form['Shift']
+
+
+        error = None
+
+        if error is not None:
+            flash(error)
+
+        else:  
+             db=get_db()
+
+             db.execute(
+                'INSERT INTO SHIFT(EmpNo, StartDate,Shift)'
+                ' VALUES (?,?,?)',
+                (empnum,start,shift)
+                
+            )
+             db.commit()
+
+             return redirect(url_for('schedule.shiftPage'))
+
+    return render_template('schedule/add/addShift.html',shift=shift)

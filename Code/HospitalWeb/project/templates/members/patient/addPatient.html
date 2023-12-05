@@ -3,9 +3,46 @@
   <a href="{{ url_for('people.seeAllPatients') }}"><button>Return to Patient Page</button></a>
 {% endblock %}
 
-  <!-- SSN needed -->
 
-<!--    <label for="BloodType">Blood Type</label>
+<!--     <label for="insProvider">Insurance Provider</label>
+    <input name="InsProvider" id="insProvider" value="{{ request.form['InsProvider'] }}" required>
+
+    <label for="insMemberId">Insurance Member ID</label>
+    <input name="InsMemberId" id="insMemberId " value="{{ request.form['InsMemberId'] }}" required>
+ -->
+
+{% block content %}
+   <form method="post">
+    <label for="name">FIRST NAME</label>
+    <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
+    <label for="name">MIDDLE INITIAL</label>
+      <input name="Minit" id="minit" value="{{ request.form['Minit'] }}">
+    <label for="name">LAST NAME</label>
+    <input name="Lname" id="lname" value="{{ request.form['Lname'] }}" required>
+    
+
+    <label for="Gender">Gender</label>
+    <select name="Gender" id="gender">
+    <option value="M">M</option>
+    <option value="F">F</option>
+    </select>
+
+     <label for="Pcp">Primary Care</label>
+    <select name="Pcp" id="pcp">
+    {% for item in patient%}
+    <option value="{{ request.form['Pcp'] }}"> </option>
+    {%endfor%}
+    </select>
+
+    <label for="ssn">SSN</label>
+    <input name="Ssn" id="ssn" value="{{ request.form['Ssn'] }}" required>
+
+
+  <label for="Dob">Birth Date:</label>
+  <input type="date" id="dob" name="Dob">
+
+ 
+<label for="BloodType">Blood Type</label>
     <select name="BloodType" id="bloodType">
     <option value="A">A</option>
     <option value="B">B</option>
@@ -20,14 +57,12 @@
     <option value="-">-</option>
     </select>
 
-    <label for="insProvider">Insurance Provider</label>
-    <input name="InsProvider" id="insProvider" value="{{ request.form['InsProvider'] }}" required>
-
-    <label for="insMemberId">Insurance Member ID</label>
-    <input name="InsMemberId" id="insMemberId " value="{{ request.form['InsMemberId'] }}" required>
-
-    <label for="pcp">PCP</label>
-    <input name="Pcp" id="pcp" value="{{ request.form['Pcp'] }}">
+    <select name="Physician">
+    {% for item in patient%}
+     <option value="Pcp" label="{{item['LName']}},{{item[Fname]}}">item['EmpNo']</option>
+    {% endfor %}
+    </option>
+    </select> 
    
     <label for="addr">Address</label>
     <input name="Addr" id="addr" value="{{ request.form['Addr'] }}">
@@ -46,35 +81,7 @@
 
     <label for="phone">Phone</label>
     <input name="Phone" id="phone" value="{{ request.form['Phone'] }}">
- -->
-{% block content %}
-   <form method="post">
-    <label for="name">FIRST NAME</label>
-    <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
-    <label for="name">MIDDLE NAME</label>
-      <input name="Minit" id="minit" value="{{ request.form['Minit'] }}">
-    <label for="name">LAST NAME</label>
-    <input name="Lname" id="lname" value="{{ request.form['Lname'] }}" required>
-    
 
-    <label for="Gender">Gender</label>
-    <select name="Gender" id="gender">
-    <option value="M">M</option>
-    <option value="F">F</option>
-    </select>
-
-     <label for="Pcp">Primary Care</label>
-    <select name="Pcp" id="pcp">
-    {% for item in patient%}
-    <option value="{{ request.form['Fname'] }}"> </option>
-    {%endfor%}
-    </select>
-
-
-  <label for="Dob">Birth Date:</label>
-  <input type="date" id="dob" name="Dob">
-
- 
     <input type="submit" value="Save">
   </form>
 {% endblock %}

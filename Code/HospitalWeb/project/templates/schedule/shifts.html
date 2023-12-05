@@ -3,7 +3,7 @@
 <nav>
   <h1>Shifts</h1>
   <h2><a href="/"><button>Back</button></a>
-<h2><button>Add More</button></h2>
+<a href="{{ url_for('schedule.addShift') }}"><button>Add More</button></a></h2>
   <ul>
  
       <!--shifts! -->
@@ -11,7 +11,7 @@
 </nav>
 
 {% block header %}
-<h1>{% block title %} Shifts? {% endblock %}</h1>
+<h1>{% block title %} Shifts {% endblock %}</h1>
 
 {% endblock %}
 
@@ -27,15 +27,16 @@
  	<tr>
 <th >Employee Number</th>
 	<th >Shift Start</th>	
-	<th>Shift End</th>
-
+	<th >Shift Number</th>	
 
  	</tr>
+{% for item in shift %} 	
 <tr>
-	<td> Employee Number First Name Last Name</td>
-	<td>Shift Start</td>
-	<td>Shift End</td>
+	<td class="empNo">{{item['EmpNo']}}({{item['staffLast']}},{{item['staffFirst']}})</td>
+	<td class="start">{{item['StartDate']}}</td>
+	<td class="start">{{item['Shift']}}</td>
 </tr>
+{% endfor %}
 </tbody>
 
 </table>

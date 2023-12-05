@@ -1,0 +1,41 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+  <h1>Add Shift</h1>
+  <h2><a href="/"><button>Back</button></a>
+  <ul>
+ 
+      <!-- Add Shift -->
+  </ul>
+</nav>
+
+{% block header %}
+<h1>{% block title %} Staff {% endblock %}</h1>
+
+{% endblock %}
+
+
+
+{% block content %}
+   <form method="post">
+
+	 <select name="EmpNo">
+	{% for item in shift%}
+     <option value="{{request.form['EmpNo']}}" label="{{item['staffLast']}},{{item['staffFirst']}}">{{item['EmpNo']}}</option>
+ {% endfor %}
+    </select> 
+
+   <label for="StartDate">Start Date:</label>
+    <input type="date" name="StartDate">
+
+
+	 <select name="Shift">
+     <option value="1" >1</option>
+      <option value="2" >2</option>
+      <option value="3" >3</option>
+    </select> 
+
+<input type="submit" value="Save">
+</form>
+{% endblock %}
+

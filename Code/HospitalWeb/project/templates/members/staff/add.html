@@ -24,6 +24,15 @@
     <option value="I">I</option>
     </select>
 
+    <label for="ssn">SSN</label>
+    <input name="Ssn" id="ssn" value="{{ request.form['Ssn'] }}" required>
+
+   <label for="title">Title</label>
+    <input name="Title" id="title" value="{{ request.form['Title'] }}" required>
+
+    <label for="Salary">Salary</label>
+    <input name="Salary" id="salary" value="{{ request.form['Salary'] }}" required>
+
     <label for="EmpStatus">EMPLOYEE Type</label>
     <select name="EmpType" id="empType">
     <option value="PHYS">PHYS</option>

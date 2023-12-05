@@ -12,33 +12,14 @@
 
 {% block content %}
    <form method="post">
-    <label for="name">FIRST NAME</label>
-    <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
-    <label for="name">MIDDLE Initial(optional)</label>
-    <input name="Minit" id="minit" value="{{ request.form['Minit'] }}">
-    <label for="name">LAST NAME</label>
-    <input name="Lname" id="lname" value="{{ request.form['Lname'] }}" required>
+    <td class="surgeryno">{{item['SurgeryNo']}}</td>
+  <td class="patientno">{{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})</td>
+  <td class="physician">{{item['Surgeon']}}({{item['docLast']}},{{item['docFirst']}})</td>
+  <td class="facility">{{item['clinic']}} </td>
+  <td class="type">{{item['surgName']}}</td>
+  <td class="time">{{item['SurgeryTime']}} </td>
 
-    <label for="Gender">Gender</label>
-    <select name="Gender" id="gender">
-    <option value="M">M</option>
-    <option value="F">F</option>
-    </select>
-
-    <label for="EmpStatus">EMPLOYEE STATUS</label>
-    <select name="EmpStatus" id="status">
-    <option value="A">A</option>
-    <option value="I">I</option>
-    </select>
-
-    <label for="EmpStatus">EMPLOYEE Type</label>
-    <select name="EmpType" id="empType">
-    <option value="PHYS">PHYS</option>
-    <option value="NURS">NURS</option>
-    <option value="SURG">SURG</option>
-    <option value="SUPP">SUPP</option>
-    </select>
-
+  
     <input type="submit" value="Save">
   </form>
 {% endblock %}
