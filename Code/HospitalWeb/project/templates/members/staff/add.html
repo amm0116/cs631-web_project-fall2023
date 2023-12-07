@@ -1,8 +1,19 @@
+<body onload='hide()'>
 {% block header %}
   <h1>{% block title %}New Staff Member{% endblock %}</h1>
   <a href="{{ url_for('people.seeAllStaff') }}"><button>Return to Staff Page</button></a>
 {% endblock %}
 
+<script type="text/javascript"> 
+// get element by id for this
+  function hide()  {  
+                    document.getElementById("nursing").style.visibility="hidden";
+                  }
+
+ function show()  {  
+                    document.getElementById("nursing").style.visibility="visible";
+                  }
+</script>
 {% block content %}
    <form method="post">
     <label for="name">FIRST NAME</label>
@@ -33,13 +44,45 @@
     <label for="Salary">Salary</label>
     <input name="Salary" id="salary" value="{{ request.form['Salary'] }}" required>
 
+     
+
     <label for="EmpStatus">EMPLOYEE Type</label>
     <select name="EmpType" id="empType">
     <option value="PHYS">PHYS</option>
-    <option value="NURS">NURS</option>
+    <option value="NURS">NURS</option> 
     <option value="SURG">SURG</option>
     <option value="SUPP">SUPP</option>
     </select>
+
+
+    <div id="nursing">
+
+      <label for="yrsNurse">Years Nursing Experience</label>
+      <input name="YrsNursingExp " id="yearsnurse" value="{{ request.form['YrsNursingExp '] }}" >
+
+       <label for="nurseGrade">Nurse Grade</label>
+      <input name="NurseGrade " id="nursegrade" value="{{ request.form['NurseGrade'] }}" >
+</div>
+
+
+
+    <label for="addr">Address</label>
+    <input name="Addr" id="addr" value="{{ request.form['Addr'] }}">
+
+    <label for="city">City</label>
+    <input name="City" id="city" value="{{ request.form['City'] }}">
+
+    <label for="stateProv">State/Providence</label>
+    <input name="StateProv" id="stateProv" value="{{ request.form['StateProv'] }}">
+
+    <label for="zip">Zip Code</label>
+    <input name="ZIP" id="zip" value="{{ request.form['ZIP'] }}">
+
+   <label for="country">Country</label>
+    <input name="Country" id="country" value="{{ request.form['Country'] }}">
+
+    <label for="phone">Phone</label>
+    <input name="Phone" id="phone" value="{{ request.form['Phone'] }}">
 
     <input type="submit" value="Save">
   </form>

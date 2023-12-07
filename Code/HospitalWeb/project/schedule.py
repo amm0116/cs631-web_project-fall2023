@@ -26,7 +26,10 @@ def appointmentPage():
     db=get_db()
     appointment=db.execute('SELECT APPOINTMENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
                            ' FROM APPOINTMENT,PATIENT,STAFF'
-                           ' WHERE STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo').fetchall()#'SELECT AppointmentNo , * FROM APPOINTMENT').fetchall()
+                           ' WHERE STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo').fetchall()
+                           #'SELECT AppointmentNo , * FROM APPOINTMENT').fetchall()
+
+
     return render_template('schedule/appointments.html',appointment=appointment,doctors=doctorInfo(appointment))
 
 @bp.route('/<string:filter>/<int:id>/')
@@ -38,6 +41,15 @@ def appointmentFiltering(filter,id):
     db.commit()
     return render_template('schedule/appointments.html',appointment=result)
 
+@bp.route('/<string:filter>/<int:month>/')
+def appointmentMonthFiltering(filter,month):
+    db=get_db()
+    result=db.execute('  SELECT APPOINTMENT.*'
+                           ' FROM APPOINTMENT,PATIENT,STAFF'
+                           ' WHERE APPOINTMENT.Time=DATE_FORMAT("2023-?-??", "%d")',(month,) ).fetchall()
+    db.commit()
+    
+    return render_template('schedule/appointments.html',appointment=result)
 
 def doctorInfo(appointment):
     list=[]
