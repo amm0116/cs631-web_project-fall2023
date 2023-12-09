@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
 <nav>
   <h1>Add Appointment</h1>
-  <h2><a href="/"><button>Back</button></a>
+ <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
 <a href="{{ url_for('people.addPatient') }}"><button>Add More</button></a></h2>
   <ul>
  
@@ -39,7 +39,15 @@
     <input type="date" name="Time">
 
     <label for="type">Type</label>
-    <input name="Type" value="{{ request.form['Type'] }}" required>
+     <select name="Type">
+    <option value="name">Routine</option>
+    <option value="name">Consultation</option>
+    <option value="name">Follow-up</option>
+    <option value="name">Diagnostic</option>
+     <option value="name">Preventive</option>
+     <option value="name">Emergency</option>
+   </option>
+    </select> 
 
 <input type="submit" value="Save">
   </form>
