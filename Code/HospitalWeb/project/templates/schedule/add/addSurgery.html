@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
 <nav>
   <h1>Add Surgery</h1>
-  <h2><a href="/"><button>Back</button></a>
-<a href="{{ url_for('people.addPatient') }}"><button>Add More</button></a></h2>
+  <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
+
   <ul>
  
       <!--Surgery -->
@@ -11,13 +11,23 @@
 </nav>
 
 {% block content %}
+
+
    <form method="post">
-    <td class="surgeryno">{{item['SurgeryNo']}}</td>
-  <td class="patientno">{{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})</td>
-  <td class="physician">{{item['Surgeon']}}({{item['docLast']}},{{item['docFirst']}})</td>
-  <td class="facility">{{item['clinic']}} </td>
-  <td class="type">{{item['surgName']}}</td>
-  <td class="time">{{item['SurgeryTime']}} </td>
+       <label for="surgeryNo">Surgery Number</label>
+       <input name="surgeryNo" id="SurgeryNo" value="{{ request.form['SurgeryNo'] }}" required>
+
+    <select name="PatientNo" id="patientNo">
+    {% for item in surgery%}  
+      <option value="{{request.form['PatientNo']}}">{{item['patientLast']}},{{item['patientFirst']}}</option>
+    {% endfor %}
+    </select>
+
+     <select name="surgeon" id="surgon">
+    {% for item in surgery%}  
+      <option value="{{request.form['Surgeon']}}">{{item['staffLast']}},{{item['staffFirst']}}</option>
+    {% endfor %}
+    </select>
 
   
     <input type="submit" value="Save">

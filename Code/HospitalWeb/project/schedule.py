@@ -100,17 +100,20 @@ def surgeryPage():
 @bp.route('/addSurgery',methods=('GET','POST')) 
 def addSurgery():
     db=get_db()
-    surgery=db.execute('SELECT APPOINTMENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
-                           ' FROM APPOINTMENT,PATIENT,STAFF'
-                           ' WHERE STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo').fetchall()
+    surgery=db.execute('SELECT SURGERY.*,SURGERY_STAFF.*,SURG_TYPE.Name AS surgName,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast, OP_THEATRE.Clinic AS clinic'
+                        ' FROM SURGERY,SURGERY_STAFF,SURG_TYPE,STAFF,PATIENT,OP_THEATRE'
+                        ' WHERE STAFF.EmpNo=SURGERY_STAFF.EmpNo AND PATIENT.PatientNo=SURGERY.PatientNo AND SURG_TYPE.Code=SURGERY.SurgeryType AND SURGERY_STAFF.SurgeryNo=SURGERY.SurgeryNo AND OP_THEATRE.Code=SURGERY.OpTheatre').fetchall()
+
 
     if request.method == 'POST':
+        surgerynum= request.form['SurgeryNo']
         patientnum= request.form['PatientNo']
-        physician=request.form['Physician']
-        clinic=request.form['Clinic']
-        apptime=request.form['Time']
-        apptype=request.form['Type']
+        surgeon=request.form['Surgeon']
+        theatre=request.form['OpTheatre']
+        surgtime=request.form['SurgeryTime ']
+        surgtype=request.form['SurgeryType']
 
+  
         error = None
 
         if error is not None:
@@ -120,9 +123,9 @@ def addSurgery():
              db=get_db()
 
              db.execute(
-                'INSERT INTO APPOINTMENT(PatientNo,Physician,Clinic,Time,Type)'
-                ' VALUES (?,?,?,?,?)',
-                (patientnum,physician,clinic,apptime,apptype)
+                'INSERT INTO SURGERY(SurgeryNo,PatientNo,Surgeon,SurgeryTime,OpTheatre,SurgeryType)'
+                ' VALUES (?,?,?,?,?,?)',
+                (surgerynum,patientnum,surgeon,surgtime,theatre,surgtype)
                 
             )
        
