@@ -49,14 +49,23 @@ def seePatient(id):
         'AND PATIENT.Pcp=STAFF.EmpNo'
         ,(id,)).fetchone()
 
+
+    #only of type physician
+    error = None
+
+    for person in physician:
+        print(person)
+
     return render_template('members/patient/fullbio.html',item=item) 
 
-
+#'Cardiology', 'Dermatology', 'Gastroenterology', 'Orthopedics', 'Neurology', 'Ophthalmology', 'Otolaryngology', 'Pediatrics', 'Obstetrics and Gynecology', 'Urology', 'Endocrinology', 'Rheumatology', 'Pulmonology', 'Hematology', 
+#'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology'
 
 @bp.route('/addPatient',methods=('GET','POST')) #'GET','POST')
 def addPatient():
     # db=get_db()
     # error=None
+    physician=get_db().execute('SELECT STAFF.* FROM STAFF WHERE EmpType="PHYS"').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
 
     if request.method == 'POST':
         gender=request.form['Gender']
@@ -75,11 +84,6 @@ def addPatient():
         country= request.form['Country']
         phone= request.form['Phone']
 
-        item = get_db().execute('SELECT STAFF.* FROM STAFF'
-            ' FROM STAFF'
-        ' WHERE STAFF.EmpType=PHYS').fetchall()
-        #only of type physician
-        error = None
 
         if error is not None:
             flash(error)
@@ -95,14 +99,17 @@ def addPatient():
              print(post_id)
              db.commit()
 
-             return redirect(url_for('people.seeAllPatients',patient=item))
+             return redirect(url_for('people.seeAllPatients'))
 
-    return render_template('members/patient/addPatient.html')
+    return render_template('members/patient/addPatient.html',physician=physician)
 
 @bp.route('/add',methods=('GET','POST')) #'GET','POST')
 def addStaff():
     # db=get_db()
     # error=None
+    specialty= ['Cardiology', 'Dermatology', 'Gastroenterology', 'Orthopedics', 'Neurology', 'Ophthalmology', 
+                'Otolaryngology', 'Pediatrics', 'Obstetrics and Gynecology', 'Urology', 'Endocrinology', 'Rheumatology', 'Pulmonology', 'Hematology', 
+                'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology']
 
     if request.method == 'POST':
         gender=request.form['Gender']
@@ -114,6 +121,7 @@ def addStaff():
         ssn = request.form['Ssn']
         title = request.form['Title']
         salary=request.form['Salary']
+        skill=request.form['Specialty']
         # empStatus = request.form['EmpStatus']
         # addr = request.form['Addr']
         # city = request.form['City'] 
@@ -131,9 +139,9 @@ def addStaff():
         else:  
              db=get_db()
              db.execute(
-                'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary)'
-                ' VALUES (?,?,?,?,?,?,?,?)',
-                (Fname,mName,Lname,gender,empType,ssn,title,salary)
+                'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary,Specialty)'
+                ' VALUES (?,?,?,?,?,?,?,?,?)',
+                (Fname,mName,Lname,gender,empType,ssn,title,salary,skill)
             )
              post_id = db.cursor().fetchone()
              print(post_id)
@@ -141,7 +149,7 @@ def addStaff():
 
              return redirect(url_for('people.seeAllStaff'))
 
-    return render_template('members/staff/add.html')
+    return render_template('members/staff/add.html',specialty=specialty)
 
 def get_person(id):
     item = get_db().execute(

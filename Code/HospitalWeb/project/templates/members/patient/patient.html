@@ -42,6 +42,7 @@
 	<td class="gender">{{item['Gender']}}</td>
 	<td class="dob">{{item['Dob']}}</td>
   <td class="ssn">{{item['Ssn']}}</td>
+  
   <td class="view"><a href="{{ url_for('people.seePatient',id=item['PatientNo'])}}">View</a></td>
 	
 	<td><a href="{{ url_for('people.delete',id=item['PatientNo'])}}"><button class="button is-large">Delete</button></a></td>

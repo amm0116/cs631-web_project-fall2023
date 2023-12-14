@@ -14,20 +14,34 @@
 
 
    <form method="post">
-       <label for="surgeryNo">Surgery Number</label>
-       <input name="surgeryNo" id="SurgeryNo" value="{{ request.form['SurgeryNo'] }}" required>
-
+      
     <select name="PatientNo" id="patientNo">
-    {% for item in surgery%}  
-      <option value="{{request.form['PatientNo']}}">{{item['patientLast']}},{{item['patientFirst']}}</option>
+    {% for item in patient%}  
+      <option value="{{request.form['PatientNo']}}">{{item['Lname']}},{{item['Fname']}}</option>
     {% endfor %}
     </select>
 
-     <select name="surgeon" id="surgon">
-    {% for item in surgery%}  
-      <option value="{{request.form['Surgeon']}}">{{item['staffLast']}},{{item['staffFirst']}}</option>
+     <select name="Surgeon" id="surgeon">
+    {% for item in doctor%}  
+      <option value="{{request.form['EmpNo']}}">{{item['Lname']}},{{item['Fname']}}</option>
     {% endfor %}
     </select>
+
+    <select name="OpTheatre" id="optheatre">
+    {% for item in place%}  
+      <option value="{{request.form['Code']}}">{{item['Code']}}({{item['Clinic']}}-{{item['Theatre']}})</option>
+    {% endfor %}
+    </select>
+
+
+      <select name="SurgeryType" id="type">
+    {% for item in type%}  
+      <option value="{{request.form['Code']}}">{{item['Code']}}({{item['Name']}})</option>
+    {% endfor %}
+    </select>
+
+     <label for="SurgeryTime">SurgeryTime</label>
+    <input type="date" name="SurgeryTime">
 
   
     <input type="submit" value="Save">

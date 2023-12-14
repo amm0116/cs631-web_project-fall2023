@@ -103,26 +103,30 @@ def addAppointment():
 @bp.route('/surgery')
 def surgeryPage():
     db=get_db()
-    surgery=db.execute('SELECT SURGERY.*,SURGERY_STAFF.*,SURG_TYPE.Name AS surgName,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast, OP_THEATRE.Clinic AS clinic'
-                           ' FROM SURGERY,SURGERY_STAFF,SURG_TYPE,STAFF,PATIENT,OP_THEATRE'
-                           ' WHERE STAFF.EmpNo=SURGERY_STAFF.EmpNo AND PATIENT.PatientNo=SURGERY.PatientNo AND SURG_TYPE.Code=SURGERY.SurgeryType AND SURGERY_STAFF.SurgeryNo=SURGERY.SurgeryNo AND OP_THEATRE.Code=SURGERY.OpTheatre').fetchall()
+    surgery=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo, B.Fname AS patientFirst, B.Lname AS patientLast, SURGERY.Surgeon, C.Fname AS docFirst, C.Lname AS docLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY , PATIENT AS B, STAFF AS C, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = C.EmpNo AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code').fetchall()
     print(db)
     return render_template('schedule/surgeries.html',surgery=surgery)
 
 @bp.route('/addSurgery',methods=('GET','POST')) 
 def addSurgery():
     db=get_db()
-    surgery=db.execute('SELECT SURGERY.*,SURGERY_STAFF.*,SURG_TYPE.Name AS surgName,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast, OP_THEATRE.Clinic AS clinic'
-                        ' FROM SURGERY,SURGERY_STAFF,SURG_TYPE,STAFF,PATIENT,OP_THEATRE'
-                        ' WHERE STAFF.EmpNo=SURGERY_STAFF.EmpNo AND PATIENT.PatientNo=SURGERY.PatientNo AND SURG_TYPE.Code=SURGERY.SurgeryType AND SURGERY_STAFF.SurgeryNo=SURGERY.SurgeryNo AND OP_THEATRE.Code=SURGERY.OpTheatre').fetchall()
+    
+    # surgery=db.execute('SELECT SURGERY.*, B.Fname AS patientFirst, B.Lname AS patientLast, C.Fname AS docFirst, C.Lname AS docLast, E.Name AS surgType, D.Clinic, D.Theatre FROM SURGERY , PATIENT AS B, STAFF AS C, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.Surgeon = C.EmpNo AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code').fetchall()
 
+    patient= db.execute('SELECT * FROM PATIENT').fetchall()
 
+    surgeryItem= db.execute('SELECT * FROM SURG_TYPE').fetchall()
+
+    opClinic= db.execute('SELECT * FROM OP_THEATRE')
+
+    surgeon= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="SURG"')
+
+#patient number, surgeon, time, op theatre, surgery type
     if request.method == 'POST':
-        surgerynum= request.form['SurgeryNo']
         patientnum= request.form['PatientNo']
-        surgeon=request.form['Surgeon']
+        doc=request.form['Surgeon']
         theatre=request.form['OpTheatre']
-        surgtime=request.form['SurgeryTime ']
+        surgtime=request.form['SurgeryTime']
         surgtype=request.form['SurgeryType']
 
   
@@ -135,9 +139,9 @@ def addSurgery():
              db=get_db()
 
              db.execute(
-                'INSERT INTO SURGERY(SurgeryNo,PatientNo,Surgeon,SurgeryTime,OpTheatre,SurgeryType)'
-                ' VALUES (?,?,?,?,?,?)',
-                (surgerynum,patientnum,surgeon,surgtime,theatre,surgtype)
+                'INSERT INTO SURGERY(PatientNo,Surgeon,SurgeryTime,OpTheatre,SurgeryType)'
+                ' VALUES (?,?,?,?,?)',
+                (patientnum,doc,surgtime,theatre,surgtype)
                 
             )
        
@@ -145,7 +149,7 @@ def addSurgery():
 
              return redirect(url_for('schedule.surgeryPage'))
 
-    return render_template('schedule/add/addSurgery.html',surgery=surgery)
+    return render_template('schedule/add/addSurgery.html',patient=patient, type=surgeryItem, place=opClinic, doctor=surgeon)
 
 @bp.route('/stays')
 def stayPage():

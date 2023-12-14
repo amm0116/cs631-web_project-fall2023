@@ -64,7 +64,11 @@
       <input name="NurseGrade " id="nursegrade" value="{{ request.form['NurseGrade'] }}" >
 </div>
 
-
+    <label for="Specialty">Specialty</label>
+    <select name="Specialty" id="specialty">
+    {% for item in specialty%}
+     <option value="Specialty" label="{{item}}">{{item}}</option>
+     {%endfor%}
 
     <label for="addr">Address</label>
     <input name="Addr" id="addr" value="{{ request.form['Addr'] }}">

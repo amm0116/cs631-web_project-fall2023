@@ -12,6 +12,7 @@
  -->
 
 {% block content %}
+
    <form method="post">
     <label for="name">FIRST NAME</label>
     <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
@@ -29,9 +30,10 @@
 
      <label for="Pcp">Primary Care</label>
     <select name="Pcp" id="pcp">
-    {% for item in patient%}
-    <option value="{{ request.form['Pcp'] }}"> </option>
-    {%endfor%}
+    {% for item in physician%}
+     <option value="Pcp" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
+    
+    {% endfor %}
     </select>
 
     <label for="ssn">SSN</label>
@@ -57,12 +59,6 @@
     <option value="-">-</option>
     </select>
 
-    <select name="Physician">
-    {% for item in patient%}
-     <option value="Pcp" label="{{item['LName']}},{{item[Fname]}}">item['EmpNo']</option>
-    {% endfor %}
-    </option>
-    </select> 
    
     <label for="addr">Address</label>
     <input name="Addr" id="addr" value="{{ request.form['Addr'] }}">
@@ -76,7 +72,7 @@
     <label for="zip">Zip Code</label>
     <input name="ZIP" id="zip" value="{{ request.form['ZIP'] }}">
 
-   <label for="country">Countr</label>
+   <label for="country">Country</label>
     <input name="Country" id="country" value="{{ request.form['Country'] }}">
 
     <label for="phone">Phone</label>
