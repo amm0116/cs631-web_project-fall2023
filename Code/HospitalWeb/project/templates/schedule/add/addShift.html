@@ -21,8 +21,8 @@
 
 	 <select name="EmpNo">
 	{% for item in shift%}
-     <option value="{{request.form['EmpNo']}}" label="{{item['staffLast']}},{{item['staffFirst']}}">{{item['EmpNo']}}</option>
- {% endfor %}
+     <option value="{{item['EmpNo']}}" label="{{item['staffLast']}},{{item['staffFirst']}}">{{item['EmpNo']}}</option>
+  {% endfor %}
     </select> 
 
    <label for="StartDate">Start Date:</label>

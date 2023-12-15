@@ -11,11 +11,13 @@
 </nav>
 
 {% block content %}
+ {% for item in stay%}  
+ {% endfor %}
    <form method="post">
        <label for="Patient">Patient</label>
-    <select name="Patient" id="PatientNo">
+    <select name="patientnum" id="PatientNo">
     {% for item in stay%}  
-    <option value="{{request.form['PatientNo']}}">{{item['patientLast']}},{{item['patientFirst']}}</option>
+    <option value="{{item.PatientNo}}">{{item['patientLast']}},{{item['patientFirst']}}</option>
     {% endfor %}
     </select>
     
@@ -25,7 +27,7 @@
     <label for="room">Room/Bed</label>
     <select name="bed" id="Bed">
    {% for item in stay%}  
-    <option value="item.Code">{{item.Clinic}} Wing:{{item.Wing}} Room: {{item.RoomNo}} Room/Bed: {{item.NurseUnit}}-{{item.RoomNo}}-{{item.Bed}}</option>
+    <option value="item.Bed">{{item.Clinic}} Wing:{{item.Wing}} Room: {{item.RoomNo}} Room/Bed: {{item.NurseUnit}}-{{item.RoomNo}}-{{item.letter}}</option>
     {% endfor %}
     </select>
 

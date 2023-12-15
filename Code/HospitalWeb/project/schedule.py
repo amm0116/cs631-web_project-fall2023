@@ -154,9 +154,13 @@ def addSurgery():
 @bp.route('/stays')
 def stayPage():
     db=get_db()
+    #
+
     stay=db.execute('SELECT STAY.*,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast'
                            ' FROM STAY,PATIENT,STAFF'
-                           ' WHERE PATIENT.PatientNo=STAY.PatientNo').fetchall()
+                           ' WHERE PATIENT.PatientNo=STAY.PatientNo AND STAFF.EmpNo=(STAY.Physician OR STAY.Nurse)').fetchall()
+
+
     print(db)
 
     return render_template('schedule/inpatient.html',stay=stay)
@@ -164,9 +168,11 @@ def stayPage():
 @bp.route('/addStay',methods=('GET','POST')) #'GET','POST')
 def addStay():
     db=get_db()
-    stay=db.execute('SELECT STAY.*,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast,BED.*'
-                           ' FROM STAY,PATIENT,BED'
-                           ' WHERE PATIENT.PatientNo=STAY.PatientNo AND STAY.Bed=BED.Code').fetchall()
+    stay=db.execute('SELECT STAY.*,BED.*,BED.Bed AS letter'
+                           ' FROM STAY,BED'
+                           ' WHERE STAY.Bed=BED.Code').fetchall()
+
+    patient= db.execute('SELECT * FROM PATIENT').fetchall()
 
     if request.method == 'POST':
         patientnum= request.form['PatientNo']
@@ -197,14 +203,12 @@ def addStay():
 
              return redirect(url_for('schedule/inpatient.html'))
 
-    return render_template('schedule/add/addStay.html',stay=stay)
+    return render_template('schedule/add/addStay.html',stay=stay,patient=patient)
 
 @bp.route('/shift')
 def shiftPage():
     db=get_db()
-    shift=db.execute('SELECT SHIFT.*,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast'
-                           ' FROM SHIFT,STAFF'
-                           ' WHERE STAFF.EmpNo=SHIFT.EmpNo').fetchall()
+    shift=db.execute('SELECT SHIFT.*,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast FROM SHIFT,STAFF WHERE STAFF.EmpNo=SHIFT.EmpNo').fetchall()
     print(db)
 
     return render_template('schedule/shifts.html',shift=shift)
@@ -212,8 +216,9 @@ def shiftPage():
 @bp.route('/addShift',methods=('GET','POST')) #'GET','POST')
 def addShift():
     db=get_db()
-    shift=db.execute('SELECT SHIFT.*,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast'
-                           ' FROM SHIFT,STAFF'
+
+    shift=db.execute('SELECT STAFF.EmpNo,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast'
+                           ' FROM STAFF'
                            ).fetchall()
 
     if request.method == 'POST':
