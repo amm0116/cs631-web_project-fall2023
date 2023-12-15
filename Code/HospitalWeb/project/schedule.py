@@ -176,6 +176,7 @@ def addStay():
     patient= db.execute('SELECT * FROM PATIENT').fetchall()
     doctor= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="PHYS"').fetchall()
     assistant= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="NURS"').fetchall()
+    ailment= db.execute('SELECT * FROM PATIENT_ILLNESS').fetchall()
     
     if request.method == 'POST':
         patientnum= request.form['PatientNo']
@@ -206,7 +207,7 @@ def addStay():
 
              return redirect(url_for('schedule/inpatient.html'))
 
-    return render_template('schedule/add/addStay.html',stay=stay,patient=patient,doctor=doctor,assistant=assistant)
+    return render_template('schedule/add/addStay.html',stay=stay,patient=patient,doctor=doctor,assistant=assistant,ailment=ailment)
 
 @bp.route('/shift')
 def shiftPage():

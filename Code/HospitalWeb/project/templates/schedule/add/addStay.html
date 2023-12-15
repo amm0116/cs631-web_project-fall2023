@@ -21,8 +21,17 @@
     {% endfor %}
     </select>
     
+     <select name="DiagnosisNo" id="diagnosis">
+    {% for item in ailment%}  
+     {% for item in stay%} 
+      <option value="{{item['DiagnosisNo']}}" label="{{item['DiagnosisNo']}}">{{item['DiagnosisNo']}}</option>
+    {% endfor %}
+    {% endfor %}
+    </select>
+
      <label for="Date">Start Date:</label>
     <input type="date" name="AdmissionDate">
+
 
     <label for="room">Room/Bed</label>
     <select name="Bed" id="bed">
@@ -33,13 +42,13 @@
 
      <select name="Physician" id="physician">
     {% for item in doctor%}  
-      <option value="item.EmpNo" label="{{item['Lname']}},{{item['Fname']}}">item.EmpNo</option>
+      <option value="{{item['EmpNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
     {% endfor %}
     </select>
 
      <select name="Nurse" id="nurse">
     {% for item in assistant%}  
-      <option value="item.EmpNo" label="{{item['Lname']}},{{item['Fname']}}">item.EmpNo</option>
+       <option value="{{item['EmpNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
     {% endfor %}
     </select>
 
