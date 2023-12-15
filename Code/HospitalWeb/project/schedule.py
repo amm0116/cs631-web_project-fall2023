@@ -103,7 +103,7 @@ def addAppointment():
 @bp.route('/surgery')
 def surgeryPage():
     db=get_db()
-    surgery=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo, B.Fname AS patientFirst, B.Lname AS patientLast, SURGERY.Surgeon, C.Fname AS docFirst, C.Lname AS docLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY , PATIENT AS B, STAFF AS C, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = C.EmpNo AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code').fetchall()
+    surgery=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo, c, SURGERY.Surgeon, C.Fname AS docFirst, C.Lname AS docLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY , PATIENT AS B, STAFF AS C, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = C.EmpNo AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code').fetchall()
     print(db)
     return render_template('schedule/surgeries.html',surgery=surgery)
 
@@ -172,8 +172,11 @@ def addStay():
                            ' FROM STAY,BED'
                            ' WHERE STAY.Bed=BED.Code').fetchall()
 
-    patient= db.execute('SELECT * FROM PATIENT').fetchall()
 
+    patient= db.execute('SELECT * FROM PATIENT').fetchall()
+    doctor= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="PHYS"').fetchall()
+    assistant= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="NURS"').fetchall()
+    
     if request.method == 'POST':
         patientnum= request.form['PatientNo']
         physician=request.form['Physician']
@@ -203,7 +206,7 @@ def addStay():
 
              return redirect(url_for('schedule/inpatient.html'))
 
-    return render_template('schedule/add/addStay.html',stay=stay,patient=patient)
+    return render_template('schedule/add/addStay.html',stay=stay,patient=patient,doctor=doctor,assistant=assistant)
 
 @bp.route('/shift')
 def shiftPage():
