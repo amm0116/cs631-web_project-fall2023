@@ -49,14 +49,35 @@ def seePatient(id):
         'AND PATIENT.Pcp=STAFF.EmpNo'
         ,(id,)).fetchone()
 
+    allergies = get_db().execute(
+            'SELECT * FROM PATIENT_ALLERGY'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
+
+    illness= get_db().execute(
+            'SELECT * FROM PATIENT_ILLNESS'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
+
+    appointments= get_db().execute(
+            'SELECT * FROM APPOINTMENT'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
+
+    stay= get_db().execute(
+            'SELECT * FROM STAY'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
+
+    surgery= get_db().execute(
+            'SELECT * FROM SURGERY'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
 
     #only of type physician
     error = None
 
-    for person in physician:
-        print(person)
-
-    return render_template('members/patient/fullbio.html',item=item) 
+    return render_template('members/patient/fullbio.html',item=item,allergies=allergies, illness=illness,stay=stay,appointments=appointments,surgery=surgery) 
 
 #'Cardiology', 'Dermatology', 'Gastroenterology', 'Orthopedics', 'Neurology', 'Ophthalmology', 'Otolaryngology', 'Pediatrics', 'Obstetrics and Gynecology', 'Urology', 'Endocrinology', 'Rheumatology', 'Pulmonology', 'Hematology', 
 #'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology'
@@ -64,7 +85,7 @@ def seePatient(id):
 @bp.route('/addPatient',methods=('GET','POST')) #'GET','POST')
 def addPatient():
     # db=get_db()
-    # error=None
+    error=None
     physician=get_db().execute('SELECT STAFF.* FROM STAFF WHERE EmpType="PHYS"').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
 
     if request.method == 'POST':
@@ -92,11 +113,12 @@ def addPatient():
              db=get_db()
              db.execute(
                 'INSERT INTO PATIENT (Fname,Minit,Lname,Gender,Dob,Ssn,Pcp,ZIP,BloodType,RhFactor,Addr,City,StateProv,Country,Phone)'
-                ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                 (Fname,mName,Lname,gender,birthdate,ssn,caregiver,zipCode,blood,rh,address,city,state,country,phone)
             )
              post_id = db.cursor().fetchone()
              print(post_id)
+             print("ghvuiavdfas")
              db.commit()
 
              return redirect(url_for('people.seeAllPatients'))
@@ -145,6 +167,7 @@ def addStaff():
             )
              post_id = db.cursor().fetchone()
              print(post_id)
+             print("ghvuiavdfas")
              db.commit()
 
              return redirect(url_for('people.seeAllStaff'))
@@ -158,13 +181,10 @@ def get_person(id):
         ' WHERE EmpNo = ?',
         (id,)
     ).fetchone()
-    #for autoincrement
-    # if item is None:
-    #     abort(404, f"EmpNo {id} doesn't exist.")
-
+ 
     return item
 
-#Update -Small Popup
+
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 def updatePerson(id):
      db=get_person(id)
@@ -192,7 +212,7 @@ def updatePerson(id):
 
      return render_template('update.html')
 
-#staff deletion, smaller pieces
+
 @bp.route('/<int:id>/delete', methods=('POST','GET'))
 def delete(id):
     get_person(id)

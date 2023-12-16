@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Edit Staf Member{% endblock %}</h1>
-  <a href="{{ url_for('people.seeAll') }}"><button>Return to Staff Page</button></a>
+  <h1>{% block title %}Edit Physician{% endblock %}</h1>
+  <a href="{{ url_for('schedule.stayPage') }}"><button>Return to Staff Page</button></a>
 {% endblock %}
 
 {% block content %}
@@ -12,6 +12,8 @@
    <input name="id" id="id" value="{{ request.form['id'] }}" required>  -->
    <label for="name">NAME</label>
     <input name="name" id="name" value="{{ request.form['name']}}" required>
+
+
     <input type="submit" value="Save">
   </form>
 {% endblock %}

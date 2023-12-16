@@ -23,7 +23,7 @@
 
      <select name="Surgeon" id="surgeon">
     {% for item in doctor%}  
-      <option value="{{request.form['EmpNo']}}">{{item['Lname']}},{{item['Fname']}}</option>
+      <option value="{{item['EmpNo']}}">{{item['Lname']}},{{item['Fname']}}</option>
     {% endfor %}
     </select>
 
@@ -34,11 +34,6 @@
     </select>
 
 
-      <select name="SurgeryType" id="type">
-    {% for item in type%}  
-      <option value="{{request.form['Code']}}">{{item['Code']}}({{item['Name']}})</option>
-    {% endfor %}
-    </select>
 
      <label for="SurgeryTime">SurgeryTime</label>
     <input type="date" name="SurgeryTime">

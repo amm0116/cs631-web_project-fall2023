@@ -50,4 +50,12 @@
 
 </table>
 
+
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+  <label for="Filter By Surgeon Name">Filter By Surgeon Name</label>
+   {% for item in surgeon%}
+  <option value="{{ url_for('schedule.surgeonFiltering',filter='ByName',id=item['EmpNo'])}}">{{item['Lname']}},{{item['Fname']}}</option>
+  {% endfor %}
+</select>
+
 {% endblock %}

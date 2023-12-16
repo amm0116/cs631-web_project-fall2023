@@ -1,19 +1,12 @@
 <!doctype html>
 <link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
 <nav>
-  <h1>Shifts</h1>
+
   <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
 <h2><a href="{{ url_for('schedule.addAppointment') }}"><button>Add Appointment</button></h2></a>
   <ul>
  
-      <!--appointments! -->
-
-<!-- appt number -->
-      
  
-
-<input type="submit" value="Submit">
-</form>
   </ul>
 </nav>
 
@@ -25,13 +18,21 @@
 
 {% block header %}
 <h1>{% block title %} Appointments {% endblock %}</h1>
-
 {% endblock %}
-
-
-
 {% block content %}
 
+{% for item in appointment%}
+
+  {{item['AppointmentNo']}}
+  {{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})
+  {{item['Physician']}}({{item['docLast']}},{{item['docFirst']}})
+  {{item['Clinic']}} 
+ {{item['Time']}} 
+  {{item['Type']}}
+
+
+
+{% endfor %}
 <table class="table is-bordered is-fullwidth">
 	
 
@@ -58,15 +59,21 @@
 
 </tr>
 
-
-
 {% endfor %}
 </tbody>
 
 </table>
-{% for item in appointment%}
-<!-- item.Time.strftime("%Y") -->
-{% endfor %}
+
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+  <label for="Filter By Doctor Name">Filter By Doctor Name</label>
+   {% for item in physician%}
+  <option value="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=item['EmpNo'])}}">{{item['Lname']}},{{item['Fname']}}</option>
+  {% endfor %}
+</select>
+
+
+
+
   <h2><a href="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=2)}}"><button>Filter by Physician</button></a>
   <h2><a href="{{ url_for('schedule.appointmentMonthFiltering',filter='ByMonth',month=6)}}"><button>Filter by Month</button></a>
 

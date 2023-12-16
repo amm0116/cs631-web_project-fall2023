@@ -3,34 +3,36 @@
 <nav>
   <h1>Add Appointment</h1>
  <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
-<a href="{{ url_for('people.addPatient') }}"><button>Add More</button></a></h2>
   <ul>
  
       <!--patient -->
+
+<!--        -->
+
   </ul>
 </nav>
 
 {% block content %}
    <form method="post">
 
-    <select name="PatientNo">
-    {% for item in appointment%}
-     <option value="{{request.form['PatientNo']}}" label="{{item['patientLast']}},{{item['patientFirst']}}">{{item['PatientNo']}}</option>
-    
+   <select name="PatientNo">
+    {% for item in patient%}
+     <option value="{{request.form['PatientNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['PatientNo']}}</option>
     {% endfor %}
     </option>
     </select> 
 
+ 
     <select name="Physician">
-    {% for item in appointment%}
-     <option value="name" label="{{item['docLast']}},{{item['docFirst']}}">{{item['Physician']}}</option>
+    {% for item in doctor%}
+     <option value="{{item['EmpNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
     {% endfor %}
     </option>
     </select> 
 
      <select name="Clinic">
-    {% for item in appointment%}
-     <option value="name">{{item['Clinic']}}</option>
+    {% for item in hospital%}
+     <option value="name">{{item['Name']}}</option>
     {% endfor %}
     </option>
     </select> 
@@ -38,15 +40,13 @@
     <label for="Time">Time</label>
     <input type="date" name="Time">
 
+
     <label for="type">Type</label>
      <select name="Type">
-    <option value="name">Routine</option>
-    <option value="name">Consultation</option>
-    <option value="name">Follow-up</option>
-    <option value="name">Diagnostic</option>
-     <option value="name">Preventive</option>
-     <option value="name">Emergency</option>
-   </option>
+
+     <option name="Type" id="apptype" value="Diagnostic">Diagnostic</option>
+     <option name="Type" id="apptype" value="Preventive">Preventive</option>
+     <option name="Type" id="apptype" value="Emergency">Emergency</option>
     </select> 
 
 <input type="submit" value="Save">
