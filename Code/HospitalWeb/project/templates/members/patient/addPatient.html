@@ -4,16 +4,11 @@
 {% endblock %}
 
 
-<!--     <label for="insProvider">Insurance Provider</label>
-    <input name="InsProvider" id="insProvider" value="{{ request.form['InsProvider'] }}" required>
-
-    <label for="insMemberId">Insurance Member ID</label>
-    <input name="InsMemberId" id="insMemberId " value="{{ request.form['InsMemberId'] }}" required>
- -->
-
 {% block content %}
 
    <form method="post">
+
+     <section class="section is-medium"> 
     <label for="name">FIRST NAME</label>
     <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
     <label for="name">MIDDLE INITIAL</label>
@@ -35,7 +30,7 @@
     
     {% endfor %}
     </select>
-
+</section>
     <label for="ssn">SSN</label>
     <input name="Ssn" id="ssn" value="{{ request.form['Ssn'] }}" required>
 
@@ -59,7 +54,7 @@
     <option value="-">-</option>
     </select>
 
-   
+    <section class="section is-medium">
     <label for="addr">Address</label>
     <input name="Addr" id="addr" value="{{ request.form['Addr'] }}">
 
@@ -77,6 +72,7 @@
 
     <label for="phone">Phone</label>
     <input name="Phone" id="phone" value="{{ request.form['Phone'] }}">
+</section>
 
     <input type="submit" value="Save">
   </form>

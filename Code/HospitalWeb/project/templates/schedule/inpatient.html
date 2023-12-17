@@ -27,21 +27,17 @@
  	<tr>
 <th >Stay No.</th>
 	<th >Patient</th>	
-	<th>Facility</th>
-	<th >Unit</th>
-	<th >Wing</th>	
-	<th>Room</th>
-	<th>Bed</th>
-	<th>Admission</th>
-	<th>CheckOut</th>
-<th>Nurse</th>
+		<th>Admission</th>
+
 <th>Physician</th>
+<th>Nurse</th>
+
 <th>Actions</th>
 
 
  	</tr>
 {% for item in stay%}
-{% for item2 in room%}
+
 <tr>
 	
 	<td class="stayno">{{item['StayNo']}}</td>
@@ -49,32 +45,56 @@
 
 	<td class="admission">{{item['AdmissionDate']}}</td>
 	
-	
+
+	<td class="physician">{{item['Physician']}}</td>
+
+	<td class="nurse">{{item['Nurse']}} </td>
+
+<td><a href="{{ url_for('schedule.updateStaff',id=item['StayNo'])}}">Edit Physician</a>|<a href="{{ url_for('schedule.updateNurse',id=item['StayNo'])}}">Edit Nurse</a>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+
+
+<section class="section">
+  <h1 class="title">Occupied Rooms</h1>
+    <table class="table is-bordered is-narrow">
+     <tbody>
+  <tr>
+  <th >Stay No.</th>
+	<th>Facility</th>
+	<th >Unit</th>
+	<th >Wing</th>	
+	<th>Room</th>
+	<th>Bed</th>
+	<th>Code</th>
+	<th>Actions</th>
+
+</tr>
+
+{% for item2 in room%}
+<tr>
+	<td class="stayno">{{item2['StayNo']}}</td>
 	<td class="facility">{{item2['Clinic']}} </td>
 	<td class="unit">{{item2['NurseUnit']}}</td>
 	<td class="wing">{{item2['Wing']}}</td>
 	<td class="room">{{item2['RoomNo']}} </td>
   <td class="room">{{item2['Bed']}} </td>
+  <td class="room">{{item2['Code']}} </td>
+<td><a href="{{ url_for('schedule.updateBed',id=item2['Code'])}}">Edit Bed</a></td>
 
-	<td class="physician">{{item['Physician']}}({{item['staffLast']}},{{item['staffFirst']}})</td>
-
-	<td class="nurse">{{item['Nurse']}} </td>
-
-	{% if item['Physician'] != None %}
-   	<td><a href="{{ url_for('people.seeStaff',id=item['Physician'])}}">{{item['Physician']}}</a></td>
-    {% else %}
-    	<td><a href="{{ url_for('people.seeStaff',id=item['Nurse'])}}">{{item['Nurse']}}</a></td>
-{% endif %}
-
-<td><a href="{{ url_for('schedule.updateStay',id=item['StayNo'])}}">Edit Staff</a></td>
 </tr>
 
 {% endfor %}
-	{%endfor%}
 </tbody>
 
-</table>
-
+   </table>
+</section>
 
 {% endblock %}
 

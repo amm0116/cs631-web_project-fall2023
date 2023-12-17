@@ -15,18 +15,21 @@
 
    <form method="post">
       
+    <label for="Patient">Patient</label>
     <select name="PatientNo">
     {% for item in patient%}  
       <option value="{{item.PatientNo}}">{{item['Lname']}},{{item['Fname']}}</option>
     {% endfor %}
     </select>
 
+    <label for="Surgeon">Surgeon</label>
      <select name="Surgeon" >
     {% for item in doctor%}  
       <option value="{{item.EmpNo}}">{{item['Lname']}},{{item['Fname']}}</option>
     {% endfor %}
     </select>
 
+    <label for="Operating Theatre">Operating Theatre</label>
     <select name="OpTheatre">
     {% for item in place%}  
       <option value="{{item.Code}}">{{item['Code']}}({{item['Clinic']}}-{{item['Theatre']}})</option>

@@ -23,6 +23,7 @@
     {% endfor %}
     </select>
     
+     <label for="DiagnosisNo">Diagnosis Number</label>
         <select name="DiagnosisNo">
     {% for item in ailment%}  
    
@@ -42,12 +43,13 @@
     {% endfor %}
     </select>
 
+ <label for="Physician">Patient</label>
      <select name="Physician" id="physician">
     {% for item in doctor%}  
       <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
     {% endfor %}
     </select>
-
+<label for="Nurse">Nurse</label>
      <select name="Nurse" id="nurse">
     {% for item in assistant%}  
        <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
@@ -59,4 +61,31 @@
 
     <input type="submit" value="Save">
   </form>
+
+ <section class="section">
+  <h1 class="title">Available Beds</h1>
+
+   <table class="table is-bordered is-narrow">
+     <tbody>
+  <tr>
+<th >Bed Code</th>
+  <th >Clinic</th>  
+  <th>Wing</th>
+  <th>Unit</th>
+  <th>Room</th>
+  <th>Bed</th>
+</tr>
+   {% for item in available%} 
+<tr>
+  <td class="code">{{item.Code}}</td>
+
+  <td class="clinic">{{item.Clinic}} </td>
+  <td class="wing">{{item.Wing}} </td>
+  <td class="unit">{{item.NurseUnit}} </td>
+  <td class="room">{{item.RoomNo}} </td>
+  <td class="bed">{{item.Bed}} </td>
+</tr>
+{% endfor %}
+</tbody>
+ </table>
 {% endblock %}

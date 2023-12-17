@@ -19,6 +19,7 @@
 {% block content %}
    <form method="post">
 
+<label for="Staff">Staff:</label>
 	 <select name="EmpNo">
 	{% for item in shift%}
      <option value="{{item['EmpNo']}}" label="{{item['staffLast']}},{{item['staffFirst']}}">{{item['EmpNo']}}</option>
@@ -29,6 +30,7 @@
     <input type="date" name="StartDate">
 
 
+<label for="Shift">Shift:</label>
 	 <select name="Shift">
      <option value="1" >1</option>
       <option value="2" >2</option>

@@ -109,10 +109,13 @@ def addAppointment():
 @bp.route('/surgery')
 def surgeryPage():
     db=get_db()
-    surgery=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo, SURGERY.Surgeon,B.Fname AS patientFirst, B.Lname AS patientLast, C.Fname AS docFirst, C.Lname AS docLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY , PATIENT AS B, STAFF AS C, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = C.EmpNo AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code').fetchall()
+    surgery=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo, SURGERY.Surgeon,B.Fname AS patientFirst, B.Lname AS patientLast, E.Name AS surgType, D.Clinic AS clinic, D.Theatre AS theatre, SURGERY.SurgeryTime ,SURGERY.OpTheatre FROM SURGERY , PATIENT AS B, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code').fetchall()
     surgeon=db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="SURG"').fetchall()
-    print(db)
-    return render_template('schedule/surgeries.html',surgery=surgery,surgeon=surgeon)
+
+    
+    place= db.execute('SELECT * FROM OP_THEATRE').fetchall()
+
+    return render_template('schedule/surgeries.html',surgery=surgery,surgeon=surgeon,place=place)
 
 @bp.route('/addSurgery',methods=('GET','POST')) 
 def addSurgery():
@@ -171,8 +174,54 @@ def surgeonFiltering(filter,id):
 
     surgeon=db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="SURG"').fetchall()
 
+
     db.commit()
-    return render_template('schedule/surgeries.html',surgery=result,surgeon=surgeon)
+    return render_template('schedule/surgeries.html',surgery=result,surgeon=surgeon,result=result)
+
+
+@bp.route('/surgery/op/<string:filter>/<int:id>/')
+def theatreFiltering(filter,id):
+    db=get_db()
+    result=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo,SURGERY.OpTheatre,SURGERY.Surgeon,B.Fname AS patientFirst, B.Lname AS patientLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY ,PATIENT AS B,STAFF AS C, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = C.EmpNo AND SURGERY.OpTheatre = ? AND SURGERY.SurgeryType = E.Code',(id,)).fetchall()
+    print(id)
+    place= db.execute('SELECT * FROM OP_THEATRE').fetchall()
+
+
+    db.commit()
+    return render_template('schedule/surgeries.html',surgery=result,place=place)
+
+def monthProcessing(monthNum):
+     
+    value= db.execute('SELECT SURGERY.SurgeryTime, SURGERY.PatientNo FROM SURGERY')
+    patientNum=[]
+    for item in value:
+        datetime_str = item['SurgeryTime']
+        if "/" in datetime_str:
+             datetime_object = datetime.strptime(datetime_str, '%m/%d/%Y')
+             if monthNum==datetime_object.month:
+                patientNum.append(item['PatientNo'])
+
+        if "-" in datetime_str:
+             datetime_object = datetime.strptime(datetime_str, '%Y-%m-%d')
+             if monthNum==datetime_object.month:
+                patientNum.append(item['PatientNo'])
+
+    return patientNum
+
+
+@bp.route('/surgery/<string:filter>/<int:month>/')
+def surgeonMonthFiltering(filter,month):
+    db=get_db()
+    # result=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo,SURGERY.Surgeon,B.Fname AS patientFirst, B.Lname AS patientLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY ,PATIENT AS B, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = ? AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code',(id,)).fetchall()
+    result=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo, SURGERY.Surgeon,B.Fname AS patientFirst, B.Lname AS patientLast, C.Fname AS docFirst, C.Lname AS docLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY , PATIENT AS B, STAFF AS C, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = C.EmpNo AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code').fetchall()
+    patients=monthProcessing(month)
+    print(patients)
+    
+    db.commit()
+
+    return render_template('schedule/surgeries.html',surgery=result,patients=patients)
+
+
 
 
 @bp.route('/stays')
@@ -184,6 +233,7 @@ def stayPage():
                            ' FROM STAY,PATIENT,STAFF'
                            ' WHERE PATIENT.PatientNo=STAY.PatientNo AND STAFF.EmpNo=(STAY.Physician OR STAY.Nurse)').fetchall()
     room=db.execute('SELECT * FROM BED, STAY WHERE BED.Code=STAY.Bed')
+
 
     print(db)
 
@@ -201,7 +251,8 @@ def addStay():
     doctor= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="PHYS"').fetchall()
     assistant= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="NURS"').fetchall()
     ailment= db.execute('SELECT * FROM PATIENT_ILLNESS').fetchall()
-    
+    available=db.execute('SELECT * FROM BED WHERE Code NOT IN (SELECT Bed FROM STAY)').fetchall()
+
     if request.method == 'POST':
         patientnum= request.form['PatientNo']
         physician=request.form['Physician']
@@ -231,17 +282,69 @@ def addStay():
 
              return redirect(url_for('schedule.stayPage'))
 
-    return render_template('schedule/add/addStay.html',stay=stay,patient=patient,doctor=doctor,assistant=assistant,ailment=ailment)
+    return render_template('schedule/add/addStay.html',stay=stay,patient=patient,doctor=doctor,assistant=assistant,ailment=ailment,available=available)
+
+
+@bp.route('/<int:id>/updateRoom', methods=('GET', 'POST'))
+def updateBed(id):
+     db=get_db()
+     room= db.execute('SELECT BED.* FROM BED').fetchall()
+     available=db.execute('SELECT * FROM BED WHERE Code NOT IN (SELECT Bed FROM STAY)').fetchall()
+     error=None
+
+     if request.method == 'POST':
+        room = request.form['Code']
+
+        if error is not None:
+            flash(error)
+
+        else:  
+             db=get_db()
+             db.execute(
+               'UPDATE STAY SET Bed= ?'
+                ' WHERE Bed = ?',
+                (room,id)
+            )
+             db.commit()
+             return redirect(url_for('schedule.stayPage'))
+
+     return render_template('schedule/update/updateBed.html',room=room,available=available)
+
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
-def updateStay(id):
+def updateStaff(id):
      db=get_db()
      phys= db.execute('SELECT STAFF.* FROM STAFF WHERE STAFF.EmpType="PHYS"').fetchall()
-     nurse=db.execute('SELECT STAFF.* FROM STAFF WHERE STAFF.EmpType="NURS"').fetchall()
+     # nurse=db.execute('SELECT STAFF.* FROM STAFF WHERE STAFF.EmpType="NURS"').fetchall()
      error=None
 
      if request.method == 'POST':
         physician = request.form['Physician']
+        # nurse = request.form['Nurse']
+
+        if error is not None:
+            flash(error)
+
+        else:  
+             db=get_db()
+             db.execute(
+               'UPDATE STAY SET Physician = ?'
+                ' WHERE StayNo = ?',
+                (physician,id)
+            )
+             db.commit()
+             return redirect(url_for('schedule.stayPage'))
+
+     return render_template('schedule/update/updateStaff.html',phys=phys)
+
+
+@bp.route('/<int:id>/updateNurse', methods=('GET', 'POST'))
+def updateNurse(id):
+     db=get_db()
+     nurse=db.execute('SELECT STAFF.* FROM STAFF WHERE STAFF.EmpType="NURS"').fetchall()
+     error=None
+
+     if request.method == 'POST':
         nurse = request.form['Nurse']
 
         if error is not None:
@@ -250,14 +353,14 @@ def updateStay(id):
         else:  
              db=get_db()
              db.execute(
-               'UPDATE STAY SET Physician = ? AND Nurse = ?'
+               'UPDATE STAY SET nurse = ?'
                 ' WHERE StayNo = ?',
-                (physician,nurse,id)
+                (nurse,id)
             )
              db.commit()
              return redirect(url_for('schedule.stayPage'))
 
-     return render_template('schedule/update/update.html',phys=phys,nurse=nurse)
+     return render_template('schedule/update/updateNurse.html',nurse=nurse)
 
 def get_person(id):
     item = get_db().execute(

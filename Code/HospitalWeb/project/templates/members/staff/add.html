@@ -5,19 +5,36 @@
 {% endblock %}
 
 <script type="text/javascript"> 
-// get element by id for this
-  function hide()  {  
-                    document.getElementById("nursing").style.visibility="hidden";
-                  }
 
- function show()  {  
-                    document.getElementById("nursing").style.visibility="visible";
-                  }
+function nursing(that) {
+    if (that.value == "NURS") {
+        document.getElementById("nurs").style.display = "block";
+    } else {
+        document.getElementById("nurs").style.display = "none";
+    }
+}
+
+function doc(that) {
+    if (that.value == "PHYS"  ) {
+        document.getElementById("phys").style.display = "block";
+    } else {
+        document.getElementById("phys").style.display = "none";
+    }
+}
+function surgeon(that) {
+if(that.value == "SURG"){
+        document.getElementById("surg").style.display = "block";
+} else {
+        document.getElementById("surg").style.display = "none";
+    }
+
+}
 </script>
 
 
 {% block content %}
    <form method="post">
+   <section class="section is-medium"> 
     <label for="name">FIRST NAME</label>
     <input name="Fname" id="fname" value="{{ request.form['Fname'] }}" required>
     <label for="name">MIDDLE Initial(optional)</label>
@@ -44,34 +61,34 @@
     <input name="Title" id="title" value="{{ request.form['Title'] }}" required>
 
     <label for="Salary">Salary</label>
-    <input name="Salary" id="salary" value="{{ request.form['Salary'] }}" required>
-
+    <input name="Salary" id="salary" value="{{ request.form['Salary'] }}">
+</section>
      
-
-    <label for="EmpStatus">EMPLOYEE Type</label>
-    <select name="EmpType" id="empType">
-    <option value="PHYS">PHYS</option>
+<section class="section is-medium"> 
+    <label for="EmpType">EMPLOYEE Type</label>
+    <select name="EmpType" id="type">
+    <option value="PHYS">PHYS</option> 
     <option value="NURS">NURS</option> 
     <option value="SURG">SURG</option>
     <option value="SUPP">SUPP</option>
-    </select>
-
-
-    <div id="nursing">
+     </select>
 
       <label for="yrsNurse">Years Nursing Experience</label>
-      <input name="YrsNursingExp " id="yearsnurse" value="{{ request.form['YrsNursingExp '] }}" >
+      <input name="YrsNursingExp" id="yearsnurse" value="{{ request.form['YrsNursingExp']}}" >
 
        <label for="nurseGrade">Nurse Grade</label>
-      <input name="NurseGrade " id="nursegrade" value="{{ request.form['NurseGrade'] }}" >
-</div>
+      <input name="NurseGrade" id="nursegrade" value="{{request.form['NurseGrade']}}" >
+
+
 
     <label for="Specialty">Specialty</label>
     <select name="Specialty" id="specialty">
     {% for item in specialty%}
      <option value="{{item}}" label="{{item}}">{{item}}</option>
      {%endfor%}
-
+ </select>
+   </section> 
+<section class="section is-medium"> 
     <label for="addr">Address</label>
     <input name="Addr" id="addr" value="{{ request.form['Addr'] }}">
 
@@ -89,7 +106,7 @@
 
     <label for="phone">Phone</label>
     <input name="Phone" id="phone" value="{{ request.form['Phone'] }}">
-
+</section> 
     <input type="submit" value="Save">
   </form>
 {% endblock %}

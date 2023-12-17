@@ -27,7 +27,7 @@
 <th >Surgery Number</th>
 <th >Patient</th>
 <th >Surgeon</th>
-<th>Facility</th>
+<th>Operating Theatre</th>
 <th>Type</th>
 <th >Time</th>	
 
@@ -38,7 +38,7 @@
 	<td class="surgeryno">{{item.SurgeryNo}}</td>
 	<td class="patientno">{{item.PatientNo}}({{item['patientLast']}},{{item['patientFirst']}})</td>
 	<td class="physician">{{item.Surgeon}}</td>
-	<td class="facility">{{item.Clinic}} </td>
+	<td class="facility">{{item.OpTheatre}}({{item['clinic']}}-{{item['Theatre']}})</td>
 	<td class="type">{{item.SurgType}}</td>
 	<td class="time">{{item.SurgeryTime}} </td>
 </tr>
@@ -58,5 +58,25 @@
   <option value="{{ url_for('schedule.surgeonFiltering',filter='ByName',id=item['EmpNo'])}}">{{item['Lname']}},{{item['Fname']}}</option>
   {% endfor %}
 </select>
+
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+  <label for="Filter By OpTheatre">Filter By OpTheatre</label>
+  <option value="Choose One!">Choose One</option>
+   {% for item in place%}
+  <option value="{{ url_for('schedule.theatreFiltering',filter='ByPlace',id=item['Code'])}}">{{item['Code']}}</option>
+  {% endfor %}
+</select>
+
+
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+   <label for="Filter By Date">Filter By Date</label>
+   <option value="Choose A Month">Choose a Month</option>
+  	{%for i in range(13)%}
+  	{%if i!=0 %}
+       <option value="{{ url_for('schedule.surgeonMonthFiltering',filter='ByMonth',month=i)}}">{{i}}</option>
+     {%endif%}
+    {%endfor%}
+</select>
+
 
 {% endblock %}

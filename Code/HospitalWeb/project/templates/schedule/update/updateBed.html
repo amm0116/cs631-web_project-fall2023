@@ -1,0 +1,49 @@
+
+{% block header %}
+  <h1>{% block title %}Edit Bed{% endblock %}</h1>
+  <a href="{{ url_for('schedule.stayPage') }}"><button>Return to Stay Page</button></a>
+{% endblock %}
+{% block content %}
+
+   <form method="post">
+
+   <select name="Code">
+    {% for item in room%}
+   <option value="{{item.Code}}" label="{{item['Code']}}">{{item.Code}}</option>
+    {% endfor %}
+ 
+    </select> 
+  
+
+    <input type="submit" value="Save">
+  </form>
+
+ <section class="section">
+  <h1 class="title">Available Beds</h1>
+
+   <table class="table is-bordered is-narrow">
+     <tbody>
+  <tr>
+<th >Bed Code</th>
+  <th >Clinic</th>  
+  <th>Wing</th>
+  <th>Unit</th>
+  <th>Room</th>
+  <th>Bed</th>
+</tr>
+   {% for item in available%} 
+<tr>
+  <td class="code">{{item.Code}}</td>
+
+  <td class="clinic">{{item.Clinic}} </td>
+  <td class="wing">{{item.Wing}} </td>
+  <td class="unit">{{item.NurseUnit}} </td>
+  <td class="room">{{item.RoomNo}} </td>
+  <td class="bed">{{item.Bed}} </td>
+</tr>
+{% endfor %}
+</tbody>
+ </table>
+</section>
+
+{% endblock %}

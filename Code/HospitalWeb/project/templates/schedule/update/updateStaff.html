@@ -1,6 +1,6 @@
 
 {% block header %}
-  <h1>{% block title %}Edit Staff Member{% endblock %}</h1>
+  <h1>{% block title %}Edit PHYSICIAN{% endblock %}</h1>
   <a href="{{ url_for('schedule.stayPage') }}"><button>Return to Stay Page</button></a>
 {% endblock %}
 
@@ -14,11 +14,6 @@
  
     </select> 
   
-   <select name="Nurse">
-    {% for item in nurse%}
-     <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item.EmpNo}}</option>
-    {% endfor %}
-    </select> 
 
     <input type="submit" value="Save">
   </form>

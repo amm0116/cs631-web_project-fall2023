@@ -16,7 +16,7 @@ bp = Blueprint('people', __name__, url_prefix='/people')
 @bp.route('/staff')
 def seeAllStaff():
     db=get_db()
-    staff=db.execute('SELECT rowid , * FROM STAFF').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
+    staff=db.execute('SELECT * FROM STAFF').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
 
     return render_template('members/staff/staff.html',staff=staff)
 
@@ -79,8 +79,6 @@ def seePatient(id):
 
     return render_template('members/patient/fullbio.html',item=item,allergies=allergies, illness=illness,stay=stay,appointments=appointments,surgery=surgery) 
 
-#'Cardiology', 'Dermatology', 'Gastroenterology', 'Orthopedics', 'Neurology', 'Ophthalmology', 'Otolaryngology', 'Pediatrics', 'Obstetrics and Gynecology', 'Urology', 'Endocrinology', 'Rheumatology', 'Pulmonology', 'Hematology', 
-#'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology'
 
 @bp.route('/addPatient',methods=('GET','POST')) #'GET','POST')
 def addPatient():
@@ -131,7 +129,7 @@ def addStaff():
     # error=None
     specialty= ['Cardiology', 'Dermatology', 'Gastroenterology', 'Orthopedics', 'Neurology', 'Ophthalmology', 
                 'Otolaryngology', 'Pediatrics', 'Obstetrics and Gynecology', 'Urology', 'Endocrinology', 'Rheumatology', 'Pulmonology', 'Hematology', 
-                'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology']
+                'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology','N/A']
 
     if request.method == 'POST':
         gender=request.form['Gender']
@@ -144,14 +142,15 @@ def addStaff():
         title = request.form['Title']
         salary=request.form['Salary']
         skill=request.form['Specialty']
-        # empStatus = request.form['EmpStatus']
-        # addr = request.form['Addr']
-        # city = request.form['City'] 
+        yrsnursing=request.form['YrsNursingExp']
+        grade=request.form['NurseGrade']
+        addr = request.form['Addr']
+        city = request.form['City'] 
 
-        # stateProv = request.form['StateProv']
-        # zipCode =request.form['ZIP']
-        # country =request.form['Country']
-        # phone  =request.form['Phone']
+        stateProv = request.form['StateProv']
+        zipCode =request.form['ZIP']
+        country =request.form['Country']
+        phone  =request.form['Phone']
 
         error = None
 
@@ -160,14 +159,33 @@ def addStaff():
 
         else:  
              db=get_db()
-             db.execute(
-                'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary,Specialty)'
-                ' VALUES (?,?,?,?,?,?,?,?,?)',
-                (Fname,mName,Lname,gender,empType,ssn,title,salary,skill)
-            )
-             post_id = db.cursor().fetchone()
-             print(post_id)
-             print("ghvuiavdfas")
+
+             if empType=="PHYS":
+                db.execute(
+                    'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary,Specialty,Addr,City,StateProv,ZIP,Country,Phone)'
+                    ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (Fname,mName,Lname,gender,empType,ssn,title,salary,skill,addr,city,stateProv,zipCode,country,phone)
+                    )
+             elif empType=="SURG":
+                db.execute(
+                    'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Specialty,Addr,City,StateProv,ZIP,Country,Phone)'
+                    ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (Fname,mName,Lname,gender,empType,ssn,title,skill,addr,city,stateProv,zipCode,country,phone)
+                    )
+
+             elif empType=="SUPP":
+                db.execute(
+                    'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary,Addr,City,StateProv,ZIP,Country,Phone)'
+                    ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (Fname,mName,Lname,gender,empType,ssn,title,salary,addr,city,stateProv,zipCode,country,phone)
+                    )
+             else:
+                db.execute(
+                    'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary,YrsNursingExp,NurseGrade,Addr,City,StateProv,ZIP,Country,Phone)'
+                    ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (Fname,mName,Lname,gender,empType,ssn,title,salary,yrsnursing,grade,addr,city,stateProv,zipCode,country,phone)
+                    )
+
              db.commit()
 
              return redirect(url_for('people.seeAllStaff'))
@@ -220,3 +238,13 @@ def delete(id):
     db.execute('DELETE FROM STAFF WHERE rowid = ?', (id,))
     db.commit()
     return redirect(url_for('people.seeAllStaff'))
+
+@bp.route('/staff/<string:filter>/<string:empType>/')
+def staffTypeFiltering(filter,empType):
+    db=get_db()
+    staff= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType= ?',(empType,)).fetchall()
+
+    types=["PHYS","SURG","NURS","SUPP"]
+
+    db.commit()
+    return render_template('members/staff/staff.html',staff=staff,doc=types)

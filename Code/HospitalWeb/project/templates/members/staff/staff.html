@@ -16,7 +16,6 @@
 <a href="{{ url_for('people.addStaff') }}"><button>Add More</button></a></h2>
 
 
-
   <ul>
  
       <!--staff -->
@@ -45,4 +44,16 @@
 </tr>
 {% endfor %}
 </table>
+
+
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+  <label for="Filter By Doctor Name">Filter By Employee Type</label>
+
+    <option value="{{ url_for('people.staffTypeFiltering',filter='ByType',empType='PHYS')}}">PHYS</option> 
+    <option value="{{ url_for('people.staffTypeFiltering',filter='ByType',empType='NURS')}}">NURS</option> 
+    <option value="{{ url_for('people.staffTypeFiltering',filter='ByType',empType='SURG')}}">SURG</option>
+    <option value="{{ url_for('people.staffTypeFiltering',filter='ByType',empType='SUPP')}}">SUPP</option>
+  </select>
+
+
 {% endblock %}

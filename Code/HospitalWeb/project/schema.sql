@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS STAFF (
     EmpType CHAR(4) NOT NULL CHECK(EmpType = 'PHYS' OR EmpType = 'NURS' OR EmpType = 'SURG' OR EmpType = 'SUPP'),
     Title   VARCHAR(50) NOT NULL,
     Salary  INTEGER,
-    Specialty   VARCHAR(50) CHECK(Specialty IN ('Cardiology', 'Dermatology', 'Gastroenterology', 'Orthopedics', 'Neurology', 'Ophthalmology', 'Otolaryngology', 'Pediatrics', 'Obstetrics and Gynecology', 'Urology', 'Endocrinology', 'Rheumatology', 'Pulmonology', 'Hematology', 'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology')),
+    Specialty   VARCHAR(50) CHECK(Specialty IN ('Cardiology', 'Dermatology', 'Gastroenterology', 'Orthopedics', 'Neurology', 'Ophthalmology', 'Otolaryngology', 'Pediatrics', 'Obstetrics and Gynecology', 'Urology', 'Endocrinology', 'Rheumatology', 'Pulmonology', 'Hematology', 'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology','N/A')),
     NurseGrade  INTEGER,
     YrsNursingExp   INT,
     Addr    VARCHAR(100),
@@ -604,6 +604,7 @@ INSERT INTO "SHIFT" ("ShiftNo","EmpNo","StartDate","Shift") VALUES (1,1,'11/20/2
 INSERT INTO "SHIFT" ("ShiftNo","EmpNo","StartDate","Shift") VALUES (3,1,'11/21/2023',1);
 INSERT INTO "SHIFT" ("ShiftNo","EmpNo","StartDate","Shift") VALUES (4,1,'11/22/2023',1);
 INSERT INTO "STAY" ("StayNo","PatientNo","Bed","AdmissionDate","DiagnosisNo","Physician","Nurse") VALUES (1,1,14,'11/25/2023',1,2,4);
+INSERT INTO "STAY" ("StayNo","PatientNo","Bed","AdmissionDate","DiagnosisNo","Physician","Nurse") VALUES (2,3,20,'11/25/2023',7,9,4);
 INSERT INTO "STAY" ("StayNo","PatientNo","Bed","AdmissionDate","DiagnosisNo","Physician","Nurse") VALUES (3,2,16,'11/25/2023',6,NULL,4);
 INSERT INTO "STAY" ("StayNo","PatientNo","Bed","AdmissionDate","DiagnosisNo","Physician","Nurse") VALUES (4,7,35,'11/26/2023',9,9,4);
 INSERT INTO "STAY" ("StayNo","PatientNo","Bed","AdmissionDate","DiagnosisNo","Physician","Nurse") VALUES (5,6,15,'11/27/2023',8,2,4);
@@ -1184,11 +1185,12 @@ CREATE TRIGGER CHECK_STAY_NURSE_UPDATE
         SELECT RAISE (ABORT, 'The selected attending Nurse must be a Nurse.');
     END;
 CREATE TRIGGER CHECK_STAY_NURSE_COUNT_UPDATE
-    BEFORE UPDATE ON STAY
+    BEFORE UPDATE OF Nurse ON STAY
     FOR EACH ROW
-    WHEN OLD.Nurse IS NOT NULL AND (SELECT COUNT(*) FROM STAY WHERE Nurse = OLD.Nurse) <= 5
+    WHEN OLD.Nurse IS NOT NULL AND NEW.Nurse != OLD.Nurse
+    AND (SELECT COUNT(*) FROM STAY WHERE Nurse = OLD.Nurse) <= 5
     BEGIN
-        SELECT RAISE (ABORT, 'This Nurse only acts as an Attending Nurse for 5 or less patients and none can be removed.');
+     SELECT RAISE (ABORT, 'This Nurse only acts as an Attending Nurse for 5 or less patients and none can be removed.');
     END;
 CREATE TRIGGER CHECK_STAY_PHYS_INSERT
     BEFORE INSERT ON STAY
