@@ -21,18 +21,7 @@
 {% endblock %}
 {% block content %}
 
-{% for item in appointment%}
 
-  {{item['AppointmentNo']}}
-  {{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})
-  {{item['Physician']}}({{item['docLast']}},{{item['docFirst']}})
-  {{item['Clinic']}} 
- {{item['Time']}} 
-  {{item['Type']}}
-
-
-
-{% endfor %}
 <table class="table is-bordered is-fullwidth">
 	
 
@@ -71,8 +60,15 @@
   {% endfor %}
 </select>
 
+ {% for item in appointment%}
 
-
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+   <label for="Filter By Date">Filter By Date</label>
+   {% for item in p%}
+  <option value="{{ url_for('schedule.appointmentMonthFiltering',filter='ByMonth',id=item['Time'])}}">Month</option>
+  {% endfor %}
+ {%endfor%}
+</select>
 
   <h2><a href="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=2)}}"><button>Filter by Physician</button></a>
   <h2><a href="{{ url_for('schedule.appointmentMonthFiltering',filter='ByMonth',month=6)}}"><button>Filter by Month</button></a>

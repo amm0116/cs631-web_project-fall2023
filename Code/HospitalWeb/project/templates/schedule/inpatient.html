@@ -30,27 +30,31 @@
 	<th>Facility</th>
 	<th >Unit</th>
 	<th >Wing</th>	
-	<th>Room/Bed</th>
+	<th>Room</th>
+	<th>Bed</th>
 	<th>Admission</th>
 	<th>CheckOut</th>
-	<th>Physician</th>
 <th>Nurse</th>
+<th>Physician</th>
 <th>Actions</th>
 
 
  	</tr>
 {% for item in stay%}
+{% for item2 in room%}
 <tr>
 	
 	<td class="stayno">{{item['StayNo']}}</td>
 	<td class="patient">{{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})</td>
-	<td class="facility">{{item['Clinic']}} </td>
-	<td class="unit">{{item['Unit']}}</td>
-	<td class="wing">{{item['Wing']}}</td>
-	<td class="room">{{item['Bed']}} </td>
 
 	<td class="admission">{{item['AdmissionDate']}}</td>
-	<td class="checkout">?????</td>
+	
+	
+	<td class="facility">{{item2['Clinic']}} </td>
+	<td class="unit">{{item2['NurseUnit']}}</td>
+	<td class="wing">{{item2['Wing']}}</td>
+	<td class="room">{{item2['RoomNo']}} </td>
+  <td class="room">{{item2['Bed']}} </td>
 
 	<td class="physician">{{item['Physician']}}({{item['staffLast']}},{{item['staffFirst']}})</td>
 
@@ -62,15 +66,15 @@
     	<td><a href="{{ url_for('people.seeStaff',id=item['Nurse'])}}">{{item['Nurse']}}</a></td>
 {% endif %}
 
-
-<td><a href="{{ url_for('schedule.updateStay',id=item['Physician'])}}"><button class="button is-large">Edit Physician</button></a></td>
-
-
+<td><a href="{{ url_for('schedule.updateStay',id=item['StayNo'])}}">Edit Staff</a></td>
 </tr>
 
 {% endfor %}
+	{%endfor%}
 </tbody>
 
 </table>
+
+
 {% endblock %}
 

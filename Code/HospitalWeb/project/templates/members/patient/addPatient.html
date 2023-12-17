@@ -31,7 +31,7 @@
      <label for="Pcp">Primary Care</label>
     <select name="Pcp" id="pcp">
     {% for item in physician%}
-     <option value="Pcp" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
+     <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
     
     {% endfor %}
     </select>

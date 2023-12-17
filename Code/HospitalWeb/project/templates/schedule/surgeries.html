@@ -35,12 +35,12 @@
  {% for item in surgery%}
 <tr>
 	
-	<td class="surgeryno">{{item['SurgeryNo']}}</td>
-	<td class="patientno">{{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})</td>
-	<td class="physician">{{item['Surgeon']}}({{item['docLast']}},{{item['docFirst']}})</td>
-	<td class="facility">{{item['clinic']}} </td>
-	<td class="type">{{item['surgType']}}</td>
-	<td class="time">{{item['SurgeryTime']}} </td>
+	<td class="surgeryno">{{item.SurgeryNo}}</td>
+	<td class="patientno">{{item.PatientNo}}({{item['patientLast']}},{{item['patientFirst']}})</td>
+	<td class="physician">{{item.Surgeon}}</td>
+	<td class="facility">{{item.Clinic}} </td>
+	<td class="type">{{item.SurgType}}</td>
+	<td class="time">{{item.SurgeryTime}} </td>
 </tr>
 
 {% endfor %}
@@ -53,6 +53,7 @@
 
 <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
   <label for="Filter By Surgeon Name">Filter By Surgeon Name</label>
+  <option value="Choose One!">Choose One</option>
    {% for item in surgeon%}
   <option value="{{ url_for('schedule.surgeonFiltering',filter='ByName',id=item['EmpNo'])}}">{{item['Lname']}},{{item['Fname']}}</option>
   {% endfor %}

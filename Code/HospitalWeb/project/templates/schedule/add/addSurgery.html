@@ -15,21 +15,21 @@
 
    <form method="post">
       
-    <select name="PatientNo" id="patientNo">
+    <select name="PatientNo">
     {% for item in patient%}  
-      <option value="{{request.form['PatientNo']}}">{{item['Lname']}},{{item['Fname']}}</option>
+      <option value="{{item.PatientNo}}">{{item['Lname']}},{{item['Fname']}}</option>
     {% endfor %}
     </select>
 
-     <select name="Surgeon" id="surgeon">
+     <select name="Surgeon" >
     {% for item in doctor%}  
-      <option value="{{item['EmpNo']}}">{{item['Lname']}},{{item['Fname']}}</option>
+      <option value="{{item.EmpNo}}">{{item['Lname']}},{{item['Fname']}}</option>
     {% endfor %}
     </select>
 
-    <select name="OpTheatre" id="optheatre">
+    <select name="OpTheatre">
     {% for item in place%}  
-      <option value="{{request.form['Code']}}">{{item['Code']}}({{item['Clinic']}}-{{item['Theatre']}})</option>
+      <option value="{{item.Code}}">{{item['Code']}}({{item['Clinic']}}-{{item['Theatre']}})</option>
     {% endfor %}
     </select>
 

@@ -15,18 +15,18 @@
  {% endfor %}
    <form method="post">
        <label for="Patient">Patient</label>
-    <select name="PatientNo" id="patientnum">
+    <select name="PatientNo">
     {% for item in patient%}
   
-    <option value="item.PatientNo" label="{{item['Lname']}},{{item['Fname']}}">item.PatientNo</option>
+    <option value="{{item.PatientNo}}" label="{{item['Lname']}},{{item['Fname']}}">item.PatientNo</option>
   
     {% endfor %}
     </select>
     
-        <select name="DiagnosisNo" id="diagnosis">
+        <select name="DiagnosisNo">
     {% for item in ailment%}  
    
-      <option value="{{item['DiagnosisNo']}}" label="{{item['DiagnosisNo']}}">{{item['DiagnosisNo']}}</option>
+      <option value="{{item.DiagnosisNo}}" label="{{item['DiagnosisNo']}}">{{item.DiagnosisNo}}</option>
     {% endfor %}
 
     </select>
@@ -38,19 +38,19 @@
     <label for="room">Room/Bed</label>
     <select name="Bed" id="bed">
    {% for item in stay%}  
-    <option value="item.Bed" label="{{item.Clinic}} Wing:{{item.Wing}} Room: {{item.RoomNo}} Room/Bed: {{item.NurseUnit}}-{{item.RoomNo}}-{{item.letter}}">item.Bed</option>
+    <option value="{{item.Bed}}" label="{{item.Clinic}} Wing:{{item.Wing}} Room: {{item.RoomNo}} Room/Bed: {{item.NurseUnit}}-{{item.RoomNo}}-{{item.letter}}">item.Bed</option>
     {% endfor %}
     </select>
 
      <select name="Physician" id="physician">
     {% for item in doctor%}  
-      <option value="{{item['EmpNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
+      <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
     {% endfor %}
     </select>
 
      <select name="Nurse" id="nurse">
     {% for item in assistant%}  
-       <option value="{{item['EmpNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
+       <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
     {% endfor %}
     </select>
 

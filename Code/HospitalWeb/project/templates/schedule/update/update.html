@@ -1,25 +1,23 @@
-{% extends 'base.html' %}
 
 {% block header %}
   <h1>{% block title %}Edit Staff Member{% endblock %}</h1>
-  <a href="{{ url_for('people.seeAll') }}"><button>Return to Staff Page</button></a>
+  <a href="{{ url_for('schedule.stayPage') }}"><button>Return to Stay Page</button></a>
 {% endblock %}
 
 {% block content %}
    <form method="post">
 
    <select name="Physician">
-    {% for item in doctor%}
-     <option value="{{item['EmpNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
+    {% for item in phys%}
+     <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item.EmpNo}}</option>
     {% endfor %}
-    </option>
+ 
     </select> 
   
    <select name="Nurse">
     {% for item in nurse%}
-     <option value="{{item['EmpNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
+     <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item.EmpNo}}</option>
     {% endfor %}
-    </option>
     </select> 
 
     <input type="submit" value="Save">

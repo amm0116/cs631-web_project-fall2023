@@ -10,6 +10,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from project.db import get_db
 
+from datetime import datetime
+
 bp = Blueprint('schedule', __name__, url_prefix='/schedule')
 
 
@@ -27,7 +29,8 @@ def appointmentPage():
     appointment=db.execute('SELECT APPOINTMENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
                            ' FROM APPOINTMENT,PATIENT,STAFF'
                            ' WHERE STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo').fetchall()
-    
+
+
     physician=db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="PHYS" OR STAFF.Title="Chief of Staff"').fetchall()
     return render_template('schedule/appointments.html',appointment=appointment,physician=physician)
 
@@ -45,9 +48,20 @@ def appointmentFiltering(filter,id):
 @bp.route('/<string:filter>/<int:month>/')
 def appointmentMonthFiltering(filter,month):
     db=get_db()
-    result=db.execute('  SELECT APPOINTMENT.*'
+    result=db.execute('SELECT APPOINTMENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast'
                            ' FROM APPOINTMENT,PATIENT,STAFF'
-                           ' WHERE APPOINTMENT.Time=DATE_FORMAT("2023-?-??", "%d")',(month,) ).fetchall()
+                           ' WHERE STAFF.EmpNo=APPOINTMENT.Physician AND PATIENT.PatientNo=APPOINTMENT.PatientNo').fetchall()
+
+
+    value= db.execute('SELECT APPOINTMENT.Time FROM APPOINTMENT')
+
+    for item in value:
+        datetime_str = item['Time']
+
+        datetime_object = datetime.strptime(datetime_str, '%m/%d/%Y %I:%M')
+
+        print(datetime_object.strftime('%m'))
+
     db.commit()
     
     return render_template('schedule/appointments.html',appointment=result)
@@ -85,7 +99,7 @@ def addAppointment():
                 ' VALUES (?,?,?,?,?)',
                 (patientnum,physician,clinic,apptime,apptype)
                 )
-
+ 
              db.commit()
 
              return redirect(url_for('schedule.appointmentPage'))
@@ -110,9 +124,9 @@ def addSurgery():
 
     surgeryItem= db.execute('SELECT * FROM SURG_TYPE').fetchall()
 
-    opClinic= db.execute('SELECT * FROM OP_THEATRE')
+    opClinic= db.execute('SELECT * FROM OP_THEATRE').fetchall()
 
-    surgeon= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="SURG"')
+    surgeon= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="SURG"').fetchall()
 
 #patient number, surgeon, time, op theatre, surgery type
     if request.method == 'POST':
@@ -122,7 +136,7 @@ def addSurgery():
         surgtime=request.form['SurgeryTime']
         surgtype=1#request.form['SurgeryType']
 
-  
+        
         error = None
 
         if error is not None:
@@ -137,7 +151,13 @@ def addSurgery():
                 (patientnum,doc,surgtime,theatre,surgtype)
                 
             )
-       
+             print(surgtime)
+             print(patientnum)
+             print(doc)
+             print(theatre)
+             print(surgtime)
+             print(surgtype)
+
              db.commit()
 
              return redirect(url_for('schedule.surgeryPage'))
@@ -147,9 +167,10 @@ def addSurgery():
 @bp.route('/surgery/<string:filter>/<int:id>/')
 def surgeonFiltering(filter,id):
     db=get_db()
-    result=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo, SURGERY.Surgeon,B.Fname AS patientFirst, B.Lname AS patientLast, C.Fname AS docFirst, C.Lname AS docLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY , PATIENT AS B, STAFF AS C, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = ? AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code',(id,)).fetchall()
+    result=db.execute('SELECT SURGERY.SurgeryNo, SURGERY.PatientNo,SURGERY.Surgeon,B.Fname AS patientFirst, B.Lname AS patientLast, E.Name AS surgType, D.Clinic, D.Theatre, SURGERY.SurgeryTime FROM SURGERY ,PATIENT AS B, OP_THEATRE AS D, SURG_TYPE AS E WHERE SURGERY.PatientNo = B.PatientNo AND SURGERY.Surgeon = ? AND SURGERY.OpTheatre = D.Code AND SURGERY.SurgeryType = E.Code',(id,)).fetchall()
 
     surgeon=db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType="SURG"').fetchall()
+
     db.commit()
     return render_template('schedule/surgeries.html',surgery=result,surgeon=surgeon)
 
@@ -162,11 +183,11 @@ def stayPage():
     stay=db.execute('SELECT STAY.*,PATIENT.Fname AS patientFirst,PATIENT.Lname AS patientLast,STAFF.Fname AS staffFirst,STAFF.Lname AS staffLast'
                            ' FROM STAY,PATIENT,STAFF'
                            ' WHERE PATIENT.PatientNo=STAY.PatientNo AND STAFF.EmpNo=(STAY.Physician OR STAY.Nurse)').fetchall()
-
+    room=db.execute('SELECT * FROM BED, STAY WHERE BED.Code=STAY.Bed')
 
     print(db)
 
-    return render_template('schedule/inpatient.html',stay=stay)
+    return render_template('schedule/inpatient.html',stay=stay,room=room)
 
 @bp.route('/addStay',methods=('GET','POST')) #'GET','POST')
 def addStay():
@@ -208,21 +229,20 @@ def addStay():
        
              db.commit()
 
-             return redirect(url_for('schedule/inpatient.html'))
+             return redirect(url_for('schedule.stayPage'))
 
     return render_template('schedule/add/addStay.html',stay=stay,patient=patient,doctor=doctor,assistant=assistant,ailment=ailment)
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 def updateStay(id):
-     doctor=get_person(id)
+     db=get_db()
+     phys= db.execute('SELECT STAFF.* FROM STAFF WHERE STAFF.EmpType="PHYS"').fetchall()
+     nurse=db.execute('SELECT STAFF.* FROM STAFF WHERE STAFF.EmpType="NURS"').fetchall()
      error=None
 
      if request.method == 'POST':
         physician = request.form['Physician']
-        error = None
-
-        if not name:
-            error = 'physician is required.'
+        nurse = request.form['Nurse']
 
         if error is not None:
             flash(error)
@@ -230,20 +250,20 @@ def updateStay(id):
         else:  
              db=get_db()
              db.execute(
-               'UPDATE doctor SET physician = ?'
-                ' WHERE id = ?',
-                (physician, id)
+               'UPDATE STAY SET Physician = ? AND Nurse = ?'
+                ' WHERE StayNo = ?',
+                (physician,nurse,id)
             )
              db.commit()
              return redirect(url_for('schedule.stayPage'))
 
-     return render_template('update/update.html',doctor=doctor)
+     return render_template('schedule/update/update.html',phys=phys,nurse=nurse)
 
 def get_person(id):
     item = get_db().execute(
-        'SELECT EmpNo'
-        ' FROM STAFF'
-        ' WHERE EmpNo = ?',
+        'SELECT STAY.*'
+        ' FROM STAY'
+        ' WHERE StayNo = ?',
         (id,)
     ).fetchone()
 

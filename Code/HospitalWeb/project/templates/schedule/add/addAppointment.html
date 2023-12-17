@@ -7,34 +7,30 @@
  
       <!--patient -->
 
-<!--        -->
-
   </ul>
 </nav>
 
 {% block content %}
+
    <form method="post">
 
    <select name="PatientNo">
     {% for item in patient%}
-     <option value="{{request.form['PatientNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['PatientNo']}}</option>
+     <option value="{{item.PatientNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['PatientNo']}}</option>
     {% endfor %}
-    </option>
     </select> 
 
  
     <select name="Physician">
     {% for item in doctor%}
-     <option value="{{item['EmpNo']}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
+     <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
     {% endfor %}
-    </option>
     </select> 
 
      <select name="Clinic">
     {% for item in hospital%}
-     <option value="name">{{item['Name']}}</option>
+     <option value="{{item.Name}}">{{item['Name']}}</option>
     {% endfor %}
-    </option>
     </select> 
 
     <label for="Time">Time</label>
@@ -44,9 +40,9 @@
     <label for="type">Type</label>
      <select name="Type">
 
-     <option name="Type" id="apptype" value="Diagnostic">Diagnostic</option>
-     <option name="Type" id="apptype" value="Preventive">Preventive</option>
-     <option name="Type" id="apptype" value="Emergency">Emergency</option>
+     <option id="apptype" value="Diagnostic">Diagnostic</option>
+     <option id="apptype" value="Preventive">Preventive</option>
+     <option  id="apptype" value="Emergency">Emergency</option>
     </select> 
 
 <input type="submit" value="Save">
