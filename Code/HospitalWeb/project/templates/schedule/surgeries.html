@@ -50,32 +50,12 @@
 
 </table>
 
-
+<label for="Filter By Surgeon Name">Filter By Surgeon Name</label>
 <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-  <label for="Filter By Surgeon Name">Filter By Surgeon Name</label>
   <option value="Choose One!">Choose One</option>
    {% for item in surgeon%}
   <option value="{{ url_for('schedule.surgeonFiltering',filter='ByName',id=item['EmpNo'])}}">{{item['Lname']}},{{item['Fname']}}</option>
   {% endfor %}
-</select>
-
-<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-  <label for="Filter By OpTheatre">Filter By OpTheatre</label>
-  <option value="Choose One!">Choose One</option>
-   {% for item in place%}
-  <option value="{{ url_for('schedule.theatreFiltering',filter='ByPlace',id=item['Code'])}}">{{item['Code']}}</option>
-  {% endfor %}
-</select>
-
-
-<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-   <label for="Filter By Date">Filter By Date</label>
-   <option value="Choose A Month">Choose a Month</option>
-  	{%for i in range(13)%}
-  	{%if i!=0 %}
-       <option value="{{ url_for('schedule.surgeonMonthFiltering',filter='ByMonth',month=i)}}">{{i}}</option>
-     {%endif%}
-    {%endfor%}
 </select>
 
 

@@ -53,6 +53,7 @@
 
 </table>
 
+<label for="Filter By Doctor Name">Filter By Doctor Name</label>
 <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
   <label for="Filter By Doctor Name">Filter By Doctor Name</label>
    {% for item in physician%}
@@ -61,7 +62,6 @@
 </select>
 
 
-  <h2><a href="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=2)}}"><button>Filter by Physician</button></a>
-  <h2><a href="{{ url_for('schedule.appointmentMonthFiltering',filter='ByMonth',month=6)}}"><button>Filter by Month</button></a>
-
+ 
+ 
 {% endblock %}
