@@ -4,8 +4,11 @@ from flask import Flask, flash,render_template
 
 #basic outline
  #Used to create a simple db table to work with 
+ #DEV ONLY
  #flask --app project run --debug
  #flask --app project init-db
+ #regular
+ #flask --app project run 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -44,4 +47,6 @@ def create_app(test_config=None):
     from . import people
     app.register_blueprint(people.bp)
 
+    from . import schedule
+    app.register_blueprint(schedule.bp)
     return app

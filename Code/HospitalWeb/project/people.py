@@ -16,64 +16,93 @@ bp = Blueprint('people', __name__, url_prefix='/people')
 @bp.route('/staff')
 def seeAllStaff():
     db=get_db()
-    staff=db.execute('SELECT rowid , * FROM STAFF').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
+    staff=db.execute('SELECT * FROM STAFF').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
 
     return render_template('members/staff/staff.html',staff=staff)
 
-   #get_db().execute(
-        # 'SELECT rowid,*'
-        # ' FROM PATIENT P,STAFF E'
-        # ' WHERE P.pcp=E.rowid'
-        # ,(id,)).fetchall()
 
+@bp.route('/viewstaff/<int:id>')
+def seeStaff(id):
+    item = get_db().execute(
+        'SELECT rowid,*'
+        ' FROM STAFF'
+        ' WHERE rowid = ?'
+        ,(id,)).fetchone()
+
+
+    return render_template('members/staff/fullbio.html',item=item) 
 
 @bp.route('/patient')
 def seeAllPatients():
     db=get_db()
-    patient=db.execute('SELECT P.rowid, S.rowid, *' ' FROM PATIENT P, STAFF S' 'WHERE P.rowid=S.rowid').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
+    patient=db.execute('SELECT PatientNo, * FROM PATIENT ').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
 
     return render_template('members/patient/patient.html',patient=patient) #TODO: Generic person html, changes from DB name
 
 @bp.route('/viewpatient/<int:id>')
 def seePatient(id):
+
     item = get_db().execute(
-        'SELECT rowid,*'
-        ' FROM PATIENT'
-        ' WHERE rowid = ?'
+        'SELECT PATIENT.*,STAFF.Fname AS docFirst,STAFF.Lname AS docLast,STAFF.EmpNo AS empNo'
+        ' FROM PATIENT,STAFF'
+        ' WHERE PatientNo = ?'
+        'AND PATIENT.Pcp=STAFF.EmpNo'
         ,(id,)).fetchone()
 
+    allergies = get_db().execute(
+            'SELECT * FROM PATIENT_ALLERGY'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
 
-    return render_template('members/patient/fullbio.html',item=item) 
+    illness= get_db().execute(
+            'SELECT * FROM PATIENT_ILLNESS'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
 
-# SELECT * FROM PATIENT P, EMPLOYEE E WHERE P.Pcp = E.EmpNo
+    appointments= get_db().execute(
+            'SELECT * FROM APPOINTMENT'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
+
+    stay= get_db().execute(
+            'SELECT * FROM STAY'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
+
+    surgery= get_db().execute(
+            'SELECT * FROM SURGERY'
+            ' WHERE PatientNo = ?'
+            ,(id,)).fetchall()
+
+    #only of type physician
+    error = None
+
+    return render_template('members/patient/fullbio.html',item=item,allergies=allergies, illness=illness,stay=stay,appointments=appointments,surgery=surgery) 
+
 
 @bp.route('/addPatient',methods=('GET','POST')) #'GET','POST')
 def addPatient():
     # db=get_db()
-    # error=None
+    error=None
+    physician=get_db().execute('SELECT STAFF.* FROM STAFF WHERE EmpType="PHYS"').fetchall() #db.execute('SELECT * FROM STAFF').fetchall()
 
     if request.method == 'POST':
         gender=request.form['Gender']
         Fname = request.form['Fname']
         Lname = request.form['Lname']
-        
         mName = request.form['Minit']
         birthdate=request.form['Dob']
-        caregiver=0
+        ssn=request.form['Ssn']
+        caregiver=request.form['Pcp']
+        zipCode= request.form['ZIP']
+        blood= request.form['BloodType']
+        rh= request.form['RhFactor']
+        address= request.form['Addr']
+        city= request.form['City']
+        state= request.form['StateProv']
+        country= request.form['Country']
+        phone= request.form['Phone']
 
-        item = get_db().execute('SELECT Fname FROM STAFF').fetchall()
-
-        #get_db().execute(
-        # 'SELECT rowid,*'
-        # ' FROM PATIENT P,STAFF E'
-        # ' WHERE P.pcp=E.rowid'
-        # ,(id,)).fetchall()
-
-
-        #UUID>regular unique number up to 5 digits, no one has the same! COS has unique number(if multiple has the same)
-        #descriptive info for name, etc
-        # Hopkins,Jenna (#5550) general page after the fact
-        error = None
 
         if error is not None:
             flash(error)
@@ -81,42 +110,47 @@ def addPatient():
         else:  
              db=get_db()
              db.execute(
-                'INSERT INTO PATIENT (Fname,Minit,Lname,Gender,Dob,Pcp)'
-                ' VALUES (?,?,?,?,?,?)',
-                (Fname,mName,Lname,gender,birthdate,caregiver)
+                'INSERT INTO PATIENT (Fname,Minit,Lname,Gender,Dob,Ssn,Pcp,ZIP,BloodType,RhFactor,Addr,City,StateProv,Country,Phone)'
+                ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                (Fname,mName,Lname,gender,birthdate,ssn,caregiver,zipCode,blood,rh,address,city,state,country,phone)
             )
              post_id = db.cursor().fetchone()
              print(post_id)
+             print("ghvuiavdfas")
              db.commit()
 
-             return redirect(url_for('people.seeAllPatients',patient=item))
+             return redirect(url_for('people.seeAllPatients'))
 
-    return render_template('members/patient/addPatient.html')
+    return render_template('members/patient/addPatient.html',physician=physician)
 
 @bp.route('/add',methods=('GET','POST')) #'GET','POST')
 def addStaff():
     # db=get_db()
     # error=None
+    specialty= ['Cardiology', 'Dermatology', 'Gastroenterology', 'Orthopedics', 'Neurology', 'Ophthalmology', 
+                'Otolaryngology', 'Pediatrics', 'Obstetrics and Gynecology', 'Urology', 'Endocrinology', 'Rheumatology', 'Pulmonology', 'Hematology', 
+                'Infectious Disease', 'Emergency Medicine', 'Plastic Surgery', 'Radiology', 'Anesthesiology', 'Pathology','N/A']
 
     if request.method == 'POST':
-        status= request.form['EmpStatus']
         gender=request.form['Gender']
         empType=request.form['EmpType']
         Fname = request.form['Fname']
         Lname = request.form['Lname']
 
         mName = request.form['Minit']
-        # ssn = request.form['Ssn']
-        # title = request.form['Title']
-        
-        # empStatus = request.form['EmpStatus']
-        # addr = request.form['Addr']
-        # city = request.form['City'] 
+        ssn = request.form['Ssn']
+        title = request.form['Title']
+        salary=request.form['Salary']
+        skill=request.form['Specialty']
+        yrsnursing=request.form['YrsNursingExp']
+        grade=request.form['NurseGrade']
+        addr = request.form['Addr']
+        city = request.form['City'] 
 
-        # stateProv = request.form['StateProv']
-        # zipCode =request.form['ZIP']
-        # country =request.form['Country']
-        # phone  =request.form['Phone']
+        stateProv = request.form['StateProv']
+        zipCode =request.form['ZIP']
+        country =request.form['Country']
+        phone  =request.form['Phone']
 
         error = None
 
@@ -125,18 +159,38 @@ def addStaff():
 
         else:  
              db=get_db()
-             db.execute(
-                'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,EmpStatus)'
-                ' VALUES (?,?,?,?,?,?)',
-                (Fname,mName,Lname,gender,empType,status)
-            )
-             post_id = db.cursor().fetchone()
-             print(post_id)
+
+             if empType=="PHYS":
+                db.execute(
+                    'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary,Specialty,Addr,City,StateProv,ZIP,Country,Phone)'
+                    ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (Fname,mName,Lname,gender,empType,ssn,title,salary,skill,addr,city,stateProv,zipCode,country,phone)
+                    )
+             elif empType=="SURG":
+                db.execute(
+                    'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Specialty,Addr,City,StateProv,ZIP,Country,Phone)'
+                    ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (Fname,mName,Lname,gender,empType,ssn,title,skill,addr,city,stateProv,zipCode,country,phone)
+                    )
+
+             elif empType=="SUPP":
+                db.execute(
+                    'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary,Addr,City,StateProv,ZIP,Country,Phone)'
+                    ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (Fname,mName,Lname,gender,empType,ssn,title,salary,addr,city,stateProv,zipCode,country,phone)
+                    )
+             else:
+                db.execute(
+                    'INSERT INTO STAFF (Fname,Minit,Lname,Gender,EmpType,Ssn,Title,Salary,YrsNursingExp,NurseGrade,Addr,City,StateProv,ZIP,Country,Phone)'
+                    ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (Fname,mName,Lname,gender,empType,ssn,title,salary,yrsnursing,grade,addr,city,stateProv,zipCode,country,phone)
+                    )
+
              db.commit()
 
              return redirect(url_for('people.seeAllStaff'))
 
-    return render_template('members/staff/add.html')
+    return render_template('members/staff/add.html',specialty=specialty)
 
 def get_person(id):
     item = get_db().execute(
@@ -145,13 +199,10 @@ def get_person(id):
         ' WHERE EmpNo = ?',
         (id,)
     ).fetchone()
-    #for autoincrement
-    # if item is None:
-    #     abort(404, f"EmpNo {id} doesn't exist.")
-
+ 
     return item
 
-#Update -Small Popup
+
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 def updatePerson(id):
      db=get_person(id)
@@ -179,7 +230,7 @@ def updatePerson(id):
 
      return render_template('update.html')
 
-#staff deletion, smaller pieces
+
 @bp.route('/<int:id>/delete', methods=('POST','GET'))
 def delete(id):
     get_person(id)
@@ -188,4 +239,12 @@ def delete(id):
     db.commit()
     return redirect(url_for('people.seeAllStaff'))
 
+@bp.route('/staff/<string:filter>/<string:empType>/')
+def staffTypeFiltering(filter,empType):
+    db=get_db()
+    staff= db.execute('SELECT * FROM STAFF WHERE STAFF.EmpType= ?',(empType,)).fetchall()
 
+    types=["PHYS","SURG","NURS","SUPP"]
+
+    db.commit()
+    return render_template('members/staff/staff.html',staff=staff,doc=types)

@@ -1,0 +1,62 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+  <h1>Surgeries</h1>
+  <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
+<a href="{{ url_for('schedule.addSurgery') }}"><button>Add More</button></a></h2>
+  <ul>
+ 
+      <!--Surgeries! -->
+  </ul>
+</nav>
+
+{% block header %}
+<h1>{% block title %} Surgeries {% endblock %}</h1>
+
+{% endblock %}
+
+
+{% block content %}
+
+<table class="table is-bordered is-fullwidth">
+	
+
+ <tbody>
+
+ 	<tr>
+<th >Surgery Number</th>
+<th >Patient</th>
+<th >Surgeon</th>
+<th>Operating Theatre</th>
+<th>Type</th>
+<th >Time</th>	
+
+ 	</tr>
+ {% for item in surgery%}
+<tr>
+	
+	<td class="surgeryno">{{item.SurgeryNo}}</td>
+	<td class="patientno">{{item.PatientNo}}({{item['patientLast']}},{{item['patientFirst']}})</td>
+	<td class="physician">{{item.Surgeon}}</td>
+	<td class="facility">{{item.OpTheatre}}({{item['clinic']}}-{{item['Theatre']}})</td>
+	<td class="type">{{item.SurgType}}</td>
+	<td class="time">{{item.SurgeryTime}} </td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+
+</table>
+
+<label for="Filter By Surgeon Name">Filter By Surgeon Name</label>
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+  <option value="Choose One!">Choose One</option>
+   {% for item in surgeon%}
+  <option value="{{ url_for('schedule.surgeonFiltering',filter='ByName',id=item['EmpNo'])}}">{{item['Lname']}},{{item['Fname']}}</option>
+  {% endfor %}
+</select>
+
+
+{% endblock %}

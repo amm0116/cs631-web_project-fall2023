@@ -1,33 +1,210 @@
 <!doctype html>
 <link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
 <nav>
-  <h1>Patient Management/Full!</h1>
-  <h2><a href="/"><button>Back</button></a>
-  <ul>
+
+	<section class="hero is-small is-primary">
+  <div class="hero-body" >
+    <p class="title has-text-black">
+      Newark Medical </p>  
+      Patient Management > View
+
+  </div>
+</section> 
+    <ul>
  
       <!--patient -->
   </ul>
 </nav>
 
 {% block header %}
-<h1>{% block title %} Patients {% endblock %}</h1>
+<h1>{% block title %} Patient No.{{item['PatientNo']}} ({{item['Fname']}} {{item['Minit']}} {{item['Lname']}})  {% endblock %}</h1>
+
+<h2><a href="{{ url_for('people.seeAllPatients')}}"><button class="button is-large">Back</button></a></h2>
+
 {% endblock %}
 
 
 
 {% block content %}
-
-<table class="table">
-<tr>
-	<td class="rowid">{{item['rowid']}}</td>
-	<td class="name">{{item['Fname']}}{{item['Minit']}}{{item['Lname']}}</td>
-	<td class="dob">{{item['Dob']}}</td>
-	<td class="gender">{{item['Gender']}}</td>
+<div class="block">
+<div class="columns is-multiline is-mobile">
 
 
-	<td><a href="{{ url_for('people.delete',id=item['rowid'])}}"><button class="button is-large">Delete</button></a></td>
-	
+<div class="column is-one-quarter">
+<p>First Name: {{item['Fname']}}</p>
+<p>Middle Initial: {{item['Minit']}}</p>
+<p>Last Name: {{item['Lname']}}</p>
+
+
+<p>SSN: {{item['Ssn']}}</p>
+<p>DOB: {{item['Dob']}}</p>
+<p>Gender: {{item['Gender']}}</p>
+
+<p>Primary Physician: {{item['Pcp']}}(<a href="{{ url_for('people.seeStaff',id=item['empNo'])}}">{{item['docLast']}},{{item['docFirst']}}</a>)</p>
+
+<p>Gender: {{item['Gender']}}</p>
+
+<p>Blood Type: {{item['BloodType']}}</p>
+
+<p>Rh Factor: {{item['RhFactor']}}</p>
+</div>
+
+<div class="column is-narrow">
+      <p>Address: {{item['Addr']}}</p>
+<p>City: {{item['City']}}</p>
+<p>State/Prov: {{item['StateProv']}}</p>
+
+		
+<p>ZIPCODE: {{item['ZIP']}}</p>
+<p>Country: {{item['Country']}}</p>
+<p>Phone: {{item['Phone']}}</p>
+
+  </div>
+  </div>
+   </div>
+
+
+<section class="section">
+  <h1 class="title">Allergies</h1>
+
+   <table class="table is-bordered is-narrow">
+     <tbody>
+  <tr>
+<th >Diagnosis Number</th>
+  <th >PatientNo</th>  
+  <th>Allergy Code</th>
+  <th>Appointment Number</th>
 </tr>
+   {% for allergy in allergies%} 
+<tr>
+  <td class="diagnosisno">{{allergy.DiagnosisNo}}</td>
 
-</table>
+  <td class="patientno">{{allergy.PatientNo}} </td>
+  <td class="allergy">{{allergy.Allergy}} </td>
+  <td class="appointmentno">{{allergy.AppointmentNo}} </td>
+</tr>
+{% endfor %}
+</tbody>
+
+   </table>
+</section>
+
+
+<section class="section">
+  <h1 class="title">Illnesses</h1>
+    <table class="table is-bordered is-narrow">
+     <tbody>
+  <tr>
+<th >Diagnosis Number</th>
+  <th >PatientNo</th>  
+  <th>Illness Code</th>
+  <th>Appointment Number</th>
+</tr>
+   {% for illness in illness%} 
+<tr>
+  <td class="diagnosisno">{{illness.DiagnosisNo}}</td>
+
+  <td class="patientno">{{illness.PatientNo}} </td>
+  <td class="illness">{{illness.Illness}} </td>
+  <td class="appointmentno">{{illness.AppointmentNo}} </td>
+</tr>
+{% endfor %}
+</tbody>
+
+   </table>
+</section>
+
+
+<section class="section">
+  <h1 class="title">Appointments</h1>
+    <table class="table is-bordered is-narrow">
+     <tbody>
+  <tr>
+  <th>Appointment Number</th>
+  <th>Patient Number</th>
+  <th >Physician</th>
+  <th >Clinic</th>  
+  <th >Time</th>  
+  <th>Type</th>
+
+</tr>
+   {% for appointment in appointments%} 
+<tr>
+  <td class="appointmentno">{{appointment.AppointmentNo}} </td>
+  <td class="patientno">{{appointment.PatientNo}} </td>
+  <td class="phys">{{appointment.Physician}} </td>
+  <td class="clinic">{{appointment.Clinic}} </td>
+  <td class="time">{{appointment.Time}} </td>
+  <td class="type">{{appointment.Type}}</td>
+  
+</tr>
+{% endfor %}
+</tbody>
+
+   </table>
+</section>
+
+<section class="section">
+  <h1 class="title">Inpatient Stays</h1>
+  <table class="table is-bordered is-narrow">
+     <tbody>
+  <tr>
+  <th>Stay Number</th>
+  <th>Patient Number</th>
+  <th >Bed</th>
+  <th >Admission Date</th>  
+  <th >Diagnosis Number</th>  
+  <th >Physician</th>
+  <th>Nurse</th>
+
+</tr>
+   {% for inpatient in stay%} 
+<tr>
+  <td class="stayno">{{inpatient.StayNo}} </td>
+  <td class="patientno">{{inpatient.PatientNo}} </td>
+   <td class="bed">{{inpatient.Bed}} </td>
+  <td class="admission">{{inpatient.AdmissionDate}} </td>
+  <td class="diagnosisno">{{inpatient.DiagnosisNo}} </td>
+   <td class="phys">{{inpatient.Physician}} </td>
+    <td class="nurs">{{inpatient.Nurse}} </td>
+
+  
+</tr>
+{% endfor %}
+</tbody>
+
+   </table>
+</section>
+
+<section class="section">
+  <h1 class="title">Surgeries</h1>
+  <table class="table is-bordered is-narrow">
+     <tbody>
+  <tr>
+  <th>Surgery Number</th>
+  <th>Patient Number</th>
+  <th >Surgeon</th>
+  <th>Surgery Time</th>
+  <th >Operating Theatre</th>  
+  <th >Surgery Type</th>  
+
+
+</tr>
+   {% for operation in surgery%} 
+<tr>
+  <td class="surgeryno">{{operation.SurgeryNo}} </td>
+  <td class="patientno">{{operation.PatientNo}} </td>
+   <td class="surgeon">{{operation.Surgeon}} </td>
+  <td class="time">{{operation.SurgeryTime}} </td>
+  <td class="op">{{operation.OpTheatre}} </td>
+   <td class="type">{{operation.SurgeryType}} </td>
+
+
+  
+</tr>
+{% endfor %}
+</tbody>
+
+   </table>
+</section>
 {% endblock %}

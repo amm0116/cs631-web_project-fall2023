@@ -1,0 +1,67 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+
+  <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
+<h2><a href="{{ url_for('schedule.addAppointment') }}"><button>Add Appointment</button></h2></a>
+  <ul>
+ 
+ 
+  </ul>
+</nav>
+
+<script>
+   function changeValue(o){
+     document.getElementById('name').value=o.innerHTML;
+    }
+</script>
+
+{% block header %}
+<h1>{% block title %} Appointments {% endblock %}</h1>
+{% endblock %}
+{% block content %}
+
+
+<table class="table is-bordered is-fullwidth">
+	
+
+ <tbody>
+
+ 	<tr>
+<th >Appointment Number</th>
+<th >Patient Number</th>
+<th >Physician Number</th>
+<th>Facility</th>
+<th >Time</th>	
+<th>Type</th>
+
+
+ 	</tr>
+ {% for item in appointment%}
+<tr>
+  <td class="appointmentno">{{item['AppointmentNo']}}</td>
+	<td class="patientno">{{item['PatientNo']}}({{item['patientLast']}},{{item['patientFirst']}})</td>
+	<td class="physician">{{item['Physician']}}({{item['docLast']}},{{item['docFirst']}})</td>
+	<td class="clinic">{{item['Clinic']}} </td>
+	<td class="time">{{item['Time']}} </td>
+	<td class="type">{{item['Type']}}</td>
+
+</tr>
+
+{% endfor %}
+</tbody>
+
+</table>
+
+<label for="Filter By Doctor Name">Filter By Doctor Name</label>
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+  <label for="Filter By Doctor Name">Filter By Doctor Name</label>
+   {% for item in physician%}
+  <option value="{{ url_for('schedule.appointmentFiltering',filter='ByName',id=item['EmpNo'])}}">{{item['Lname']}},{{item['Fname']}}</option>
+  {% endfor %}
+</select>
+
+
+ 
+ 
+{% endblock %}

@@ -1,0 +1,47 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+  <h1>Add Surgery</h1>
+  <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
+
+  <ul>
+ 
+      <!--Surgery -->
+  </ul>
+</nav>
+
+{% block content %}
+
+
+   <form method="post">
+      
+    <label for="Patient">Patient</label>
+    <select name="PatientNo">
+    {% for item in patient%}  
+      <option value="{{item.PatientNo}}">{{item['Lname']}},{{item['Fname']}}</option>
+    {% endfor %}
+    </select>
+
+    <label for="Surgeon">Surgeon</label>
+     <select name="Surgeon" >
+    {% for item in doctor%}  
+      <option value="{{item.EmpNo}}">{{item['Lname']}},{{item['Fname']}}</option>
+    {% endfor %}
+    </select>
+
+    <label for="Operating Theatre">Operating Theatre</label>
+    <select name="OpTheatre">
+    {% for item in place%}  
+      <option value="{{item.Code}}">{{item['Code']}}({{item['Clinic']}}-{{item['Theatre']}})</option>
+    {% endfor %}
+    </select>
+
+
+
+     <label for="SurgeryTime">SurgeryTime</label>
+    <input type="date" name="SurgeryTime">
+
+  
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

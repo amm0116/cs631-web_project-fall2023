@@ -1,0 +1,55 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+  <h1>Add Appointment</h1>
+ <h2><a href="{{ url_for('mainpg') }}"><button>Back</button></a>
+  <ul>
+ 
+      <!--patient -->
+
+  </ul>
+</nav>
+
+{% block content %}
+
+   <form method="post">
+
+  <label for="Patient">Patient</label>
+   <select name="PatientNo">
+    {% for item in patient%}
+     <option value="{{item.PatientNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['PatientNo']}}</option>
+    {% endfor %}
+    </select> 
+
+  <label for="Physician">Physician</label>
+    <select name="Physician">
+    {% for item in doctor%}
+     <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item['EmpNo']}}</option>
+    {% endfor %}
+    </select> 
+
+ <label for="Clinic">Clinic</label>
+     <select name="Clinic">
+    {% for item in hospital%}
+     <option value="{{item.Name}}">{{item['Name']}}</option>
+    {% endfor %}
+    </select> 
+
+    <label for="Time">Time</label>
+    <input type="date" name="Time">
+
+
+    <label for="type">Type</label>
+     <select name="Type">
+
+     <option id="apptype" value="Diagnostic">Diagnostic</option>
+     <option id="apptype" value="Preventive">Preventive</option>
+     <option  id="apptype" value="Emergency">Emergency</option>
+     <option  id="apptype" value="Consultation">Consultation</option>
+     <option  id="apptype" value="Routine">Routine</option>
+      <option  id="apptype" value="Follow-up">Follow-up</option>
+    </select> 
+
+<input type="submit" value="Save">
+  </form>
+{% endblock %}

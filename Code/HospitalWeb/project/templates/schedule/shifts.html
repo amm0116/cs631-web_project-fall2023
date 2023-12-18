@@ -1,0 +1,43 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+  <h1>Shifts</h1>
+  <h2><a href="/"><button>Back</button></a>
+<a href="{{ url_for('schedule.addShift') }}"><button>Add More</button></a></h2>
+  <ul>
+ 
+      <!--shifts! -->
+  </ul>
+</nav>
+
+{% block header %}
+<h1>{% block title %} Shifts {% endblock %}</h1>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<table class="table is-bordered is-fullwidth">
+	
+
+ <tbody>
+
+ 	<tr>
+<th >Employee Number</th>
+	<th >Shift Start</th>	
+	<th >Shift Number</th>	
+
+ 	</tr>
+{% for item in shift %} 	
+<tr>
+	<td class="empNo">{{item['EmpNo']}}({{item['staffLast']}},{{item['staffFirst']}})</td>
+	<td class="start">{{item['StartDate']}}</td>
+	<td class="start">{{item['Shift']}}</td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+{% endblock %}

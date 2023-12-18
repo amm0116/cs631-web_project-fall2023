@@ -1,0 +1,20 @@
+
+{% block header %}
+  <h1>{% block title %}Edit PHYSICIAN{% endblock %}</h1>
+  <a href="{{ url_for('schedule.stayPage') }}"><button>Return to Stay Page</button></a>
+{% endblock %}
+
+{% block content %}
+   <form method="post">
+
+   <select name="Physician">
+    {% for item in phys%}
+     <option value="{{item.EmpNo}}" label="{{item['Lname']}},{{item['Fname']}}">{{item.EmpNo}}</option>
+    {% endfor %}
+ 
+    </select> 
+  
+
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

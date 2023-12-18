@@ -1,0 +1,63 @@
+<!doctype html>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}">
+<nav>
+
+	<section class="hero is-small is-primary">
+  <div class="hero-body" >
+    <p class="title has-text-black">
+      Newark Medical </p>  
+      Employee Management > View
+
+  </div>
+</section> 
+    <ul>
+ 
+      <!--patient -->
+  </ul>
+</nav>
+
+{% block header %}
+<h1>{% block title %} Employee No.{{item['EmpNo']}} ({{item['Fname']}} {{item['Minit']}} {{item['Lname']}})  {% endblock %}</h1>
+
+<h2><a href="{{ url_for('people.seeAllStaff')}}"><button class="button is-large">Back</button></a></h2>
+
+{% endblock %}
+
+
+
+{% block content %}
+<div class="block">
+<div class="columns is-multiline is-mobile">
+
+<div class="column is-one-quarter">
+<p>First Name: {{item['Fname']}}</p>
+<p>Middle Initial: {{item['Minit']}}</p>
+<p>Last Name: {{item['Lname']}}</p>
+
+
+<p>SSN: {{item['Ssn']}}</p>
+<p>DOB: {{item['Dob']}}</p>
+<p>Gender: {{item['Gender']}}</p>
+
+		
+<p>Employee Type: {{item['EmpType']}}</p>
+
+<p>Title: {{item['Title']}}</p>
+
+</div>
+
+
+<div class="column is-narrow">
+      <p>Address: {{item['Addr']}}</p>
+<p>City: {{item['City']}}</p>
+<p>State/Prov: {{item['StateProv']}}</p>
+
+		
+<p>ZIPCODE: {{item['ZIP']}}</p>
+<p>Country: {{item['Country']}}</p>
+<p>Phone: {{item['Phone']}}</p>
+
+  </div>
+  </div>
+   </div>
+{% endblock %}
